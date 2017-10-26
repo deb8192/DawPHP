@@ -5,12 +5,12 @@
  $description = 'Página principal de una galería de fotos on-line.';
 
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
-require_once("includes/cabecera.php");
+include_once("includes/cabecera.php");
  ?>
  
 <body>
 	<!-- HEADER -->
-	<?php require_once("includes/header.php"); ?>
+	<?php include_once("includes/header.php"); ?>
 	
 	<aside id="buscar">
 		<form action="buscar.php" method="post">
@@ -66,4 +66,4 @@ require_once("includes/cabecera.php");
 	</section>
 	
 	<!-- FOOTER con </body> y </html> -->
-	<?php require_once("includes/footer.php"); ?>
+	<?php include_once("includes/footer.php"); ?>

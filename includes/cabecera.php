@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php session_start();
+
+// Cargar usuarios predefinidos en el sistema si no se ha iniciado sesión
+if (empty ($_SESSION['usuario']))
+	require_once("includes/usuariosBD.php");
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

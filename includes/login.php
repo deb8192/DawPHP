@@ -7,6 +7,6 @@
 		
 		
 		$_SESSION['usuario'] = $usuario;
-		header("Location:../index.php");
+		header("Location:../menu_usuario.php");
 	}
 ?>

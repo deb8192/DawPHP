@@ -1,7 +1,6 @@
 <header>
 	<a class="logo" href="index.php" tabindex="1"><h1>PI</h1></a>
 	
-	
 	<?php if (empty ($_SESSION['usuario'])) { ?>
 
 		<form id="inicio_sesion" action="includes/login.php" method="post">
@@ -64,7 +63,7 @@
 				<li><a href="" tabindex="3">Editar datos</a></li>
 				<li><a href="" tabindex="4">Darse de baja</a></li>
 				<li><a href="" tabindex="5">Mis álbumes</a></li>
-				<li><a href="" tabindex="6">Crear álbum</a></li>
+				<li><a href="crear_album.php" tabindex="6">Crear álbum</a></li>
 				<li><a href="solicitar_album.php" tabindex="7">Solicitar álbum</a></li>
 		</nav>
 		<nav  id="menu_usuario_modificado">
@@ -72,7 +71,7 @@
 				<li><a href="" tabindex="3">Editar datos</a></li>
 				<li><a href="" tabindex="4">Darse de baja</a></li>
 				<li><a href="" tabindex="5">Mis álbumes</a></li>
-				<li><a href="" tabindex="6">Crear álbum</a></li>
+				<li><a href="crear_album.php" tabindex="6">Crear álbum</a></li>
 				<li><a href="solicitar_album.php" tabindex="7">Solicitar álbum</a></li>
 				<li><a href="logout.php" tabindex="8">Salir</a></li>
 			</ul>
@@ -84,7 +83,7 @@
 						<li><a href="" tabindex="3">Editar datos</a></li>
 						<li><a href="" tabindex="4">Darse de baja</a></li>
 						<li><a href="" tabindex="5">Mis álbumes</a></li>
-						<li><a href="" tabindex="6">Crear álbum</a></li>
+						<li><a href="crear_album.php" tabindex="6">Crear álbum</a></li>
 						<li><a href="solicitar_album.php" tabindex="7">Solicitar álbum</a></li>
 						<li><a href="logout.php" tabindex="8">Salir</a></li>
 					</ul>
