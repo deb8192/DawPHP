@@ -194,7 +194,7 @@ img { border: 1px solid #000; }
 
 
 /* Estilos form compartidos*/
-#registro form, .form_busqueda form,  #solicitar form {
+#registro form, .form_busqueda form,  #solicitar form, #crear_album form {
 	margin: 0 auto;
 	max-width: 480px;
 	min-width: 150px;
@@ -202,21 +202,22 @@ img { border: 1px solid #000; }
 }
 
 #registro form input[type=submit], .form_busqueda input[type=submit],
-#solicitar form input[type=submit] {
+#solicitar form input[type=submit],  #crear_album form input[type=submit] {
 	margin-right: 10%;
 	float: right;
-}
-
-#registro form input[type=submit], .form_busqueda input[type=submit], 
-#solicitar form input[type=submit] {
 	padding: 10px;
 }
 
-#registro form p, .form_busqueda form p, #solicitar form p {
+/*#registro form input[type=submit], .form_busqueda input[type=submit], 
+#solicitar form input[type=submit] {
+	padding: 10px;
+}*/
+
+#registro form p, .form_busqueda form p, #solicitar form p, #crear_album form p {
 	margin-right: 40px;
 }
 
-#registro form label, .form_busqueda form label, #solicitar form label {
+#registro form label, .form_busqueda form label, #solicitar form label #crear_album form label {
     display: block;
     margin-bottom: 3px;
 }

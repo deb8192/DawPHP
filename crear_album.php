@@ -12,9 +12,10 @@ require_once("includes/cabecera.php");
 	<!-- HEADER -->
 	<?php require_once("includes/header.php"); ?>
 		
+		<section id="crear_album">	
 		<p class="letra_roja">(*) Campos obligatorios</p>
 		
-		<form action="respuesta_crear_album.php" method="post">
+		<form id="form_crear_album" action="respuesta_crear_album.php" method="post">
 			<fieldset>
 				<legend>Crear album</legend>
 				
@@ -43,6 +44,7 @@ require_once("includes/cabecera.php");
 			</fieldset>
 			<input type="submit" name="crear_album" value="Crear álbum" tabindex="5"/>
 		</form>
+		</section>
 	
 	<!-- FOOTER con </body> y </html> -->
 	<?php require_once("includes/footer.php"); ?>
