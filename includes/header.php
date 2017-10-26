@@ -2,8 +2,7 @@
 	<a class="logo" href="index.php" tabindex="1"><h1>PI</h1></a>
 	
 	
-	<?php require_once("login.php");
-		if (empty ($_SESSION['usuario'])) { ?>
+	<?php if (empty ($_SESSION['usuario'])) { ?>
 
 		<form id="inicio_sesion" action="includes/login.php" method="post">
 			<label for="usuario">Usuario:</label>
