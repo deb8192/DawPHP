@@ -3,7 +3,7 @@
 	
 	
 	<?php require_once("login.php");
-		if (!isset ($_SESSION['usuario'])) { ?>
+		if (empty ($_SESSION['usuario'])) { ?>
 
 		<form id="inicio_sesion" action="includes/login.php" method="post">
 			<label for="usuario">Usuario:</label>
@@ -35,7 +35,8 @@
 	
 		<p id="bienvenida">Bienvenido Pepito Palotes | <a class="salir" href="includes/logout.php" tabindex="2">Salir</a></p>
 			
-			
+		<?php if ((strpos($_SERVER['PHP_SELF'], 'solicitar_album') !== false) || 
+			(strpos($_SERVER['PHP_SELF'], 'respuesta_album') !== false )) { ?>
 			
 			<nav id="menu_usuario">
 				<ul>
@@ -58,21 +59,8 @@
 					</li>
 				</ul>
 			</nav>
-			
-			
-			
-	<?php } ?>
-</header>
-
-<?php 
-/*         Menú para cuando se haya iniciado sesión
-
-	<header>
-		<a class="logo" href="index.php" tabindex="1"><h1>PI</h1></a>
-		<p id="bienvenida">Bienvenido Pepito Palotes | <a class="salir" href="index.php" tabindex="2">Salir</a></p>
-		
-		
-		<nav  id="menu_usuario">
+		<?php } else { ?>
+			<nav  id="menu_usuario">
 			<ul>
 				<li><a href="" tabindex="3">Editar datos</a></li>
 				<li><a href="" tabindex="4">Darse de baja</a></li>
@@ -87,7 +75,7 @@
 				<li><a href="" tabindex="5">Mis álbumes</a></li>
 				<li><a href="" tabindex="6">Crear álbum</a></li>
 				<li><a href="solicitar_album.php" tabindex="7">Solicitar álbum</a></li>
-				<li><a href="index.php" tabindex="8">Salir</a></li>
+				<li><a href="logout.php" tabindex="8">Salir</a></li>
 			</ul>
 		</nav>
 		<nav  id="menu_usuario_desplegable">
@@ -99,13 +87,11 @@
 						<li><a href="" tabindex="5">Mis álbumes</a></li>
 						<li><a href="" tabindex="6">Crear álbum</a></li>
 						<li><a href="solicitar_album.php" tabindex="7">Solicitar álbum</a></li>
-						<li><a href="index.php" tabindex="8">Salir</a></li>
+						<li><a href="logout.php" tabindex="8">Salir</a></li>
 					</ul>
 				</li>
 			</ul>
 		</nav>
-		
-		
-	</header>
-*/
-?>
+	<?php }
+	} ?>
+</header>

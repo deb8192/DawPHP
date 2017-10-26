@@ -4,6 +4,8 @@
 		$usuario = addslashes($_POST['usuario']);
 		$password = addslashes($_POST['password']);
 		
+		
+		
 		$_SESSION['usuario'] = $usuario;
 		header("Location:../index.php");
 	}
