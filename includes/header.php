@@ -31,7 +31,7 @@
 	
 	<?php } else { ?>
 	
-		<p id="bienvenida">Bienvenido Pepito Palotes | <a class="salir" href="includes/logout.php" tabindex="2">Salir</a></p>
+		<p id="bienvenida">Bienvenido/a <?php echo $_SESSION['usuario']; ?> | <a class="salir" href="includes/logout.php" tabindex="2">Salir</a></p>
 			
 		<?php if ((strpos($_SERVER['PHP_SELF'], 'solicitar_album') !== false) || 
 			(strpos($_SERVER['PHP_SELF'], 'respuesta_album') !== false )) { ?>
