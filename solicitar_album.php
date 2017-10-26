@@ -119,15 +119,15 @@ require_once("cabecera.php");
 				<p class="quitar_abajo">País: <span class="asterisco_rojo">*</span></p>
 				<p class="quitar_arriba"><select name="pais" required="" tabindex="17">
 					<option value="">Elija país...</option>
-					<option value="al">Alemania</option>
-					<option value="es">Escocia</option>
-					<option value="esp">España</option>
-					<option value="fr">Francia</option>
-					<option value="ga">Gales</option>
-					<option value="gr">Grecia</option>
-					<option value="ing">Inglaterra</option>
-					<option value="ir">Irlanda</option>
-					<option value="it">Italia</option>
+					<option value="Alemania">Alemania</option>
+					<option value="Escocia">Escocia</option>
+					<option value="España">España</option>
+					<option value="Francia">Francia</option>
+					<option value="Gales">Gales</option>
+					<option value="Grecia">Grecia</option>
+					<option value="Inglaterra">Inglaterra</option>
+					<option value="Irlanda">Irlanda</option>
+					<option value="Italia">Italia</option>
 				</select></p>
 			</fieldset>
 			
