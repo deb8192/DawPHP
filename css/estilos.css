@@ -66,6 +66,14 @@ header p {
 .logo:hover, .registro:hover, .salir:hover {
 	color: orange;
 }
+
+.inicio_error {
+	color: red;
+	position: relative;
+	top: 25px;
+	left: 320px;
+}
+
 #inicio_sesion{
 		visibility: visible;
 		display: block;
@@ -96,7 +104,7 @@ header p {
 	display: none;
 }
 #principal, #buscar, #registro, .form_busqueda, #solicitar, .tarifas,
-#datos_usuario,#respuesta_album, .letra_roja, h1, h2, h3, h4 {
+#datos_usuario,#respuesta_album, .letra_roja, h1, h2, h3, h4, .inicio_error {
 	padding: 0;
 	margin: 0;
 }

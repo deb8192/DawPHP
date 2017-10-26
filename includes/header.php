@@ -28,13 +28,17 @@
 				</li>
 			</ul>
 		</form>
-	
-	<?php } else { ?>
+		
+		<?php if (isset($_SESSION['error'])) {
+			echo '<p class="inicio_error">'.$_SESSION['error'].' que ingresaste no coincide con nuestros registros. Por favor, revisa e inténtalo de nuevo.</p>';
+		}
+	} else { ?>
 	
 		<p id="bienvenida">Bienvenido/a <?php echo $_SESSION['usuario']; ?> | <a class="salir" href="includes/logout.php" tabindex="2">Salir</a></p>
 			
 		<?php if ((strpos($_SERVER['PHP_SELF'], 'solicitar_album') !== false) || 
-			(strpos($_SERVER['PHP_SELF'], 'respuesta_album') !== false )) { ?>
+			(strpos($_SERVER['PHP_SELF'], 'respuesta_album') !== false ) ||
+			(strpos($_SERVER['PHP_SELF'], 'crear_album') !== false )) { ?>
 			
 			<nav id="menu_usuario">
 				<ul>

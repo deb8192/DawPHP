@@ -13,9 +13,17 @@
 		$password = addslashes($_POST['password']);
 		
 		if (array_key_exists($usuario, $usuarios)) {
-			$_SESSION['usuario'] = $usuario;
-			header("Location:../menu_usuario.php");
-		} else
+			
+			if (strcmp ($password , $usuarios[$usuario] ) == 0) {
+				$_SESSION['usuario'] = $usuario;
+				header("Location:../menu_usuario.php");
+			} else {
+				$_SESSION['error'] = "La contraseña";
+				header("Location:../index.php");
+			}
+		} else {
+			$_SESSION['error'] = "El usuario";
 			header("Location:../index.php");
+		}
 	}
 ?>
