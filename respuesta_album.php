@@ -2,7 +2,7 @@
  // Título de la página, keywords y descripción
  $title = 'Respuesta álbum';
  $keywords = 'pictures, images, imagen, imágenes, fotos, foto';
- $description = 'Página página de confirmación de impresión de álbum.';
+ $description = 'Página de confirmación de impresión de álbum.';
  
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");

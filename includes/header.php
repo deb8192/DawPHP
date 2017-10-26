@@ -73,7 +73,7 @@
 				<li><a href="" tabindex="5">Mis álbumes</a></li>
 				<li><a href="crear_album.php" tabindex="6">Crear álbum</a></li>
 				<li><a href="solicitar_album.php" tabindex="7">Solicitar álbum</a></li>
-				<li><a href="logout.php" tabindex="8">Salir</a></li>
+				<li><a href="includes/logout.php" tabindex="8">Salir</a></li>
 			</ul>
 		</nav>
 		<nav  id="menu_usuario_desplegable">
@@ -85,7 +85,7 @@
 						<li><a href="" tabindex="5">Mis álbumes</a></li>
 						<li><a href="crear_album.php" tabindex="6">Crear álbum</a></li>
 						<li><a href="solicitar_album.php" tabindex="7">Solicitar álbum</a></li>
-						<li><a href="logout.php" tabindex="8">Salir</a></li>
+						<li><a href="includes/logout.php" tabindex="8">Salir</a></li>
 					</ul>
 				</li>
 			</ul>
