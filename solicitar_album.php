@@ -81,7 +81,7 @@ require_once("cabecera.php");
 				<input type= "text" name="titulo_album" id="titulo_album" required="" maxlength="200" tabindex="7"/></p>  <!--obligatorio, máximo 200 caracteres -->
 			
 				<p class="quitar_margenes">Texto adicional:</p>  <!--opcional, máximo 4000 caracteres -->
-				<textarea rows="4" cols="50" maxlength="4000" placeholder="Dedicatoria, descripción..." tabindex="8"></textarea>
+				<textarea name="area_texto" rows="4" cols="50" maxlength="4000" placeholder="Dedicatoria, descripción..." tabindex="8"></textarea>
 			</fieldset>
 			<fieldset class="direction">
 				<legend> Dirección </legend>
