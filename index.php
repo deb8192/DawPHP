@@ -3,14 +3,14 @@
  $title = 'PI - Pictures & images';
  $keywords = 'pictures, images, imagen, imágenes, fotos, foto';
  $description = 'Página principal de una galería de fotos on-line.';
- 
+
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
-require_once("cabecera.php");
+require_once("includes/cabecera.php");
  ?>
  
 <body>
 	<!-- HEADER -->
-	<?php require_once("header.php"); ?>
+	<?php require_once("includes/header.php"); ?>
 	
 	<aside id="buscar">
 		<form action="buscar.php" method="post">
@@ -66,4 +66,4 @@ require_once("cabecera.php");
 	</section>
 	
 	<!-- FOOTER con </body> y </html> -->
-	<?php require_once("footer.php"); ?>
+	<?php require_once("includes/footer.php"); ?>

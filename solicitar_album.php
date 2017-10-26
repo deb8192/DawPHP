@@ -5,12 +5,12 @@
  $description = 'Página para solicitar la impresión de un álbum del usuario.';
  
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
-require_once("cabecera.php");
+require_once("includes/cabecera.php");
  ?>
  
  <body>
 	<!-- HEADER -->
-	<?php require_once("header.php"); ?>
+	<?php require_once("includes/header.php"); ?>
 	
 	<aside class="tarifas">
 		<h2>Tarifas</h2>
@@ -169,4 +169,4 @@ require_once("cabecera.php");
 	</section>
 	
 	<!-- FOOTER con </body> y </html> -->
-	<?php require_once("footer.php"); ?>
+	<?php require_once("includes/footer.php"); ?>

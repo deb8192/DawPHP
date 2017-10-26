@@ -5,12 +5,12 @@
  $description = 'Menú de usuario de la galería de fotos on-line.';
  
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
-require_once("cabecera.php");
+require_once("includes/cabecera.php");
  ?>
  
  <body>
 	<!-- HEADER -->
-	<?php require_once("header.php"); ?>
+	<?php require_once("includes/header.php"); ?>
 	
 	<section id="datos_usuario">
 		<h2>Datos personales</h2>
@@ -24,6 +24,6 @@ require_once("cabecera.php");
 	</section>
 	
 	<!-- FOOTER -->
-	<?php require_once("footer.php"); ?>
+	<?php require_once("includes/footer.php"); ?>
 </body>
 </html>
