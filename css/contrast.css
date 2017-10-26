@@ -1,0 +1,675 @@
+/*
+	Color naranja: #FF8000
+*/
+
+a:visited {
+	color: yellow;
+}
+
+a img:hover { /* anyadido */
+	filter: invert(100%);
+}
+
+:focus { /* anyadido */
+	outline: 0.25em solid #FF8000;
+}
+
+input[type=submit]:hover { /* anyadido */
+	background-color: #FF8000;
+	border-color: #FF8000;
+}
+
+select, input { /* anyadido */
+    font-size: 0.7em;
+}
+
+table { /* anyadido */
+    background-color: #333;
+	margin-top: 20px;
+	border: 1px solid #FFF;
+}
+
+table td { /* anyadido */
+    border: 1px solid #FFF;
+    padding-top: 10px;
+	text-align: center;
+}
+
+#respuesta_album h4 { /* anyadido */
+	margin-top: 55px;
+}
+html{
+	/*height: 100%;*/
+	font-size: 1.5em; /* anyadido */
+}
+
+body {
+	width: 100%;
+	/*height: 100%;*/
+	margin: 0 auto;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	background-color: #000; /* cambiado */
+	color: white; /* anyadido */
+}
+
+h1, h2, h3, h4 {
+	font-family: Cambria, Georgia, Times New Roman, serif; 
+}
+
+header {
+	height: 30px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #222262;
+	color: #FFF;
+	overflow: visible;
+	z-index: 4;
+}
+
+header form {
+    float: right;
+    margin-right: 5%;
+}
+
+header a{
+	color: inherit;
+}
+
+header p {
+    float: right;
+    padding: 10px;
+	margin: 0;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.barra {
+	float: right;
+	margin: 10px;
+	margin-top: 0px;
+	padding: 0px;
+}
+
+.registro {
+	margin-left: 5px;
+	float: right;
+}
+
+.logo {
+    margin: 0;
+	margin-top: 10px;
+	margin-right: 40px;
+    position: relative;
+    top: -10px;
+    margin-left: 5%;
+    float: left;
+}
+
+.logo:hover, .registro:hover, .salir:hover {
+	color: #FF8000;
+}
+#inicio_sesion{
+		visibility: visible;
+		display: block;
+	}
+
+#inicio_sesion_desplegable{
+	visibility: hidden;
+	display: none;
+}
+#menu_usuario_desplegable{
+	visibility: hidden;
+	display: none;
+}
+#menu_usuario{
+	visibility: visible;
+	display: block;
+}
+#menu_usuario li a{
+	display:block;
+	padding: 10px;
+	text-align: center;
+}
+#menu_usuario li a:hover{
+	background-color: #444484;
+}
+#menu_usuario_modificado{
+	visibility:hidden;
+	display: none;
+}
+#principal, #buscar, #registro, .form_busqueda, #solicitar, .tarifas,
+#datos_usuario,#respuesta_album, .letra_roja, h1, h2, h3, h4 {
+	padding: 0;
+	margin: 0;
+}
+
+#principal, #registro, .form_busqueda, #solicitar, #datos_usuario,
+#respuesta_album, #detalle_imagen {
+	background-color: #000; /* cambiado */
+	padding-left: 40px;
+	overflow: hidden;
+}
+
+#principal > h2, #registro > h2, .form_busqueda > h2, #solicitar > h2,
+#datos_usuario > h2, #respuesta_album > h2, #respuesta_album > h3,
+#detalle_imagen  h2 {
+	margin-top: 20px;
+}
+#principal, #registro, .form_busqueda, #solicitar, 
+#datos_usuario, #respuesta_album, #detalle_imagen {
+	width: 55%;
+	float: left;
+	margin-left: 20%;
+}
+
+#buscar, .tarifas { /* aside */
+	width: 18%;
+	float: right;
+	padding-top: 10px;
+}
+
+#datos_usuario h2 {
+	margin-bottom: 20px;
+}
+
+ #respuesta_album h4{
+	 margin-top: 55px;
+ }
+
+ul {
+	margin: 0;
+	padding: 0;
+	/*list-style-type: none;
+	overflow: hidden;*/
+}
+
+li {
+	list-style-type: none;
+	float: left;
+}
+a { text-decoration: none; }
+img { border: 1px solid #FFF; } /* cambiado */
+
+.lista_fotos {
+	margin-top: 20px;
+}
+
+.lista_fotos li {
+	float: left;
+	margin-bottom: 20px;
+	margin-right: 15px;
+}
+
+.datos li {
+	margin-bottom: 0;
+}
+
+#respuesta_album {
+	padding-bottom: 50px;
+}
+
+/* NO SE DE DONDE ES DATOS_IMAGEN
+#datos_imagen > h2{
+	padding-bottom:20px;
+}*/
+
+/*#menu_usuario li a{
+	display: block;
+	padding: 10px;
+	text-align: center;
+}
+
+#menu_usuario li a:hover{
+	background-color: #444484;
+}*/
+
+
+
+
+
+/* Estilos form compartidos*/
+#registro form, .form_busqueda form,  #solicitar form {
+	margin: 0 auto;
+	max-width: 480px;
+	min-width: 150px;
+	overflow: hidden;
+}
+
+#registro form input[type=submit], .form_busqueda input[type=submit],
+#solicitar form input[type=submit] {
+	margin-right: 10%;
+	float: right;
+}
+
+#registro form input[type=submit], .form_busqueda input[type=submit], 
+#solicitar form input[type=submit] {
+	padding: 10px;
+}
+
+#registro form p, .form_busqueda form p, #solicitar form p {
+	margin-right: 40px;
+}
+
+#registro form label, .form_busqueda form label, #solicitar form label {
+    display: block;
+    margin-bottom: 3px;
+}
+
+#registro form #nombre, #registro form #password2, #registro form #repassword,
+#registro form #correo, #registro form #ciudad, #registro form #pais, #registro form #foto,
+.form_busqueda form #titulo, .form_busqueda form #pais, #solicitar form input[type="text"],
+#solicitar form #email, #solicitar form select, #solicitar form #fecha_recepcion {
+	width: 100%;
+}
+
+#registro form select[name="dias"], #registro form select[name="meses"],
+#registro form select[name="anyos"], .form_busqueda form select[name="dia"],
+.form_busqueda form select[name="mes"], .form_busqueda form select[name="anyo"],
+#solicitar form input[name="numero_copias"] {
+	width: 30%;
+}
+
+#registro form input[name="registro"], .form_busqueda form input[type=submit],
+#solicitar form input[type="submit"] {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#registro form label[for="hombre"], #registro form label[for="mujer"],
+#registro form select[name="dias"], .form_busqueda form select[name="dia"],
+#solicitar form input[name="color_album"], #solicitar form input[name="numero_copias"],
+#solicitar form label[for="blanco_negro"], #solicitar form label[for="foto_color"],
+#solicitar form .resolucion {
+	margin-left: 5%;
+}
+
+
+
+/* Form registro y solicitar*/
+#registro form label[for="hombre"], #registro form label[for="mujer"],
+#solicitar form label[for="color_album"], #solicitar form label[for="numero_copias"],
+#solicitar form label[for="blanco_negro"], #solicitar form label[for="foto_color"] {
+	display: inline;
+}
+
+
+
+/* Solicitar album */
+.tarifas h2 {
+	margin-top: 10px;
+}
+
+#solicitar > p {
+	margin-right: 20px;
+}
+
+.letra_roja, .asterisco_rojo {
+	color: red;
+}
+
+#solicitar form .quitar_margenes, #solicitar form .quitar_abajo {
+	margin-bottom: 3px;
+}
+
+#solicitar form .quitar_arriba {
+	margin-top: 0;
+}
+
+#solicitar form fieldset {
+    padding-left: 40px;
+	margin-top: 20px;
+}
+
+#solicitar form textarea {
+	width: 90%;
+}
+
+.tarifas table th {
+	padding-top: 10px;
+	border-bottom: 1px solid #000;
+}
+
+.tarifas table td {
+	padding-bottom: 5px;
+}
+
+
+
+
+
+
+/* MEDIA QUERIES */
+
+
+/* para 1024px o mas */
+
+@media screen and (max-width:1024px) {
+	header {
+		height: 30px;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		background-color: #222262;
+		color: #FFF;
+		overflow: visible;
+		z-index: 4;
+	}
+
+	header form {
+		float: right;
+		margin-right: 1%;
+	}
+
+	img {
+		border: 1px solid #000;
+	}
+
+	header a{
+		color: inherit;
+	}
+
+	#bienvenida {
+		display:none;
+		visibility:hidden;
+	}
+	.barra {
+		float: right;
+		margin: 10px;
+		margin-top: 0px;
+		padding: 0px;
+	}
+
+	.registro {
+		margin-left: 5px;
+		float: right;
+	}
+	.logo {
+		margin: 0;
+		margin-top: 10px;
+		padding-right: 5%;
+		position: relative;
+		top: -10px;
+		padding-left: 5%;
+		float: left;
+		z-index: 1;
+	}
+	.logo:hover, .registro:hover, .salir:hover {
+		color: orange;
+	}
+	
+	#principal, #registro, .form_busqueda, #solicitar, 
+	#datos_usuario, #respuesta_album, #detalle_imagen {
+		width: 55%;
+		float: left;
+		margin-left: 20%;
+	}
+	
+	#buscar, .tarifas { /* aside */
+		width: 18%;
+		float: right;
+		padding-top: 10px;
+	}
+	#inicio_sesion{
+		visibility: visible;
+		display: block;
+	}
+
+	#inicio_sesion_desplegable{
+		visibility: hidden;
+		display: none;
+	}
+	#menu_usuario_desplegable{
+		visibility: hidden;
+		display: none;
+	}
+	#menu_usuario_modificado{
+		visibility: visible;
+		display: block;
+	}
+	#menu_usuario_modificado li a{
+		display:block;
+		padding: 10px;
+		text-align: center;
+	}
+	#menu_usuario{
+		visibility: hidden;
+		display: none;
+	}
+
+	#menu_usuario_modificado li a:hover{
+		background-color: #444484;
+	}
+	
+}
+
+/* para 768px o menos */
+
+@media screen and (max-width:768px) {
+	
+	header {
+		height: 30px;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		background-color: #222262;
+		color: #FFF;
+		overflow: visible;
+		z-index: 1;
+	}
+
+	header form {
+		float: right;
+		margin-right: 5%;
+	}
+
+	img {
+		border: 1px solid #000;
+	}
+
+	header a{
+		color: inherit;
+	}	
+
+	#bienvenida {
+		display:none;
+		visibility:hidden;
+	}
+
+	h1, h2, h3, h4 {
+		font-family: Cambria, Georgia, Times New Roman, serif; 
+		margin:0;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	li {
+		list-style-type: none;
+	}
+	.barra {
+		clear: right;
+		visibility: hidden;
+		display: none;
+	}
+
+	.registro {
+		display:none;
+	}
+
+	.logo {
+		margin: 0;
+		margin-top: 10px;
+		padding-right: 5%;
+		background-color: #222262;
+		position: relative;
+		top: -10px;
+		padding-left: 5%;
+		float: left;
+		z-index: 1;
+	}
+
+	.logo:hover, .registro:hover, .salir:hover, .desplegable_is li:hover > a{
+		color: orange;
+	}
+	#inicio_sesion{
+		visibility: hidden;
+		display: none;
+	}
+	#inicio_sesion_desplegable{
+		float: left;
+		visibility: visible;
+		display: block;
+	}
+	#menu_usuario{
+		visibility:hidden;
+		display: none;
+		padding: auto;
+	}
+	#menu_usuario_modificado{
+		visibility:hidden;
+		display: none;
+	}
+	#menu_usuario_desplegable{
+		visibility: visible;
+		display: block;
+	}
+	#menu_usuario_desplegable li a, #inicio_sesion_desplegable li a, .opciones_is li{
+		display:block;
+		padding: 10px;
+		text-align: center;
+	}
+	.desplegable_is{
+		display: block;
+		margin-left: -19%;
+		padding-right: 5%;
+		position: absolute;
+		color: #FFFFFF;
+		float: left;
+		width: 100%;
+	}
+	.desplegable{
+		display: block;
+		position: absolute;
+		color: #FFFFFF;
+		float: left;
+		width: 100%;
+	}
+	.desplegable li, .desplegable_is li{
+		width: 100%;
+	}
+	.opciones_is {
+		z-index: 5;
+	}
+	.opciones, .opciones_is {
+		position: absolute;
+		background-color: #222262;
+		display: none;
+	}
+	.opciones a, .opciones_is a{
+		text-decoration:none;
+		color: #FFFFFF;
+	}
+	.opciones li, .opciones_is li{
+		width: 100%;
+		clear: left;
+	}
+	.desplegable li:hover > a{
+		background-color: #444484;
+	}
+	.desplegable li:hover > .opciones, .desplegable_is li:hover > .opciones_is  {
+		display: block;
+		width: 100%;
+		clear: left;
+	}
+	
+	#buscar, #principal, #solicitar, .tarifas, .tarifas table, #detalle_imagen, #datos_usuario, #solicitar, .form_busqueda, #respuesta_album {
+		width: auto;
+		float: none;
+		text-align: center;
+		margin-left: auto;
+		margin-right:auto;
+		padding-left: 0;
+	}
+	
+	#principal, #detalle_imagen, #datos_usuario, .form_busqueda, #solicitar, #respuesta_album{
+		margin-left: 0;
+	}
+	
+	#buscar {
+		height: 40px;
+	}
+	
+	#buscar form {
+		position: absolute;
+		right: 5%;
+		padding-top: 8px;
+	}
+	
+	.lista_fotos {
+		margin: 0 auto;
+		margin-top: 20px; /* para que no se anule por la anterior */
+		width: 450px;
+	}
+	#detalle_imagen img{
+		width: 300px;
+		height: 225px; 
+	}
+}
+
+/* para 480px o menos */
+
+@media screen and (max-width:480px) {
+	
+	#buscar form {
+		right: 10%;
+	}
+	
+	.lista_fotos {
+		width: 220px;
+	}
+	
+	#registro form #hombre, #registro form #mujer {
+		margin-left: 0;
+	}
+	
+	#registro form label[for="hombre"], #registro form label[for="mujer"],
+	#registro form select[name="dias"] {
+		margin-left: 5px;
+	}
+	
+	#solicitar {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	
+	#solicitar form .resolucion {
+		font-size: 0.8em;
+		margin-left: 10%;
+		margin-right: 0;
+	}
+	
+	#solicitar form .resolucion input {
+		width: 30%;
+	}
+	
+	#solicitar form p {
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+	
+	#solicitar form fieldset {
+		padding-left: 0;
+	}
+	
+	#solicitar form textarea {
+		width: 95%;
+		margin-left: 10px;
+	}
+	
+	#solicitar > p {
+		margin-right: 0;
+	}
+	#detalle_imagen img{
+		width: 200px;
+		height: 150px; 
+	}
+}
