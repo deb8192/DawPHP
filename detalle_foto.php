@@ -17,11 +17,11 @@ require_once("includes/cabecera.php");
 		<img src="img/foto.jpg" alt="Foto 1" width="400" height="300"/>
 		<aside>
 			<h3>Detalles</h3>
-			<p>Título: Lorem ipsum</p>
-			<p>Fecha: 00/00/0000</p>
-			<p>País: España</p>
-			<p>Álbum: Carpeta 1</p>
-			<p>Usuario: John Smith</p>
+			<p>Título: <?php $fotos['var_ID']['titulo']; ?></p>
+			<p>Fecha: <?php $fotos['var_ID']['fecha']; ?></p>
+			<p>País: <?php $fotos['var_ID']['pais']; ?></p>
+			<p>Álbum: <?php $fotos['var_ID']['album']; ?></p>
+			<p>Usuario: <?php $fotos['var_ID']['usuario']; ?></p>
 		</aside>
 	</section>
 	
