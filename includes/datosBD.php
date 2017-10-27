@@ -26,7 +26,7 @@
 			"fecha" => "27/10/2017",
 			"ciudad" => "Roma",
 			"pais" => "Italia",
-			"nombre" => "foto0.jpg",
+			"nombre" => "taco-work-memes.jpg",
 		),
 	);
 	

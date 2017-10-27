@@ -16,6 +16,7 @@
 			}
 		} else {
 			$_SESSION['error'] = "El usuario es incorrecto.";
+			
 			header("Location:../index.php");
 		}
 	}
