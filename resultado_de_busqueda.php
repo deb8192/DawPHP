@@ -92,6 +92,27 @@ require_once("includes/cabecera.php");
 			</p>
 			<input type="submit" name="buscar" value="Buscar" tabindex="10"/>
 		</form>
+		
+		<section id="criterio_busqueda">
+			<h2>Criterios de búsqueda</h2>
+			<?php
+
+				if(!empty($_POST['titulo'])){
+					$titulo = $_POST['titulo'];
+					echo "<p>Título: $titulo</p> ";
+				}
+				if(!empty($_POST['dia'])&&!empty($_POST['mes'])&&!empty($_POST['anyo'])){
+					$dia = $_POST['dia'];
+					$mes = $_POST['mes'];
+					$anyo = $_POST['anyo'];
+					echo "<p>Fecha: $dia de $mes de $anyo</p> ";
+				}
+				if(!empty($_POST['pais'])){
+					$pais = $_POST['pais'];
+					echo "<p>País: $pais ";
+				}
+				?>
+		</section>
 	
 		<section id="resultado_busqueda">
 			<h2>Resultado de la búsqueda</h2>
