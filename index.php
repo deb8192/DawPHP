@@ -24,7 +24,7 @@ include_once("includes/cabecera.php");
 		<ul class="lista_fotos">
 			<li>
 				<h3>Título</h3>
-				<a href="detalle_foto.php" title="Ver foto1" tabindex="7"><img src="img/foto.jpg" alt="Foto 1" width="200" height="150"/></a>
+				<a href="detalle_foto.php?id=1" title="Ver foto1" tabindex="7"><img src="img/foto.jpg" alt="Foto 1" width="200" height="150"/></a>
 				<ul class="datos">
 					<li>Fecha</li>
 					<li>País</li>
@@ -32,7 +32,7 @@ include_once("includes/cabecera.php");
 			</li>
 			<li>
 				<h3>Título</h3>
-				<a href="detalle_foto.php" title="Ver foto2" tabindex="8"><img src="img/foto.jpg" alt="Foto 2" width="200" height="150"/></a>
+				<a href="detalle_foto.php?id=0" title="Ver foto2" tabindex="8"><img src="img/foto.jpg" alt="Foto 2" width="200" height="150"/></a>
 				<ul class="datos">
 					<li>Fecha</li>
 					<li>País</li>
@@ -40,7 +40,7 @@ include_once("includes/cabecera.php");
 			</li>
 			<li>
 				<h3>Título</h3>
-				<a href="detalle_foto.php" title="Ver foto3" tabindex="9"><img src="img/foto.jpg" alt="Foto 3" width="200" height="150"/></a>
+				<a href="detalle_foto.php?id=1" title="Ver foto3" tabindex="9"><img src="img/foto.jpg" alt="Foto 3" width="200" height="150"/></a>
 				<ul class="datos">
 					<li>Fecha</li>
 					<li>País</li>
@@ -48,7 +48,7 @@ include_once("includes/cabecera.php");
 			</li>
 			<li>
 				<h3>Título</h3>
-				<a href="detalle_foto.php" title="Ver foto4" tabindex="10"><img src="img/foto.jpg" alt="Foto 4" width="200" height="150"/></a>
+				<a href="detalle_foto.php?id=0" title="Ver foto4" tabindex="10"><img src="img/foto.jpg" alt="Foto 4" width="200" height="150"/></a>
 				<ul class="datos">
 					<li>Fecha</li>
 					<li>País</li>
@@ -56,7 +56,7 @@ include_once("includes/cabecera.php");
 			</li>
 			<li>
 				<h3>Título</h3>
-				<a href="detalle_foto.php" title="Ver foto5" tabindex="11"><img src="img/foto.jpg" alt="Foto 5" width="200" height="150"/></a>
+				<a href="detalle_foto.php?id=1" title="Ver foto5" tabindex="11"><img src="img/foto.jpg" alt="Foto 5" width="200" height="150"/></a>
 				<ul class="datos">
 					<li>Fecha</li>
 					<li>País</li>

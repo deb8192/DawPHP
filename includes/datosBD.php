@@ -37,7 +37,7 @@
 			"pais" => "España",
 			"album" => "Memes",
 			"usuario" => "Débora",
-			"nombre" => "foto0.jpg",
+			"nombre" => "piensa.jpg",
 		),
 		1 => array(
 			"titulo" => "Foto 1",
@@ -45,7 +45,7 @@
 			"pais" => "España",
 			"album" => "Web",
 			"usuario" => "Marinés",
-			"nombre" => "foto1.jpg",
+			"nombre" => "jackie.jpg",
 		),
 	);
 ?>

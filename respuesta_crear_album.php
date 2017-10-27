@@ -12,34 +12,28 @@ require_once("includes/cabecera.php");
 	<!-- HEADER -->
 	<?php require_once("includes/header.php"); ?>
 		
-		<p class="letra_roja">(*) Campos obligatorios</p>
-		
-		<form action="respuesta_crear_album.php" method="post">
-			<fieldset>
-				<legend>Crear album</legend>
-				
-				<p><label for= "titulo_album_creado">Título: <span class="asterisco_rojo">*</span></label>
-				<input type= "text" name="titulo_album_creado" id="titulo_album_creado" required="" maxlength="100" tabindex="1"/></p>  
+		<section id="respuesta_crear_album">	
+			<h2>Álbum creado</h2>
 			
-				<p class="descripcion_album">Descripción: <span class="asterisco_rojo">*</span></p>
-				<textarea name="descripcion_album" id="descripcion_album" required="" maxlength="4000" tabindex="2"/></p>
-				
-				<p><label for= "fecha_album">Fecha: <span class="asterisco_rojo">*</span></label>
-				<input type="date" name="fecha_album" id="fecha_album" required="" tabindex="3"/></p>
-				
-				<p class="quitar_abajo">País: <span class="asterisco_rojo">*</span></p>
-				<p class="quitar_arriba"><select name="pais" required=""  tabindex="4">
-					<option value="">Elija país...</option>
-					<option value="Alemania">Alemania</option>
-					<option value="Escocia">Escocia</option>
-					<option value="España">España</option>
-					<option value="Francia">Francia</option>
-					<option value="Gales">Gales</option>
-					<option value="Grecia">Grecia</option>
-					<option value="Inglaterra">Inglaterra</option>
-					<option value="Irlanda">Irlanda</option>
-					<option value="Italia">Italia</option>
-				</select></p>
+			<?php
+
+			if(!empty($_POST['titulo_album_creado'])){
+				$titulo_album_creado = $_POST['titulo_album_creado'];
+				echo "<p>Título del álbum: $titulo_album_creado</p>";
+			}
+			if(!empty($_POST['descripcion_album'])){
+				$descripcion_album = $_POST['descripcion_album'];
+				echo "<p>Descripción: $descripcion_album</p>";
+			}
+			if(!empty($_POST['fecha_album'])){
+				$fecha_album = $_POST['fecha_album'];
+				echo "<p>Fecha: $fecha_album</p>";
+			}
+			if(!empty($_POST['pais'])){
+				$pais = $_POST['pais'];
+				echo "<p>País: $pais</p>";
+			}
+			?>
 	
 	<!-- FOOTER con </body> y </html> -->
 	<?php require_once("includes/footer.php"); ?>
