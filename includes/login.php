@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include_once('usuariosBD.php');
+	include_once('datosBD.php');
 	if (isset($_POST['usuario']) && isset($_POST['password'])) {
 		$usuario = addslashes($_POST['usuario']);
 		$password = addslashes($_POST['password']);

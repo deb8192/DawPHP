@@ -26,4 +26,23 @@
 			"pais" => "Italia",
 		),
 	);
+	
+	$fotos = array(
+		0 => array(
+			"titulo" => "Foto 0",
+			"fecha" => "05/6/2017",
+			"pais" => "España",
+			"album" => "Memes",
+			"usuario" => "Débora",
+			"nombre" => "foto0.jpg",
+		),
+		1 => array(
+			"titulo" => "Foto 1",
+			"fecha" => "12/7/2017",
+			"pais" => "España",
+			"album" => "Web",
+			"usuario" => "Marinés",
+			"nombre" => "foto1.jpg",
+		),
+	);
 ?>

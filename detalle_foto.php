@@ -14,14 +14,14 @@ require_once("includes/cabecera.php");
 	
 	<section id="detalle_imagen">
 		<h2>Detalle foto 1</h2>
-		<img src="img/foto.jpg" alt="Foto 1" width="400" height="300"/>
+		<img src="img/<?php echo $fotos['var_ID']['titulo']; ?>" alt="<?php echo $fotos['var_ID']['titulo']; ?>" width="400" height="300"/>
 		<aside>
 			<h3>Detalles</h3>
-			<p>Título: <?php $fotos['var_ID']['titulo']; ?></p>
-			<p>Fecha: <?php $fotos['var_ID']['fecha']; ?></p>
-			<p>País: <?php $fotos['var_ID']['pais']; ?></p>
-			<p>Álbum: <?php $fotos['var_ID']['album']; ?></p>
-			<p>Usuario: <?php $fotos['var_ID']['usuario']; ?></p>
+			<p>Título: <?php echo $fotos['var_ID']['titulo']; ?></p>
+			<p>Fecha: <?php echo $fotos['var_ID']['fecha']; ?></p>
+			<p>País: <?php echo $fotos['var_ID']['pais']; ?></p>
+			<p>Álbum: <?php echo $fotos['var_ID']['album']; ?></p>
+			<p>Usuario: <?php echo $fotos['var_ID']['usuario']; ?></p>
 		</aside>
 	</section>
 	
