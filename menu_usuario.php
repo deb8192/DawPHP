@@ -15,12 +15,12 @@ require_once("includes/cabecera.php");
 	<section id="datos_usuario">
 		<h2>Datos personales</h2>
 		<img src="img/foto.jpg" alt="Foto perfil" width="200" height="150"/>
-		<p>Nombre: Pepito Palotes</p>
-		<p>Email: pepito@gmail.com</p>
-		<p>Sexo: Hombre</p>
-		<p>Fecha: 00/00/0000</p>
-		<p>Ciudad: Alicante</p>
-		<p>País: España</p>
+		<p>Nombre: <?php echo $_SESSION['usuario']; ?></p>
+		<p>Email: <?php echo $usuarios[$_SESSION['usuario']]['correo']; ?></p>
+		<p>Sexo: <?php echo $usuarios[$_SESSION['usuario']]['sexo'] ; ?></p>
+		<p>Fecha: <?php echo $usuarios[$_SESSION['usuario']]['fecha'] ; ?></p>
+		<p>Ciudad: <?php echo $usuarios[$_SESSION['usuario']]['ciudad'] ; ?></p>
+		<p>País: <?php echo $usuarios[$_SESSION['usuario']]['pais'] ; ?></p>
 	</section>
 	
 	<!-- FOOTER -->
