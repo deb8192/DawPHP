@@ -18,11 +18,11 @@
 				$_SESSION['usuario'] = $usuario;
 				header("Location:../menu_usuario.php");
 			} else {
-				$_SESSION['error'] = "La contraseña";
+				$_SESSION['error'] = "La contraseña no coincide.";
 				header("Location:../index.php");
 			}
 		} else {
-			$_SESSION['error'] = "El usuario";
+			$_SESSION['error'] = "El usuario es incorrecto.";
 			header("Location:../index.php");
 		}
 	}

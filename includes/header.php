@@ -29,9 +29,15 @@
 			</ul>
 		</form>
 		
-		<?php if (isset($_SESSION['error'])) {
-			echo '<p class="inicio_error">'.$_SESSION['error'].' que ingresaste no coincide con nuestros registros. Por favor, revisa e inténtalo de nuevo.</p>';
-		}
+		<?php if (isset($_SESSION['error'])) { ?>
+			<div class="caja_modal">
+				<input id="cerrar-modal" name="modal" type="radio" /> 
+				<label for="cerrar-modal"> X </label>
+				<div id="modal">
+					<p class="inicio_error"><?php echo $_SESSION['error']; ?></p>
+				</div>
+			</div>
+	<?php }
 	} else { ?>
 	
 		<p id="bienvenida">Bienvenido/a <?php echo $_SESSION['usuario']; ?> | <a class="salir" href="includes/logout.php" tabindex="2">Salir</a></p>

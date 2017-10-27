@@ -67,12 +67,59 @@ header p {
 	color: orange;
 }
 
-.inicio_error {
-	color: red;
+
+/* MODAL ERRORES INICIO SESION */
+.caja_modal {
 	position: relative;
-	top: 25px;
-	left: 320px;
+	top: 40px;
+	max-width: 600px;
+	min-width: 265px;
+	margin: 0 auto;
+	padding: 10px;
+	z-index: 4;
+	color: #FFF;
 }
+#modal {
+	max-width: 600px;
+	min-width: 265px;
+	height: 25px;
+	padding: 10px;
+	background-color: rgba(0, 0, 0, 0.4);
+	border-radius: 0 0 6px 6px;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+}
+#modal p {
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: auto;
+	text-align: center;
+}
+#cerrar-modal {
+	display: none;
+}
+#cerrar-modal + label {
+  position: absolute;
+	top: 1em;
+	right: 1.5em;
+	font-weight: bold;
+	cursor: pointer;
+	background: red;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	border-radius: 5px;
+	z-index: 5;
+}
+#cerrar-modal:checked ~ #modal {
+	display: none;
+}
+#cerrar-modal:checked ~ label {
+	display: none;
+}
+/* FEINAL DEL MODAL */
+
 
 #inicio_sesion{
 		visibility: visible;
