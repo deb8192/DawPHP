@@ -12,23 +12,23 @@ require_once("includes/cabecera.php");
 	<!-- HEADER -->
 	<?php require_once("includes/header.php"); ?>
 		
-		<p class="letra_roja">(*) Campos obligatorios</p>
+		<section id="crear_album">	
+			<h2>Crear album</h2>
+			<p class="letra_roja">(*) Campos obligatorios</p>
 		
-		<form action="respuesta_crear_album.php" method="post">
-			<fieldset>
-				<legend>Crear album</legend>
+			<form id="form_crear_album" action="respuesta_crear_album.php" method="post">
 				
 				<p><label for= "titulo_album_creado">Título: <span class="asterisco_rojo">*</span></label>
-				<input type= "text" name="titulo_album_creado" id="titulo_album_creado" required="" maxlength="100" tabindex="1"/></p>  
+				<input type= "text" name="titulo_album_creado" id="titulo_album_creado" required="" maxlength="100" tabindex="4"/></p>  
 			
 				<p class="descripcion_album">Descripción: <span class="asterisco_rojo">*</span></p>
-				<textarea name="descripcion_album" id="descripcion_album" required="" maxlength="4000" tabindex="2"></textarea>
+				<textarea name="descripcion_album" id="descripcion_album" required="" rows="4" cols="50" maxlength="4000" tabindex="5"></textarea>
 				
 				<p><label for= "fecha_album">Fecha: <span class="asterisco_rojo">*</span></label>
-				<input type="date" name="fecha_album" id="fecha_album" required="" tabindex="3"/></p>
+				<input type="date" name="fecha_album" id="fecha_album" required="" tabindex="6"/></p>
 				
 				<p class="quitar_abajo">País: <span class="asterisco_rojo">*</span></p>
-				<p class="quitar_arriba"><select name="pais" required=""  tabindex="4">
+				<p class="quitar_arriba"><select id="pais" name="pais" required=""  tabindex="7">
 					<option value="">Elija país...</option>
 					<option value="Alemania">Alemania</option>
 					<option value="Escocia">Escocia</option>
@@ -40,9 +40,9 @@ require_once("includes/cabecera.php");
 					<option value="Irlanda">Irlanda</option>
 					<option value="Italia">Italia</option>
 				</select></p>
-			</fieldset>
-			<input type="submit" name="crear_album" value="Crear álbum" tabindex="5"/>
-		</form>
+			<input type="submit" name="crear_album" value="Crear álbum" tabindex="8"/>
+			</form>
+		</section>
 	
 	<!-- FOOTER con </body> y </html> -->
 	<?php require_once("includes/footer.php"); ?>
