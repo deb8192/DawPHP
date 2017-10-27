@@ -14,7 +14,7 @@ require_once("includes/cabecera.php");
 	
 	<section class="form_busqueda">
 		<h2>Formulario de búsqueda</h2>
-		<form action="resultado_de_busqueda.php" method="post">
+				<form action="resultado_de_busqueda.php" method="post">
 			<p>
 				<label for="titulo">Título:</label>
 				<input type="text" name="titulo" id="titulo" tabindex="5"/>
@@ -55,18 +55,18 @@ require_once("includes/cabecera.php");
 					<option value="31">31</option>
 				</select>
 				<select name="mes" tabindex="7">
-					<option value="1">enero</option>
-					<option value="2">febrero</option>
-					<option value="3">marzo</option>
-					<option value="4">abril</option>
-					<option value="5">mayo</option>
-					<option value="6">junio</option>
-					<option value="7">julio</option>
-					<option value="8">agosto</option>
-					<option value="9">septiembre</option>
-					<option value="10">octubre</option>
-					<option value="11">noviembre</option>
-					<option value="12">diciembre</option>
+					<option value="enero">enero</option>
+					<option value="febrero">febrero</option>
+					<option value="marzo">marzo</option>
+					<option value="abril">abril</option>
+					<option value="mayo">mayo</option>
+					<option value="junio">junio</option>
+					<option value="julio">julio</option>
+					<option value="agosto">agosto</option>
+					<option value="septiembre">septiembre</option>
+					<option value="octubre">octubre</option>
+					<option value="noviembre">noviembre</option>
+					<option value="diciembre">diciembre</option>
 				</select>
 				<select name="anyo" tabindex="8">
 					<option value="2017">2017</option>
@@ -79,19 +79,40 @@ require_once("includes/cabecera.php");
 			<p>
 				<label for="pais">País:</label>
 				<select name="pais" id="pais" tabindex="9">
-					<option value="al">Alemania</option>
-					<option value="es">Escocia</option>
-					<option value="esp">España</option>
-					<option value="fr">Francia</option>
-					<option value="ga">Gales</option>
-					<option value="gr">Grecia</option>
-					<option value="ing">Inglaterra</option>
-					<option value="ir">Irlanda</option>
-					<option value="it">Italia</option>
+					<option value="Alemania">Alemania</option>
+					<option value="Escocia">Escocia</option>
+					<option value="España">España</option>
+					<option value="Francia">Francia</option>
+					<option value="Gales">Gales</option>
+					<option value="Grecia">Grecia</option>
+					<option value="Inglaterra">Inglaterra</option>
+					<option value="Irlanda">Irlanda</option>
+					<option value="Italia">Italia</option>
 				</select>
 			</p>
 			<input type="submit" name="buscar" value="Buscar" tabindex="10"/>
 		</form>
+		
+		<section id="criterio_busqueda">
+			<h2>Criterios de búsqueda</h2>
+			<?php
+
+				if(!empty($_POST['titulo'])){
+					$titulo = $_POST['titulo'];
+					echo "<p>Título: $titulo</p> ";
+				}
+				if(!empty($_POST['dia'])&&!empty($_POST['mes'])&&!empty($_POST['anyo'])){
+					$dia = $_POST['dia'];
+					$mes = $_POST['mes'];
+					$anyo = $_POST['anyo'];
+					echo "<p>Fecha: $dia de $mes de $anyo</p> ";
+				}
+				if(!empty($_POST['pais'])){
+					$pais = $_POST['pais'];
+					echo "<p>País: $pais ";
+				}
+				?>
+		</section>
 	
 		<section id="resultado_busqueda">
 			<h2>Resultado de la búsqueda</h2>
