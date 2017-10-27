@@ -13,6 +13,8 @@ require_once("includes/cabecera.php");
 	<?php require_once("includes/header.php"); ?>
 	
 	<section id="respuesta_album">	
+	
+		<!--mostrar datos introducidos-->
 		<h2>Solicitud de álbum registrada</h2>
 		
 		<h3>Tu álbum</h3>
@@ -109,13 +111,22 @@ require_once("includes/cabecera.php");
 			}
 			if(!empty($_POST['color_fotos'])){
 				$color_fotos = $_POST['color_fotos'];
-				if($color_fotos="blanco_negro")
+				if($color_fotos=="blanco_negro")
 					echo "<p>Color de las fotos: blanco y negro</p>";
 				else
 					echo "<p>Color de las fotos: color</p>";
 			}
+			#calcular precio
+			$precio=0.10;		#una página por defecto
+			if($color_fotos === "color")
+				$precio+=0.03;	#una sóla foto
+			if($color_album !== "#000000" )
+				$precio+=0.51;
+			if($resolucion > 450)
+				$precio+=0.10;
+			$precio*=$numero_copias;
 		?>
-		<p>Precio: 1000.00 €</p>
+		<p>Precio: <?php echo number_format($precio, 2, '.','') ."€"?></p>
 	</section>
 	
 	<!-- FOOTER con </body> y </html> -->
