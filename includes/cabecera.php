@@ -1,6 +1,6 @@
 <?php
 	session_start(); 
-	include_once('usuariosBD.php');
+	include_once('datosBD.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
