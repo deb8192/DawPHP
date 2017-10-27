@@ -119,7 +119,7 @@ require_once("includes/cabecera.php");
 			<ul class="lista_fotos">
 				<li>
 					<h3>Título</h3>
-					<a href="detalle_foto.php?id=0" name="foto" id="0" title="Ver foto1" tabindex="11"><img src="img/foto.jpg" alt="Foto 1" width="200" height="150"/></a>
+					<a href="detalle_foto.php?id=0" name="foto" id="0" title="Ver foto1" tabindex="11"><img src="img/piensa.jpg" alt="Foto 1" width="200" height="150"/></a>
 					<ul class="datos">
 						<li>Fecha</li>
 						<li>País</li>
@@ -127,7 +127,7 @@ require_once("includes/cabecera.php");
 				</li>
 				<li>
 					<h3>Título</h3>
-					<a href="detalle_foto.php?id=1" name="foto" id="1" title="Ver foto2" tabindex="12"><img src="img/foto.jpg" alt="Foto 2" width="200" height="150"/></a>
+					<a href="detalle_foto.php?id=1" name="foto" id="1" title="Ver foto2" tabindex="12"><img src="img/jackie.jpg" alt="Foto 2" width="200" height="150"/></a>
 					<ul>
 						<li>Fecha</li>
 						<li>País</li>
@@ -135,7 +135,7 @@ require_once("includes/cabecera.php");
 				</li>
 				<li>
 					<h3>Título</h3>
-					<a href="detalle_foto.php?id=0" name="foto" id="0" title="Ver foto3" tabindex="13"><img src="img/foto.jpg" alt="Foto 3" width="200" height="150"/></a>
+					<a href="detalle_foto.php?id=0" name="foto" id="0" title="Ver foto3" tabindex="13"><img src="img/piensa.jpg" alt="Foto 3" width="200" height="150"/></a>
 					<ul>
 						<li>Fecha</li>
 						<li>País</li>
@@ -143,7 +143,7 @@ require_once("includes/cabecera.php");
 				</li>
 				<li>
 					<h3>Título</h3>
-					<a href="detalle_foto.php?id=1" name="foto" id="1" title="Ver foto4" tabindex="14"><img src="img/foto.jpg" alt="Foto 4" width="200" height="150"/></a>
+					<a href="detalle_foto.php?id=1" name="foto" id="1" title="Ver foto4" tabindex="14"><img src="img/jackie.jpg" alt="Foto 4" width="200" height="150"/></a>
 					<ul>
 						<li>Fecha</li>
 						<li>País</li>
@@ -151,7 +151,7 @@ require_once("includes/cabecera.php");
 				</li>
 				<li>
 					<h3>Título</h3>
-					<a href="detalle_foto.php?id=0" name="foto" id="0" title="Ver foto5" tabindex="15"><img src="img/foto.jpg" alt="Foto 5" width="200" height="150"/></a>
+					<a href="detalle_foto.php?id=0" name="foto" id="0" title="Ver foto5" tabindex="15"><img src="img/piensa.jpg" alt="Foto 5" width="200" height="150"/></a>
 					<ul>
 						<li>Fecha</li>
 						<li>País</li>
