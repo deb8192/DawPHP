@@ -118,43 +118,43 @@ require_once("includes/cabecera.php");
 			<h2>Resultado de la búsqueda</h2>
 			<ul class="lista_fotos">
 				<li>
-					<h3>Título</h3>
-					<a href="detalle_foto.php?id=0" name="foto" id="0" title="Ver foto1" tabindex="11"><img src="img/foto.jpg" alt="Foto 1" width="200" height="150"/></a>
+					<h3><?php echo $fotos[0]['titulo']; ?></h3>
+				<a href="detalle_foto.php?id=0" title="Ver foto2" tabindex="8"><img src="img/piensa.jpg" alt="Foto 2" width="200" height="150"/></a>
+				<ul class="datos">
+					<li><?php echo $fotos[0]['fecha']; ?></li>
+					<li><?php echo $fotos[0]['pais']; ?></li>
+				</ul>
+				</li>
+				<li>
+					<h3><?php echo $fotos[1]['titulo']; ?></h3>
+					<a href="detalle_foto.php?id=1" title="Ver foto3" tabindex="9"><img src="img/jackie.jpg" alt="Foto 3" width="200" height="150"/></a>
 					<ul class="datos">
-						<li>Fecha</li>
-						<li>País</li>
+						<li><?php echo $fotos[1]['fecha']; ?></li>
+						<li><?php echo $fotos[1]['pais']; ?></li>
 					</ul>
 				</li>
 				<li>
-					<h3>Título</h3>
-					<a href="detalle_foto.php?id=1" name="foto" id="1" title="Ver foto2" tabindex="12"><img src="img/foto.jpg" alt="Foto 2" width="200" height="150"/></a>
-					<ul>
-						<li>Fecha</li>
-						<li>País</li>
+					<h3><?php echo $fotos[0]['titulo']; ?></h3>
+					<a href="detalle_foto.php?id=0" title="Ver foto2" tabindex="8"><img src="img/piensa.jpg" alt="Foto 2" width="200" height="150"/></a>
+					<ul class="datos">
+						<li><?php echo $fotos[0]['fecha']; ?></li>
+						<li><?php echo $fotos[0]['pais']; ?></li>
+					</ul>
+					</li>
+				<li>
+					<h3><?php echo $fotos[1]['titulo']; ?></h3>
+					<a href="detalle_foto.php?id=1" title="Ver foto3" tabindex="9"><img src="img/jackie.jpg" alt="Foto 3" width="200" height="150"/></a>
+					<ul class="datos">
+						<li><?php echo $fotos[1]['fecha']; ?></li>
+						<li><?php echo $fotos[1]['pais']; ?></li>
 					</ul>
 				</li>
 				<li>
-					<h3>Título</h3>
-					<a href="detalle_foto.php?id=0" name="foto" id="0" title="Ver foto3" tabindex="13"><img src="img/foto.jpg" alt="Foto 3" width="200" height="150"/></a>
-					<ul>
-						<li>Fecha</li>
-						<li>País</li>
-					</ul>
-				</li>
-				<li>
-					<h3>Título</h3>
-					<a href="detalle_foto.php?id=1" name="foto" id="1" title="Ver foto4" tabindex="14"><img src="img/foto.jpg" alt="Foto 4" width="200" height="150"/></a>
-					<ul>
-						<li>Fecha</li>
-						<li>País</li>
-					</ul>
-				</li>
-				<li>
-					<h3>Título</h3>
-					<a href="detalle_foto.php?id=0" name="foto" id="0" title="Ver foto5" tabindex="15"><img src="img/foto.jpg" alt="Foto 5" width="200" height="150"/></a>
-					<ul>
-						<li>Fecha</li>
-						<li>País</li>
+					<h3><?php echo $fotos[0]['titulo']; ?></h3>
+					<a href="detalle_foto.php?id=0" title="Ver foto2" tabindex="8"><img src="img/piensa.jpg" alt="Foto 2" width="200" height="150"/></a>
+					<ul class="datos">
+						<li><?php echo $fotos[0]['fecha']; ?></li>
+						<li><?php echo $fotos[0]['pais']; ?></li>
 					</ul>
 				</li>
 			</ul>

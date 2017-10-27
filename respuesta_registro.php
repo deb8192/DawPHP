@@ -12,7 +12,7 @@ require_once("includes/cabecera.php");
 	<!-- HEADER -->
 	<?php require_once("includes/header.php");
 	
-		/*if ($_POST['repassword'] !== $_POST['password2']) {
+		/*if (strcmp ($_POST['repassword'],$_POST['password2']) !== 0) {
 			$_SESSION['error'] = "Las contraseñas no coinciden.";
 			header("Location:registro.php");
 		}*/
