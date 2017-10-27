@@ -48,12 +48,12 @@
 			
 			<nav id="menu_usuario">
 				<ul>
-					<li><a href="menu_usuario.php" tabindex="3">Ir a mi Perfil</a></li>
+					<li><a href="menu_usuario.php" tabindex="3">Perfil</a></li>
 				</ul>
 			</nav>
 			<nav id="menu_usuario_modificado">
 				<ul>
-					<li><a href="menu_usuario.php" tabindex="2">Ir a mi Perfil</a></li>
+					<li><a href="menu_usuario.php" tabindex="2">Perfil</a></li>
 					<li><a href="includes/logout.php" tabindex="3">Salir</a></li>
 				</ul>
 			</nav>
@@ -70,7 +70,7 @@
 		<?php } else { ?>
 			<nav  id="menu_usuario">
 			<ul>
-				<li><a href="menu_usuario.php" tabindex="3">Editar datos</a></li>
+				<li><a href="menu_usuario.php" tabindex="3">Perfil</a></li>
 				<li><a href="" tabindex="4">Darse de baja</a></li>
 				<li><a href="" tabindex="5">Mis álbumes</a></li>
 				<li><a href="crear_album.php" tabindex="6">Crear álbum</a></li>
@@ -78,7 +78,7 @@
 		</nav>
 		<nav  id="menu_usuario_modificado">
 			<ul>
-				<li><a href="menu_usuario.php" tabindex="3">Editar datos</a></li>
+				<li><a href="menu_usuario.php" tabindex="3">Perfil</a></li>
 				<li><a href="" tabindex="4">Darse de baja</a></li>
 				<li><a href="" tabindex="5">Mis álbumes</a></li>
 				<li><a href="crear_album.php" tabindex="6">Crear álbum</a></li>
@@ -90,7 +90,7 @@
 			<ul class="desplegable">
 				<li><a href="">Opciones</a>
 					<ul class="opciones">
-						<li><a href="menu_usuario.php" tabindex="3">Editar datos</a></li>
+						<li><a href="menu_usuario.php" tabindex="3">Perfil</a></li>
 						<li><a href="" tabindex="4">Darse de baja</a></li>
 						<li><a href="" tabindex="5">Mis álbumes</a></li>
 						<li><a href="crear_album.php" tabindex="6">Crear álbum</a></li>
