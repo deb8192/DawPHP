@@ -100,8 +100,8 @@ require_once("includes/cabecera.php");
 			</select>
 			</p>
 			<p>
-			<label for="ciudad">Ciudad:</label>
-			<input type="text" name="ciudad" id="ciudad" tabindex="14"/>
+			<label for="ciudad">Ciudad: <span class="asterisco_rojo">*</span></label>
+			<input type="text" name="ciudad" id="ciudad" required="" tabindex="14"/>
 			</p>
 			<p>
 			<label for="pais">País:</label>
