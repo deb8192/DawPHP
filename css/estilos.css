@@ -461,7 +461,7 @@ img { border: 1px solid #000; }
 		background-color: #222262;
 		color: #FFF;
 		overflow: visible;
-		z-index: 1;
+		z-index: 4;
 	}
 
 	header form {
@@ -561,6 +561,7 @@ img { border: 1px solid #000; }
 		color: #FFFFFF;
 		float: left;
 		width: 100%;
+		z-index: 5;
 	}
 	.desplegable li, .desplegable_is li{
 		width: 100%;
