@@ -8,6 +8,7 @@
 			"fecha" => "27/10/2017",
 			"ciudad" => "Alicante",
 			"pais" => "España",
+			"nombre" => "piensa.jpg",
 		),
 		"Marinés" => array(
 			"passw" => "fritz",
@@ -16,6 +17,7 @@
 			"fecha" => "27/10/2017",
 			"ciudad" => "Agost",
 			"pais" => "España",
+			"nombre" => "jackie.jpg",
 		),
 		"Prueba" => array(
 			"passw" => "prueba",
@@ -24,6 +26,7 @@
 			"fecha" => "27/10/2017",
 			"ciudad" => "Roma",
 			"pais" => "Italia",
+			"nombre" => "foto0.jpg",
 		),
 	);
 	

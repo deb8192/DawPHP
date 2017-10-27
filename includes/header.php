@@ -29,7 +29,7 @@
 			</ul>
 		</form>
 		
-		<?php if (isset($_SESSION['error'])) { ?>
+		<?php if (!empty($_SESSION['error'])) { ?>
 			<div class="caja_modal">
 				<input id="cerrar-modal" name="modal" type="radio" /> 
 				<label for="cerrar-modal"> X </label>

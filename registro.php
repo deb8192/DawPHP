@@ -14,22 +14,23 @@ require_once("includes/cabecera.php");
 	
 	<section id="registro">
 		<h2>Registro</h2>
-		<form id="form_registro" action="index.php" method="post">
+		<p class="letra_roja">(*) Campos obligatorios</p>
+		<form id="form_registro" action="respuesta_registro.php" method="post">
 			<p>
-			<label for="nombre">Nombre:</label>
-			<input type="text" name="nombre" id="nombre" tabindex="5"/>
+			<label for="nombre">Nombre: <span class="asterisco_rojo">*</span></label>
+			<input type="text" name="nombre" id="nombre" required="" tabindex="5"/>
 			</p>
 			<p>
-			<label for="password2">Contraseña:</label>
-			<input type="password" name="password2" id="password2" tabindex="6"/>
+			<label for="password2">Contraseña: <span class="asterisco_rojo">*</span></label>
+			<input type="password" name="password2" id="password2" required="" tabindex="6"/>
 			</p>
 			<p>
-			<label for="repassword">Repetir contraseña:</label>
-			<input type="password" name="repassword" id="repassword" tabindex="7"/>
+			<label for="repassword">Repetir contraseña: <span class="asterisco_rojo">*</span></label>
+			<input type="password" name="repassword" id="repassword" required="" tabindex="7"/>
 			</p>
 			<p>
-			<label for="correo">Email:</label>
-			<input type="email" name="correo" id="correo" tabindex="8"/>
+			<label for="correo">Email: <span class="asterisco_rojo">*</span></label>
+			<input type="email" name="correo" id="correo" required="" tabindex="8"/>
 			</p>
 			
 			<p>Sexo:
