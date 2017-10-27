@@ -513,7 +513,7 @@ img { border: 1px solid #000; }
 		top: -10px;
 		padding-left: 5%;
 		float: left;
-		z-index: 1;
+		z-index: 6;
 	}
 
 	.logo:hover, .registro:hover, .salir:hover, .desplegable_is li:hover > a{
