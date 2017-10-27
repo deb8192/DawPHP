@@ -13,11 +13,10 @@ require_once("includes/cabecera.php");
 	<?php require_once("includes/header.php");?>
 	
 	<section id="detalle_imagen">
-		<h2>Detalle foto 1</h2>
+		<h2><?php echo $fotos[$_GET['id']]['titulo']; ?></h2>
 		<img src="img/<?php echo $fotos[$_GET['id']]['nombre']; ?>" alt=<?php echo $fotos[$_GET['id']]['nombre']; ?>" width="400" height="300"/>
 		<aside>
 			<h3>Detalles</h3>
-			<p>Título: <?php echo $fotos[$_GET['id']]['titulo']; ?></p>
 			<p>Fecha: <?php echo $fotos[$_GET['id']]['fecha']; ?></p>
 			<p>País: <?php echo $fotos[$_GET['id']]['pais']; ?></p>
 			<p>Álbum: <?php echo $fotos[$_GET['id']]['album']; ?></p>
