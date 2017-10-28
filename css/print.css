@@ -1,0 +1,363 @@
+html{
+	height: 100%;
+}
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	font-family:Times New Roman, Georgia, Serif;
+	font-size: 16px;
+	background-color: #EEE;
+}
+header{
+	display: none;
+	visibility; hidden;
+}
+
+.barra {
+	float: right;
+	margin: 10px;
+	margin-top: 0px;
+	padding: 0px;
+}
+
+.registro {
+	margin-left: 5px;
+	float: right;
+}
+
+.logo {
+    margin: 0;
+	margin-top: 10px;
+	margin-right: 40px;
+    position: relative;
+    top: -10px;
+    margin-left: 5%;
+    float: left;
+}
+#buscar{
+	visibility: hidden;
+}
+a, src{
+	text-decoration:unterline;
+	color: blue;
+	border-color: blue;
+}
+img {
+	border: 1px solid #000;
+}
+#principal, #buscar, #datos_usuario, .form_busqueda, #registro, #solicitar,
+.color_radios, #respuesta_album {
+	padding: 0;
+	margin: 0;
+}
+
+#principal, .form_busqueda, #registro, #datos_usuario, #detalle_imagen {
+	height: 90%;
+}
+
+#solicitar, #respuesta_album, #resultado_busqueda {
+	padding-bottom: 50px;
+}
+
+#principal, .form_busqueda, #registro, #solicitar, #datos_usuario,
+#respuesta_album, #detalle_imagen {
+	width: 55%;
+	float: left;
+	margin-left: 10%;
+	background-color: #FFF;
+	padding-left: 40px;
+}
+
+#resultado_busqueda {
+	width: 100%;
+	float: left;
+	background-color: #FFF;
+}
+
+#datos_usuario > h2, #principal > h2 , .form_busqueda > h2, #registro > h2,
+#solicitar > h2, #respuesta_album > h2, #respuesta_album > h3, #respuesta_album > h4,
+.tarifas > h2, #resultado_busqueda .lista_fotos h2 , #detalle_imagen  h2 {
+	margin-top: 20px;
+}
+.tarifas{
+	z-index:-1;
+}
+.tarifas {
+	float: right;
+}
+
+.tarifas table th {
+	padding-top: 10px;
+	border-bottom: 1px solid #000;
+}
+
+.tarifas table td {
+	padding-bottom: 5px;
+}
+.lista_fotos > li {
+	margin-bottom: 20px;
+}
+
+.lista_fotos > h2 {
+	margin:20px;
+}
+
+#datos_imagen > h2{
+	padding-bottom:20px;
+}
+
+#buscar {
+	width: 20%;
+	float: right;
+	margin-top: 10px;
+}
+
+#menu_usuario{
+	display:none;
+	visibility: hidden;
+	}
+
+.lista_fotos li {
+	list-style-type: none;
+	width: 200;
+	float: left;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.datos li {
+	display: initial;
+}
+
+h1, h2, h3, h4 {
+	font-family: Cambria, Georgia, Times New Roman, serif; 
+	margin:0;
+}
+a{
+	text-decoration: underline;
+}
+li {
+	list-style-type: none;
+	float: left;
+}
+
+ul {
+	margin:0;
+	padding:0;
+}
+
+/* Estilos form compartidos*/
+.form_busqueda form,  #form_registro, #solicitar form {
+	margin: 0 auto; 
+	width: 50%;
+}
+
+.form_busqueda input[type=submit], #form_registro input[type=submit] {
+	margin-right: 10%;
+	float: right;
+}
+
+.form_busqueda input[type=submit], #form_registro input[type=submit],
+#solicitar form input[type=submit] {
+	padding: 10px;
+}
+
+/* Form resultado busqueda */
+.form_busqueda{
+	padding-left:20px;
+}
+
+.form_busqueda form {
+	margin-left: 60px;
+	width: 45%;
+}
+
+#titulo {
+	width: 70%;
+	margin-left: 25px;
+}
+
+.fecha {
+	margin-left: 20px;
+}
+
+#pais {
+	margin-left: 30px;
+}
+
+.form_busqueda input[type=submit] {
+	margin-right: 30px;
+	margin-bottom: 20px;
+	float: right;
+}
+
+/* Form registro */
+#form_registro #nombre {
+	margin-left: 88px;
+}
+
+#form_registro #password2 {
+	margin-left: 62px;
+}
+
+#form_registro #repassword {
+	margin-left: 10px;
+}
+
+#form_registro #correo {
+	margin-left: 105px;
+}
+
+#form_registro label[for="hombre"] {
+	margin-left: 108px;
+}
+
+#form_registro label[for="mujer"] {
+	margin-left: 20px;
+}
+
+.fecha_registro {
+	margin-left: 100px;
+}
+
+#form_registro #ciudad {
+	margin-left: 94px;
+}
+
+#form_registro #pais{
+	margin-left: 114px;
+}
+
+#form_registro #foto {
+	margin-left: 105px;
+}
+
+#form_registro input[name="registro"] {
+	margin-left: 154px;
+	margin-top: 20px;
+}
+
+/* Solicitar album */
+.tarifas {
+	float: right;
+	width: 20%;
+}
+
+.tarifas table th {
+	padding-top: 10px;
+	border-bottom: 1px solid #000;
+}
+
+.tarifas table td {
+	padding-bottom: 5px;
+}
+
+#solicitar h2 {
+	margin-bottom: 10px;
+}
+
+.letra_roja {
+	width: 50%;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	color: red;
+}
+
+.asterisco_rojo {
+	color: red;
+}
+
+#solicitar form fieldset {
+	margin-bottom: 10px;
+}
+
+#solicitar form input[type=submit] {
+	float: right;
+}
+
+#solicitar form #nombre, #solicitar form #apellidos, #solicitar form #email,
+#solicitar form #titulo_album {
+	width: 50%;
+}
+
+#solicitar form #nombre {
+	margin-left: 57px;
+}
+
+#solicitar form #apellidos {
+	margin-left: 49px;
+}
+
+#solicitar form #email {
+
+	margin-left: 74px;
+}
+
+#solicitar form textarea {
+
+	width: 100%;
+}
+
+.direction div {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+}
+
+#solicitar form #numero_portal, #solicitar form #CP, #solicitar form #escalera,
+#solicitar form #piso, #solicitar form #puerta {
+	width: 35%;
+}
+
+#solicitar form #calle {
+	margin-left: 0;
+}
+
+#solicitar form #escalera {
+	margin-left: 5px;
+}
+
+#solicitar form #piso {
+	margin-left: 35px;
+}
+
+#solicitar form #puerta {
+	margin-left: 19px;
+}
+
+#solicitar form select[name="provincia"] {
+	margin-left: 0;
+}
+
+#solicitar form select[name="pais"] {
+	margin-left: 0;
+}
+
+#solicitar form #color_album {
+	margin-left: 95px;
+}
+
+#solicitar form #numero_copias {
+	margin-left: 100px;
+	width: 10%;
+}
+
+#solicitar form select[name="album"] {
+	margin-left: 175px;
+}
+
+#solicitar form #fecha_recepcion {
+	margin-left: 0;
+	width: 45%;
+}
+
+#solicitar form input[name="color_fotos"] {
+	margin-left: 240px;
+}
+footer{
+	position: absolute;
+	display: block;
+	height: 40px;
+	bottom: 10px;
+}

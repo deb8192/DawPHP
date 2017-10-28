@@ -11,11 +11,12 @@ require_once("includes/cabecera.php");
  <body>
 	<!-- HEADER -->
 	<?php require_once("includes/header.php");
-	
-		/*if (strcmp ($_POST['repassword'],$_POST['password2']) !== 0) {
+		
+		//Comparar contraseña con repetir contraseña
+		if (strcmp ($_POST['repassword'],$_POST['password2']) !== 0) {
 			$_SESSION['error'] = "Las contraseñas no coinciden.";
 			header("Location:registro.php");
-		}*/
+		}
 		$fecha = $_POST['dias'].'/'.$_POST['meses'].'/'.$_POST['anyos'];
 	?>
 	
