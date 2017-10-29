@@ -377,10 +377,7 @@ img { border: 1px solid #000; }
 		float: right;
 		margin-right: 1%;
 	}
-	footer{
-		height:30px;
-		background-color:#222262;
-	}
+
 
 	img {
 		border: 1px solid #000;
@@ -481,10 +478,6 @@ img { border: 1px solid #000; }
 	header form {
 		float: right;
 		margin-right: 5%;
-	}
-		footer{
-		height:30px;
-		background-color:#222262;
 	}
 
 	img {
