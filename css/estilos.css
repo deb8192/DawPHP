@@ -1,8 +1,11 @@
 html{
-	/*height: 100%;*/
+	min-height: 100%;
+	position:relative;
 }
 
 body {
+	margin:0;
+	margin-bottom:60px;
 	width: 100%;
 	/*height: 100%;*/
 	margin: 0 auto;
@@ -63,10 +66,17 @@ header p {
     float: left;
 }
 
-.logo:hover, .registro:hover, .salir:hover {
+.logo:hover, .registro:hover, .salir:hover, .logo:active, .registro:active, .salir:active {
 	color: orange;
 }
-
+footer{
+		height:60px;
+		width:100%;
+		bottom:0;
+		background-color:#222262;
+		color: white;
+		position: absolute;
+	}
 
 /* MODAL ERRORES INICIO SESION */
 .caja_modal {
@@ -143,7 +153,7 @@ header p {
 	padding: 10px;
 	text-align: center;
 }
-#menu_usuario li a:hover{
+#menu_usuario li a:hover, #menu_usuario li a:active{
 	background-color: #444484;
 }
 #menu_usuario_modificado{
@@ -367,6 +377,10 @@ img { border: 1px solid #000; }
 		float: right;
 		margin-right: 1%;
 	}
+	footer{
+		height:30px;
+		background-color:#222262;
+	}
 
 	img {
 		border: 1px solid #000;
@@ -401,7 +415,7 @@ img { border: 1px solid #000; }
 		float: left;
 		z-index: 1;
 	}
-	.logo:hover, .registro:hover, .salir:hover {
+	.logo:hover, .registro:hover, .salir:hover, .logo:active, .registro:active, .salir:active {
 		color: orange;
 	}
 	
@@ -444,7 +458,7 @@ img { border: 1px solid #000; }
 		display: none;
 	}
 
-	#menu_usuario_modificado li a:hover{
+	#menu_usuario_modificado li a:hover, #menu_usuario_modificado li a:active{
 		background-color: #444484;
 	}
 	
@@ -467,6 +481,10 @@ img { border: 1px solid #000; }
 	header form {
 		float: right;
 		margin-right: 5%;
+	}
+		footer{
+		height:30px;
+		background-color:#222262;
 	}
 
 	img {
@@ -516,7 +534,7 @@ img { border: 1px solid #000; }
 		z-index: 6;
 	}
 
-	.logo:hover, .registro:hover, .salir:hover, .desplegable_is li:hover > a{
+	.logo:hover, .registro:hover, .salir:hover, .desplegable_is li:hover, .logo:active, .registro:active, .salir:active, .desplegable_is li:active > a{
 		color: orange;
 	}
 	#inicio_sesion{
@@ -582,10 +600,10 @@ img { border: 1px solid #000; }
 		width: 100%;
 		clear: left;
 	}
-	.desplegable li:hover > a{
+	.desplegable li:hover, .desplegable li:active > a{
 		background-color: #444484;
 	}
-	.desplegable li:hover > .opciones, .desplegable_is li:hover > .opciones_is  {
+	.desplegable li:hover, .desplegable li:active > .opciones, .desplegable_is li:hover, .desplegableis li:active > .opciones_is  {
 		display: block;
 		width: 100%;
 		clear: left;
