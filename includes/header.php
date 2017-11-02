@@ -20,14 +20,13 @@
 			<a class="registro" href="registro.php" title="Registrarse" tabindex="2">Registrarse</a>
 			<form id="inicio_sesion_desplegable" action="includes/login.php" method="post">
 				<ul class="desplegable_is">
-					<li><a href="">iniciar sesion</a>
+					<li><a>iniciar sesion</a>
 						<ul class="opciones_is">
 						<li><label for="usuario">Usuario:</label></li>
 						<li><input type="text" name="usuario" id="usuario" required="" tabindex="2"/></li>
 						<li><label for="password">Contraseña:</label></li>
 						<li><input type="password" name="password" id="password" required="" tabindex="3"/></li>
-						<li><label for="recordarme"> Recordarme</label></li>
-						<li><input type="checkbox" name="recordar" id="recordar" value="1" tabindex="4"/></li>
+						<li><label for="recordarme"> Recordarme</label><input type="checkbox" name="recordar" id="recordar" value="1" tabindex="4"/></li>
 						<li><input type="submit" name="enviar" value="Enviar"/></li>
 						<li><a href="registro.php" title="Registrarse" tabindex="5">Registrarse</a></li>
 						
@@ -36,6 +35,7 @@
 				</ul>
 			</form>
 		<?php }
+		//No funciona el else
 		else { ?>
 			<p> Hola <?php echo $_COOKIE['recordar_usuario']; ?>, tu última visita fue el 
 			<?php echo $_COOKIE['last_visit']; ?></p>
