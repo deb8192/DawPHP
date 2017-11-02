@@ -1,35 +1,47 @@
 <header>
 	<a class="logo" href="index.php" tabindex="1"><h1>PI</h1></a>
 	
-	<?php if (empty ($_SESSION['usuario'])) { ?>
+	<?php if (empty ($_SESSION['usuario'])){ 
+		if(empty ($_COOKIE['recordar_usuario']) || empty ($_COOKIE['recordar_password'])){?>
 
-		<form id="inicio_sesion" action="includes/login.php" method="post">
-			<label for="usuario">Usuario:</label>
-			<input type="text" name="usuario" id="usuario" required="" tabindex="3"/>
+			<form id="inicio_sesion" action="includes/login.php" method="post">
+				<label for="usuario">Usuario:</label>
+				<input type="text" name="usuario" id="usuario" required="" tabindex="3"/>
 
-			<label for="password">Contraseña:</label>
-			<input type="password" name="password" id="password" required="" tabindex="4"/>
+				<label for="password">Contraseña:</label>
+				<input type="password" name="password" id="password" required="" tabindex="4"/>
+				
+				<label for="recordarme"> Recordarme</label>
+				<input type="checkbox" name="recordar" id="recordar" value="1" tabindex="5"/>
 
-			<input type="submit" name="enviar" value="Enviar"/>
-		</form>
-		<p class="barra">|</p>
-		<a class="registro" href="registro.php" title="Registrarse" tabindex="2">Registrarse</a>
-		<form id="inicio_sesion_desplegable" action="includes/login.php" method="post">
-			<ul class="desplegable_is">
-				<li><a href="">iniciar sesion</a>
+				<input type="submit" name="enviar" value="Enviar"/>
+			</form>
+			<p class="barra">|</p>
+			<a class="registro" href="registro.php" title="Registrarse" tabindex="2">Registrarse</a>
+			<form id="inicio_sesion_desplegable" action="includes/login.php" method="post">
+				<ul class="desplegable_is">
+					<li><a href="">iniciar sesion</a>
 						<ul class="opciones_is">
 						<li><label for="usuario">Usuario:</label></li>
 						<li><input type="text" name="usuario" id="usuario" required="" tabindex="2"/></li>
 						<li><label for="password">Contraseña:</label></li>
 						<li><input type="password" name="password" id="password" required="" tabindex="3"/></li>
+						<li><label for="recordarme"> Recordarme</label></li>
+						<li><input type="checkbox" name="recordar" id="recordar" value="1" tabindex="4"/></li>
 						<li><input type="submit" name="enviar" value="Enviar"/></li>
-						<li><a href="registro.php" title="Registrarse" tabindex="4">Registrarse</a></li>
-					</ul>
-				</li>
-			</ul>
-		</form>
+						<li><a href="registro.php" title="Registrarse" tabindex="5">Registrarse</a></li>
+						
+						</ul>
+					</li>
+				</ul>
+			</form>
+		<?php }
+		else { ?>
+			<p> Hola <?php echo $_COOKIE['recordar_usuario']; ?>, tu última visita fue el 
+			<?php echo $_COOKIE['last_visit']; ?></p>
+		<?php}
 		
-		<?php if (!empty($_SESSION['error'])) { ?>
+		if (!empty($_SESSION['error'])) { ?>
 			<div class="caja_modal">
 				<input id="cerrar-modal" name="modal" type="radio" /> 
 				<label for="cerrar-modal"> <a href="includes/borrar_error_de_sesion.php"> X </a></label>

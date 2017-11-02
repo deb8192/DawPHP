@@ -9,6 +9,10 @@
 			
 			if (strcmp ($password , $usuarios[$usuario]['passw'] ) == 0) {
 				$_SESSION['usuario'] = $usuario;
+				if(isset($_POST['recordar'])&&$_POST['recordar']=="1"){
+					setcookie("recordar_usuario", $usuario, (time()+60*60*24*30));
+					setcookie("recordar_password", $password, (time()+60*60*24*30));
+				}
 				header("Location:../menu_usuario.php");
 			} else {
 				$_SESSION['error'] = "La contraseña no coincide.";
