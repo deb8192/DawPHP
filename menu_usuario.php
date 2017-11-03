@@ -21,6 +21,12 @@ require_once("includes/cabecera.php");
 		<p>Fecha: <?php echo $usuarios[$_SESSION['usuario']]['fecha'] ; ?></p>
 		<p>Ciudad: <?php echo $usuarios[$_SESSION['usuario']]['ciudad'] ; ?></p>
 		<p>País: <?php echo $usuarios[$_SESSION['usuario']]['pais'] ; ?></p>
+		<?php
+		if(isset($_COOKIE['last_visit']))
+			echo "<p>Tu último acceso fue el " . $_COOKIE['last_visit'] . "</p>";
+		else
+			echo "<p>Esta es tu primera vez aquí.</p>";
+		?>
 	</section>
 	
 	<!-- FOOTER -->

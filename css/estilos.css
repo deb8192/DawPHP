@@ -36,12 +36,18 @@ header a{
 	color: inherit;
 }
 
-header p {
+#bienvenida {
     float: right;
     padding: 10px;
 	margin: 0;
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.cookie_parrafo {
+	float: left;
+	margin: 0;
+	margin-right: 20px;
 }
 
 .barra {
@@ -66,7 +72,7 @@ header p {
     float: left;
 }
 
-.logo:hover, .registro:hover, .salir:hover, .logo:active, .registro:active, .salir:active {
+.logo:hover, .registro:hover, .salir:hover {
 	color: orange;
 }
 footer{
@@ -153,7 +159,7 @@ footer{
 	padding: 10px;
 	text-align: center;
 }
-#menu_usuario li a:hover, #menu_usuario li a:active{
+#menu_usuario li a:hover{
 	background-color: #444484;
 }
 #menu_usuario_modificado{
@@ -377,7 +383,10 @@ img { border: 1px solid #000; }
 		float: right;
 		margin-right: 1%;
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 
 	img {
 		border: 1px solid #000;
@@ -412,7 +421,7 @@ img { border: 1px solid #000; }
 		float: left;
 		z-index: 1;
 	}
-	.logo:hover, .registro:hover, .salir:hover, .logo:active, .registro:active, .salir:active {
+	.logo:hover, .registro:hover, .salir:hover{
 		color: orange;
 	}
 	
@@ -455,7 +464,7 @@ img { border: 1px solid #000; }
 		display: none;
 	}
 
-	#menu_usuario_modificado li a:hover, #menu_usuario_modificado li a:active{
+	#menu_usuario_modificado li a:hover{
 		background-color: #444484;
 	}
 	
@@ -527,7 +536,7 @@ img { border: 1px solid #000; }
 		z-index: 6;
 	}
 
-	.logo:hover, .registro:hover, .salir:hover, .desplegable_is li:hover, .logo:active, .registro:active, .salir:active, .desplegable_is li:active > a{
+	.logo:hover, .registro:hover, .salir:hover, .desplegable_is li:hover > a{
 		color: orange;
 	}
 	#inicio_sesion{
@@ -593,10 +602,11 @@ img { border: 1px solid #000; }
 		width: 100%;
 		clear: left;
 	}
-	.desplegable li:hover, .desplegable li:active > a{
+	.desplegable li:hover> a{
 		background-color: #444484;
+		cursor: pointer;
 	}
-	.desplegable li:hover, .desplegable li:active > .opciones, .desplegable_is li:hover, .desplegableis li:active > .opciones_is  {
+	.desplegable li:hover > .opciones, .desplegable_is li:hover> .opciones_is  {
 		display: block;
 		width: 100%;
 		clear: left;
