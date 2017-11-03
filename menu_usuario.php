@@ -25,7 +25,7 @@ require_once("includes/cabecera.php");
 		if(isset($_COOKIE['last_visit']))
 			echo "<p>Tu último acceso fue el " . $_COOKIE['last_visit'] . "</p>";
 		else
-			echo "<p>Esta es tu primera vez aquí";
+			echo "<p>Esta es tu primera vez aquí.</p>";
 		?>
 	</section>
 	

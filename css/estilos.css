@@ -36,12 +36,18 @@ header a{
 	color: inherit;
 }
 
-header p {
+#bienvenida {
     float: right;
     padding: 10px;
 	margin: 0;
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.cookie_parrafo {
+	float: left;
+	margin: 0;
+	margin-right: 20px;
 }
 
 .barra {
