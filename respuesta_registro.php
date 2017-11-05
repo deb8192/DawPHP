@@ -6,6 +6,12 @@
  
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
+ if (isset($_POST['registro'])){
+	 //Comprobar desde la BD si existe el usuario.
+	 
+	 $nombre = addslashes($_POST['nombre']);
+	 $_SESSION['usuario'] = $nombre;
+ }
  ?>
  
  <body>

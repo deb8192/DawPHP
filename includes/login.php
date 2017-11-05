@@ -29,8 +29,22 @@
 				header("Location:../index.php");
 			}
 		} else if (isset($_COOKIE["recordar_usuario"]) && isset($_COOKIE["recordar_password"])) {
-			$_SESSION['usuario'] = $_COOKIE["recordar_usuario"];
-			header("Location:../menu_usuario.php");
+			$usuario = $_COOKIE["recordar_usuario"];
+			$password = $_COOKIE["recordar_password"];
+			if (array_key_exists($usuario, $usuarios)) {
+				if (strcmp ($password , $usuarios[$usuario]['passw'] ) == 0) {
+					$_SESSION['usuario'] = $usuario;
+					header("Location:../menu_usuario.php");
+				}
+				else {
+					$_SESSION['error'] = "La contraseña no coincide.";
+					header("Location:../index.php");
+				}
+			}
+			else {
+				$_SESSION['error'] = "El usuario es incorrecto.";
+				header("Location:../index.php");
+			}
 		}
 		// Borrar las cookies
 	} else {

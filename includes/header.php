@@ -34,12 +34,12 @@
 				<label for="recordar"> Recordarme</label>
 				<input type="checkbox" name="recordar" id="recordar" value="1" tabindex="4"/>
 				
-				<input type="submit" name="enviar" value="Enviar"/>
+				<input type="submit" name="enviar" value="Acceder"/>
 				
 				<?php } else {
 					echo '<p class="cookie_parrafo">Hola '.$_COOKIE["recordar_usuario"].', su última visita fue el '.$_COOKIE["last_visit"].'</p>
-							<input type="submit" name="borrar" value="Borrar cookies"/>
-							<input type="submit" name="enviar" value="Enviar"/>';
+							<input type="submit" name="enviar" value="Acceder"/>
+							<input type="submit" name="borrar" value="Salir"/>';
 				}
 				?>
 			</form>
@@ -57,13 +57,13 @@
 							<li><label for="password">Contraseña:</label></li>
 							<li><input type="password" name="password" id="password" required="" tabindex="3"/></li>
 							<li><label for="recordar"> Recordarme</label><input type="checkbox" name="recordar" id="recordar" value="1" tabindex="4"/></li>
-							<li><input type="submit" name="enviar" value="Enviar"/></li>
+							<li><input type="submit" name="enviar" value="Acceder"/></li>
 							<li><a href="registro.php" title="Registrarse" tabindex="5">Registrarse</a></li>
 						
 						<?php } else {
 							echo '<li><p>Hola '.$_COOKIE["recordar_usuario"].', su última visita fue el '.$_COOKIE["last_visit"].'</p></li>
-									<li><input type="submit" name="borrar" value="Borrar cookies"/></li>
-									<li><input type="submit" name="enviar" value="Enviar"/></li>';
+									<li><input type="submit" name="enviar" value="Acceder"/></li>
+									<li><input type="submit" name="borrar" value="Salir"/></li>';
 						}
 						?>
 						</ul>
@@ -80,8 +80,9 @@
 				</div>
 			</div>
 	<?php }
-	} else { ?>
-	
+	} else { 
+		?>
+		
 		<p id="bienvenida">Bienvenido/a <?php echo $_SESSION['usuario']; ?> | <a class="salir" href="includes/logout.php" tabindex="2">Salir</a></p>
 			
 		<?php if ((strpos($_SERVER['PHP_SELF'], 'solicitar_album') !== false) || 
