@@ -41,7 +41,28 @@
 		}
 		$resultado->close();
 		$conexion->close();
- 
+	}
+	
+	function CargarDetalleFoto($id) {
 		
+		$conexion = conecta();
+		$consulta = 'select Fichero, f.Titulo as FTitulo, DATE_FORMAT(f.Fecha, "%d/%m/%Y") as FFecha, NomPais, a.Titulo as ATitulo, NomUsuario from fotos f inner join paises on Pais = IdPais inner join albumes a on Album = IdAlbum inner join usuarios on Usuario = IdUsuario where IdFoto = '.$id;
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		if ($resultado->num_rows > 0) {
+			$fila = $resultado->fetch_object();
+			
+			echo '<h2>'.$fila->FTitulo.'</h2>
+			<img src="'.$fila->Fichero.'" alt='.$fila->FTitulo.'" width="400" height="300"/>
+			<aside>
+				<h3>Detalles</h3>
+				<p>Fecha: '.$fila->FFecha.'</p>
+				<p>País: '.$fila->NomPais.'</p>
+				<p>Álbum: '.$fila->ATitulo.'</p>
+				<p>Usuario: '.$fila->NomUsuario.'</p>
+			</aside>';
+		}
+		$resultado->close();
+		$conexion->close();
 	}
 ?>
