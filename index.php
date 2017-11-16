@@ -4,6 +4,13 @@
  $keywords = 'pictures, images, imagen, imágenes, fotos, foto';
  $description = 'Página principal de una galería de fotos on-line.';
 
+ require('admin/db.inc');
+ $conexion = conecta();
+ $consulta = 'select * from usuarios';
+ $resultado = ejecutaConsulta($conexion, $consulta);
+ $resultado->close();
+ $conexion->close();
+ 
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 include_once("includes/cabecera.php");
  ?>
