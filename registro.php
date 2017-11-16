@@ -4,13 +4,16 @@
  $keywords = 'pictures, images, imagen, imágenes, fotos, foto, buscar, busqueda, búsqueda';
  $description = 'Página de registro de una galería de fotos on-line.';
  
+ // Para cargar la lista de paises
+ require_once("includes/functions.php");
+ 
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
  ?>
  
  <body>
 	<!-- HEADER -->
-	<?php require_once("includes/header.php"); ?>
+	<?php require_once("includes/header.php");?>
 	
 	<section id="registro">
 		<h2>Registro</h2>
@@ -106,16 +109,9 @@ require_once("includes/cabecera.php");
 			<p>
 			<label for="pais">País:</label>
 			<select name="paises" tabindex="15" id="pais">
-				<option value="al">Alemania</option>
-				<option value="es">Escocia</option>
-				<option value="esp">España</option>
-				<option value="fr">Francia</option>
-				<option value="ga">Gales</option>
-				<option value="gr">Grecia</option>
-				<option value="ing">Inglaterra</option>
-				<option value="ir">Irlanda</option>
-				<option value="it">Italia</option>
+				<?php CargarListaPaises(); ?>
 			</select>
+			
 			</p>
 			<p>
 			<label for="foto">Foto:</label>
