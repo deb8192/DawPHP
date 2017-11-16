@@ -14,13 +14,13 @@ require_once("includes/cabecera.php");
 	
 	<section id="datos_usuario">
 		<h2>Datos personales</h2>
-		<img src="img/<?php echo $usuarios[$_SESSION['usuario']]['nombre']; ?>" alt="Foto perfil" width="200" height="150"/>
-		<p>Nombre: <?php echo $_SESSION['usuario']; ?></p>
-		<p>Email: <?php echo $usuarios[$_SESSION['usuario']]['correo']; ?></p>
-		<p>Sexo: <?php echo $usuarios[$_SESSION['usuario']]['sexo'] ; ?></p>
-		<p>Fecha: <?php echo $usuarios[$_SESSION['usuario']]['fecha'] ; ?></p>
-		<p>Ciudad: <?php echo $usuarios[$_SESSION['usuario']]['ciudad'] ; ?></p>
-		<p>País: <?php echo $usuarios[$_SESSION['usuario']]['pais'] ; ?></p>
+		<img src="<?php echo $_SESSION['usuario']['foto']; ?>" alt="Foto perfil" width="200" height="150"/>
+		<p>Nombre: <?php echo $_SESSION['usuario']['nombre']; ?></p>
+		<p>Email: <?php echo $_SESSION['usuario']['correo']; ?></p>
+		<p>Sexo: <?php echo $_SESSION['usuario']['sexo'] ; ?></p>
+		<p>Fecha: <?php echo $_SESSION['usuario']['fecha'] ; ?></p>
+		<p>Ciudad: <?php echo $_SESSION['usuario']['ciudad'] ; ?></p>
+		<p>País: <?php echo $_SESSION['usuario']['pais'] ; ?></p>
 		<?php
 		if(isset($_COOKIE['last_visit']))
 			echo "<p>Tu último acceso fue el " . $_COOKIE['last_visit'] . "</p>";

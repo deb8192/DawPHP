@@ -3,7 +3,7 @@
 	include_once('datosBD.php');
 	
 	//cookie de la ultima visita
-		if(isset($_SESSION['usuario']))
+		if(isset($_SESSION['usuario']['nombre']))
 		{
 			if(isset($_COOKIE['last_visit']))
 				$last_visit = $_COOKIE['last_visit'];

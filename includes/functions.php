@@ -1,5 +1,5 @@
 <?php
-	require('admin/db.inc');
+	require_once('admin/db.inc');
 	
 	function CargarListaPaises() {
 		

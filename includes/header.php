@@ -16,7 +16,7 @@
 <header>
 	<a class="logo" href="index.php" tabindex="1"><h1>PI</h1></a>
 	
-	<?php if (empty ($_SESSION['usuario'])){ ?>
+	<?php if (empty ($_SESSION['usuario']['nombre'])){ ?>
 			
 			<form id="inicio_sesion" action="includes/login.php" method="post">
 			
@@ -83,7 +83,7 @@
 	} else { 
 		?>
 		
-		<p id="bienvenida">Bienvenido/a <?php echo $_SESSION['usuario']; ?> | <a class="salir" href="includes/logout.php" tabindex="2">Salir</a></p>
+		<p id="bienvenida">Bienvenido/a <?php echo $_SESSION['usuario']['nombre']; ?> | <a class="salir" href="includes/logout.php" tabindex="2">Salir</a></p>
 			
 		<?php if ((strpos($_SERVER['PHP_SELF'], 'solicitar_album') !== false) || 
 			(strpos($_SERVER['PHP_SELF'], 'respuesta_album') !== false ) ||

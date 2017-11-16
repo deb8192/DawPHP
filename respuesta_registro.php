@@ -10,7 +10,6 @@ require_once("includes/cabecera.php");
 	 //Comprobar desde la BD si existe el usuario.
 	 
 	 $nombre = addslashes($_POST['nombre']);
-	 $_SESSION['usuario'] = $nombre;
  }
  ?>
  

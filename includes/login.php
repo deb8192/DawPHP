@@ -1,6 +1,37 @@
 <?php
 	session_start();
-	include_once('datosBD.php');
+	
+	function ComprobarLogin($usuario, $pass) {
+		require_once('../admin/db.inc');
+		$conexion = conecta();
+		$consulta = "select NomUsuario, Email, IF(Sexo = 1, 'Hombre', 'Mujer') as Sexo, DATE_FORMAT(FNacimiento, '%d/%m/%Y') as FNacimiento, Ciudad, NomPais, Foto from usuarios inner join paises on Pais = IdPais where Clave = SHA1('$pass')";
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		$existe = false;
+		if ($resultado->num_rows > 0) {
+			$fila = $resultado->fetch_object();
+			
+			//$_SESSION['usuario'] = true;
+			$_SESSION['usuario']['nombre'] = $fila->NomUsuario;
+			$_SESSION['usuario']['foto'] = $fila->Foto;
+			$_SESSION['usuario']['correo'] = $fila->Email;
+			$_SESSION['usuario']['sexo'] = $fila->Sexo;
+			$_SESSION['usuario']['fecha'] = $fila->FNacimiento;
+			$_SESSION['usuario']['ciudad'] = $fila->Ciudad;
+			$_SESSION['usuario']['pais'] = $fila->NomPais;
+			$existe = true;
+			
+			$_SESSION['error'] = $fila->NomUsuario;
+		}
+		$resultado->close();
+		$conexion->close();
+		return $existe;
+	}
+	
+	function PasarErrorAlIndex() {
+		$_SESSION['error'] = "El usuario o la contraseña no coincide.";
+		header("Location:../index.php");
+	}
 	
 	if (isset($_POST['enviar'])) {
 		
@@ -9,41 +40,25 @@
 			$usuario = addslashes($_POST['usuario']);
 			$password = addslashes($_POST['password']);
 			
-			if (array_key_exists($usuario, $usuarios)) {
+			if (ComprobarLogin($usuario, $password)) {
 				
-				if (strcmp ($password , $usuarios[$usuario]['passw'] ) == 0) {
-					$_SESSION['usuario'] = $usuario;
-					
-					if($_POST['recordar'] == "1"){
-						// Las cookies tienen una duracion maxima de un mes
-						setcookie("recordar_usuario", $usuario, (time()+60*60*24*30), '/');
-						setcookie("recordar_password", $password, (time()+60*60*24*30), '/');
-					}
-					header("Location:../menu_usuario.php");
-				} else {
-					$_SESSION['error'] = "La contraseña no coincide.";
-					header("Location:../index.php");
+				if($_POST['recordar'] == "1"){
+					// Las cookies tienen una duracion maxima de un mes
+					setcookie("recordar_usuario", $usuario, (time()+60*60*24*30), '/');
+					setcookie("recordar_password", $password, (time()+60*60*24*30), '/');
 				}
+				header("Location:../menu_usuario.php");
 			} else {
-				$_SESSION['error'] = "El usuario es incorrecto.";
-				header("Location:../index.php");
+				PasarErrorAlIndex();
 			}
 		} else if (isset($_COOKIE["recordar_usuario"]) && isset($_COOKIE["recordar_password"])) {
 			$usuario = $_COOKIE["recordar_usuario"];
 			$password = $_COOKIE["recordar_password"];
-			if (array_key_exists($usuario, $usuarios)) {
-				if (strcmp ($password , $usuarios[$usuario]['passw'] ) == 0) {
-					$_SESSION['usuario'] = $usuario;
-					header("Location:../menu_usuario.php");
-				}
-				else {
-					$_SESSION['error'] = "La contraseña no coincide.";
-					header("Location:../index.php");
-				}
-			}
-			else {
-				$_SESSION['error'] = "El usuario es incorrecto.";
-				header("Location:../index.php");
+			
+			if (ComprobarLogin($usuario, $password)) {
+				header("Location:../menu_usuario.php");
+			} else {
+				PasarErrorAlIndex();
 			}
 		}
 		// Borrar las cookies
