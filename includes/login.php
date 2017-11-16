@@ -4,7 +4,7 @@
 	function ComprobarLogin($usuario, $pass) {
 		require_once('../admin/db.inc');
 		$conexion = conecta();
-		$consulta = "select NomUsuario, Email, IF(Sexo = 1, 'Hombre', 'Mujer') as Sexo, DATE_FORMAT(FNacimiento, '%d/%m/%Y') as FNacimiento, Ciudad, NomPais, Foto from usuarios inner join paises on Pais = IdPais where Clave = SHA1('$pass')";
+		$consulta = "select IdUsuario, NomUsuario, Email, IF(Sexo = 1, 'Hombre', 'Mujer') as Sexo, DATE_FORMAT(FNacimiento, '%d/%m/%Y') as FNacimiento, Ciudad, NomPais, Foto from usuarios inner join paises on Pais = IdPais where Clave = SHA1('$pass')";
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
 		$existe = false;
@@ -12,6 +12,7 @@
 			$fila = $resultado->fetch_object();
 			
 			//$_SESSION['usuario'] = true;
+			$_SESSION['usuario']['id'] = $fila->IdUsuario;
 			$_SESSION['usuario']['nombre'] = $fila->NomUsuario;
 			$_SESSION['usuario']['foto'] = $fila->Foto;
 			$_SESSION['usuario']['correo'] = $fila->Email;

@@ -17,6 +17,10 @@ h1, h2, h3, h4 {
 	font-family: Cambria, Georgia, Times New Roman, serif; 
 }
 
+.lista-albumes li {
+	float: none;
+}
+
 header {
 	height: 30px;
 	padding-top: 20px;

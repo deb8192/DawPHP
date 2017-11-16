@@ -3,7 +3,7 @@
 	function menuUsuario() {
 		echo '<li><a href="menu_usuario.php" tabindex="2">Perfil</a></li>
 		<li><a href="" tabindex="3">Darse de baja</a></li>
-		<li><a href="" tabindex="4">Mis álbumes</a></li>
+		<li><a href="mis_albumes.php" tabindex="4">Mis álbumes</a></li>
 		<li><a href="crear_album.php" tabindex="5">Crear álbum</a></li>
 		<li><a href="solicitar_album.php" tabindex="6">Solicitar álbum</a></li>';
 	}

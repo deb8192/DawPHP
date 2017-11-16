@@ -65,4 +65,39 @@
 		$resultado->close();
 		$conexion->close();
 	}
+	
+	function CargarAlbumes($idUsuario) {
+		
+		$conexion = conecta();
+		$consulta = 'select IdAlbum, Titulo, Descripcion from albumes where Usuario = '.$idUsuario;
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		if ($resultado->num_rows > 0) {
+			while($fila = $resultado->fetch_object()) { 
+				echo '<li> '.$fila->IdAlbum.' - '.$fila->Titulo.': '.$fila->Descripcion.' <a href="ver_album.php?id='.$fila->IdAlbum.'" >Ver álbum</a></li>';
+			}
+		}
+		$resultado->close();
+		$conexion->close();
+	}
+	
+	function CargarAlbum($id_Album) {
+		
+		$conexion = conecta();
+		$consulta = 'select Fichero, Titulo from fotos where Album = '.$id_Album;
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		if ($resultado->num_rows > 0) {
+			while($fila = $resultado->fetch_object()) {
+				
+				echo '<ul class="lista_fotos">
+					<li>
+						<h3>'.$fila->Titulo.'</h3>
+						<img src="'.$fila->Fichero.'" alt="'.$fila->Titulo.'" width="200" height="150"/></a>
+					</li>';
+			}
+		}
+		$resultado->close();
+		$conexion->close();
+	}
 ?>
