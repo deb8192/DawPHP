@@ -8,7 +8,7 @@
 			"fecha" => "27/10/2017",
 			"ciudad" => "Alicante",
 			"pais" => "España",
-			"nombre" => "piensa.jpg",
+			"nombre" => "perfiles/piensa.jpg",
 		),
 		"Marinés" => array(
 			"passw" => "fritz",
@@ -17,7 +17,7 @@
 			"fecha" => "27/10/2017",
 			"ciudad" => "Agost",
 			"pais" => "España",
-			"nombre" => "jackie.jpg",
+			"nombre" => "perfiles/jackie.jpg",
 		),
 		"Prueba" => array(
 			"passw" => "prueba",
@@ -26,7 +26,7 @@
 			"fecha" => "27/10/2017",
 			"ciudad" => "Roma",
 			"pais" => "Italia",
-			"nombre" => "taco-work-memes.jpg",
+			"nombre" => "perfiles/taco.jpg",
 		),
 	);
 	
@@ -37,7 +37,7 @@
 			"pais" => "España",
 			"album" => "Memes",
 			"usuario" => "Débora",
-			"nombre" => "piensa.jpg",
+			"nombre" => "perfiles/piensa.jpg",
 		),
 		1 => array(
 			"titulo" => "Foto 1",
@@ -45,7 +45,7 @@
 			"pais" => "España",
 			"album" => "Web",
 			"usuario" => "Marinés",
-			"nombre" => "jackie.jpg",
+			"nombre" => "perfiles/jackie.jpg",
 		),
 	);
 ?>
