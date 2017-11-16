@@ -4,6 +4,9 @@
  $keywords = 'pictures, images, imagen, imágenes, fotos, foto';
  $description = 'Página página de confirmación de impresión de álbum.';
  
+ // Para cargar la lista de paises
+ require_once("includes/functions.php");
+ 
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
  ?>
@@ -29,16 +32,7 @@ require_once("includes/cabecera.php");
 				
 				<p class="quitar_abajo">País: <span class="asterisco_rojo">*</span></p>
 				<p class="quitar_arriba"><select id="pais" name="pais" required=""  tabindex="7">
-					<option value="">Elija país...</option>
-					<option value="Alemania">Alemania</option>
-					<option value="Escocia">Escocia</option>
-					<option value="España">España</option>
-					<option value="Francia">Francia</option>
-					<option value="Gales">Gales</option>
-					<option value="Grecia">Grecia</option>
-					<option value="Inglaterra">Inglaterra</option>
-					<option value="Irlanda">Irlanda</option>
-					<option value="Italia">Italia</option>
+					<?php CargarListaPaises(); ?>
 				</select></p>
 			<input type="submit" name="crear_album" value="Crear álbum" tabindex="8"/>
 			</form>
