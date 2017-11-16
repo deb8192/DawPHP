@@ -1,6 +1,6 @@
 <?php
-	$servidor = "localhost";
-	$log = "usuarioDAW";
-	$pass = "3su4rEs*qzv?TH";
-	$nombreDB = "pibd";
+	define("dbServer", "localhost");
+	define("dbUser", "usuarioDAW");
+	define("dbPassword", "3su4rEs*qzv?TH");
+	define("dbDatabase", pibd);
 ?>
