@@ -4,12 +4,8 @@
  $keywords = 'pictures, images, imagen, imágenes, fotos, foto';
  $description = 'Página principal de una galería de fotos on-line.';
 
- require('admin/db.inc');
- $conexion = conecta();
- $consulta = 'select * from usuarios';
- $resultado = ejecutaConsulta($conexion, $consulta);
- $resultado->close();
- $conexion->close();
+ // Para cargar la lista de paises
+ require_once("includes/functions.php");
  
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 include_once("includes/cabecera.php");
@@ -28,48 +24,7 @@ include_once("includes/cabecera.php");
 	
 	<section id="principal">
 		<h2>Inicio</h2>
-		<ul class="lista_fotos">
-			<li>
-				<h3><?php echo $fotos[1]['titulo']; ?></h3>
-				<a href="detalle_foto.php?id=1" title="Ver foto1" tabindex="7"><img src="img/jackie.jpg" alt="Foto 1" width="200" height="150"/></a>
-				<ul class="datos">
-					<li><?php echo $fotos[1]['fecha']; ?></li>
-					<li><?php echo $fotos[1]['pais']; ?></li>
-				</ul>
-			</li>
-			<li>
-				<h3><?php echo $fotos[0]['titulo']; ?></h3>
-				<a href="detalle_foto.php?id=0" title="Ver foto2" tabindex="8"><img src="img/piensa.jpg" alt="Foto 2" width="200" height="150"/></a>
-				<ul class="datos">
-					<li><?php echo $fotos[0]['fecha']; ?></li>
-					<li><?php echo $fotos[0]['pais']; ?></li>
-				</ul>
-			</li>
-			<li>
-				<h3><?php echo $fotos[1]['titulo']; ?></h3>
-				<a href="detalle_foto.php?id=1" title="Ver foto3" tabindex="9"><img src="img/jackie.jpg" alt="Foto 3" width="200" height="150"/></a>
-				<ul class="datos">
-					<li><?php echo $fotos[1]['fecha']; ?></li>
-					<li><?php echo $fotos[1]['pais']; ?></li>
-				</ul>
-			</li>
-			<li>
-				<h3><?php echo $fotos[0]['titulo']; ?></h3>
-				<a href="detalle_foto.php?id=0" title="Ver foto4" tabindex="10"><img src="img/piensa.jpg" alt="Foto 4" width="200" height="150"/></a>
-				<ul class="datos">
-					<li><?php echo $fotos[0]['fecha']; ?></li>
-					<li><?php echo $fotos[0]['pais']; ?></li>
-				</ul>
-			</li>
-			<li>
-				<h3><?php echo $fotos[1]['titulo']; ?></h3>
-				<a href="detalle_foto.php?id=1" title="Ver foto5" tabindex="11"><img src="img/jackie.jpg" alt="Foto 5" width="200" height="150"/></a>
-				<ul class="datos">
-					<li><?php echo $fotos[1]['fecha']; ?></li>
-					<li><?php echo $fotos[1]['pais']; ?></li>
-				</ul>
-			</li>
-		</ul>
+		<?php CargarUltimasFotos(); ?>
 	</section>
 	
 	<!-- FOOTER con </body> y </html> -->
