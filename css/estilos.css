@@ -293,9 +293,9 @@ img { border: 1px solid #000; }
     margin-bottom: 3px;
 }
 
-#registro form #nombre, #registro form #password2, #registro form #repassword,
+#anyadirFoto form, #registro form #nombre, #registro form #password2, #registro form #repassword,
 #registro form #correo, #registro form #ciudad, #registro form #pais, #registro form #foto,
-.form_busqueda form #titulo, .form_busqueda form #pais, #solicitar form input[type="text"],
+.form_busqueda form #titulo, .form_busqueda form #pais, #anyadirFoto form input [type="text"], #solicitar form input[type="text"],
 #solicitar form #email, #solicitar form select, #solicitar form #fecha_recepcion,
 #crear_album form #titulo_album_creado, #crear_album form #pais, #crear_album form #fecha_album {
 	width: 100%;
@@ -308,7 +308,7 @@ img { border: 1px solid #000; }
 	width: 30%;
 }
 
-#registro form label[for="hombre"], #registro form label[for="mujer"],
+#anyadirFoto form, #registro form label[for="hombre"], #registro form label[for="mujer"],
 #registro form select[name="dias"], .form_busqueda form select[name="dia"],
 #solicitar form input[name="color_album"], #solicitar form input[name="numero_copias"],
 #solicitar form label[for="blanco_negro"], #solicitar form label[for="foto_color"],
@@ -319,6 +319,7 @@ img { border: 1px solid #000; }
 
 
 /* Form registro y solicitar*/
+#anyadirFoto form,
 #registro form label[for="hombre"], #registro form label[for="mujer"],
 #solicitar form label[for="color_album"], #solicitar form label[for="numero_copias"],
 #solicitar form label[for="blanco_negro"], #solicitar form label[for="foto_color"] {

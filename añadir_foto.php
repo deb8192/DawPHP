@@ -34,7 +34,7 @@ include_once("includes/cabecera.php");
 				</select>
 				
 				<p><label for= "urlFoto">Foto: <span class="asterisco_rojo">*</span></label>
-				<input type= "text" name="urlFoto" id="urlFoto" required="" maxlength="200" tabindex="7"/></p>  <!--obligatorio, máximo 200 caracteres -->
+				<input type="file" name="archivo" required="" tabindex="7"/></p>
 			
 				<p class="quitar_arriba"><select name="album" required="" tabindex="21">
 					<?php CargarListaAlbumesPorUsuario($_SESSION['usuario']['id']); ?>

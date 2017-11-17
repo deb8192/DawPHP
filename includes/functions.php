@@ -1,5 +1,34 @@
 <?php
+	
 	require_once('admin/db.inc');
+	
+	function ComprobarLogin($usuario, $pass) {
+		session_start();
+		$conexion = conecta();
+		$consulta = "select IdUsuario, NomUsuario, Email, IF(Sexo = 1, 'Hombre', 'Mujer') as Sexo, DATE_FORMAT(FNacimiento, '%d/%m/%Y') as FNacimiento, Ciudad, NomPais, Foto from usuarios inner join paises on Pais = IdPais where Clave = SHA1('$pass')";
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		$existe = false;
+		if ($resultado->num_rows > 0) {
+			$fila = $resultado->fetch_object();
+			
+			//$_SESSION['usuario'] = true;
+			$_SESSION['usuario']['id'] = $fila->IdUsuario;
+			$_SESSION['usuario']['nombre'] = $fila->NomUsuario;
+			$_SESSION['usuario']['foto'] = $fila->Foto;
+			$_SESSION['usuario']['correo'] = $fila->Email;
+			$_SESSION['usuario']['sexo'] = $fila->Sexo;
+			$_SESSION['usuario']['fecha'] = $fila->FNacimiento;
+			$_SESSION['usuario']['ciudad'] = $fila->Ciudad;
+			$_SESSION['usuario']['pais'] = $fila->NomPais;
+			$existe = true;
+			
+			$_SESSION['error'] = $fila->NomUsuario;
+		}
+		$resultado->close();
+		$conexion->close();
+		return $existe;
+	}
 	
 	function CargarListaPaises() {
 		
