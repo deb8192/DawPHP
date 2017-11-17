@@ -1,34 +1,5 @@
 <?php
-	
 	require_once('admin/db.inc');
-	
-	function ComprobarLogin($usuario, $pass) {
-		session_start();
-		$conexion = conecta();
-		$consulta = "select IdUsuario, NomUsuario, Email, IF(Sexo = 1, 'Hombre', 'Mujer') as Sexo, DATE_FORMAT(FNacimiento, '%d/%m/%Y') as FNacimiento, Ciudad, NomPais, Foto from usuarios inner join paises on Pais = IdPais where Clave = SHA1('$pass')";
-		$resultado = ejecutaConsulta($conexion, $consulta);
-		
-		$existe = false;
-		if ($resultado->num_rows > 0) {
-			$fila = $resultado->fetch_object();
-			
-			//$_SESSION['usuario'] = true;
-			$_SESSION['usuario']['id'] = $fila->IdUsuario;
-			$_SESSION['usuario']['nombre'] = $fila->NomUsuario;
-			$_SESSION['usuario']['foto'] = $fila->Foto;
-			$_SESSION['usuario']['correo'] = $fila->Email;
-			$_SESSION['usuario']['sexo'] = $fila->Sexo;
-			$_SESSION['usuario']['fecha'] = $fila->FNacimiento;
-			$_SESSION['usuario']['ciudad'] = $fila->Ciudad;
-			$_SESSION['usuario']['pais'] = $fila->NomPais;
-			$existe = true;
-			
-			$_SESSION['error'] = $fila->NomUsuario;
-		}
-		$resultado->close();
-		$conexion->close();
-		return $existe;
-	}
 	
 	function CargarListaPaises() {
 		
@@ -43,6 +14,23 @@
 		}
 		$resultado->close();
 		$conexion->close();
+	}
+	
+	function CargarArrayPaises() {
+		
+		$conexion = conecta();
+		$consulta = 'select NomPais from paises order by IdPais';
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		$paises = array();
+		if ($resultado->num_rows > 0) {
+			while($fila = $resultado->fetch_object()) {
+				array_push ( $paises , $fila->NomPais );
+			}
+		}
+		$resultado->close();
+		$conexion->close();
+		return $paises;
 	}
 	
 	function CargarListaAlbumesPorUsuario($idUsuario) {
@@ -66,7 +54,7 @@
 		$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") As Fecha, NomPais from fotos inner join paises on Pais = IdPais order by FRegistro desc limit 0, 5';
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
-		$tab = 7;
+		$tab = 6;
 		if ($resultado->num_rows > 0) {
 			while($fila = $resultado->fetch_object()) {
 				
@@ -144,12 +132,55 @@
 		$resultado->close();
 		$conexion->close();
 	}
-	function BuscarFotos() {
+	
+	
+	// Funciones para el formulario de busqueda
+	function BuscarFotos($titulo, $dia, $mes, $anyo, $pais) {
 		
 		$conexion = conecta();
-		$consulta = 'select IdFoto, Fichero, Titulo, Fecha, Pais, NomPais from fotos, paises';
+		
+		if ( ($dia != "") && ($mes != "") && ($anyo != "") ) {
+			$fecha = $dia.'/'.$mes.'/'.$anyo;
+		} else {
+			$fecha = "";
+		}
+		
+		if (($titulo != "") && ($fecha != "") && ($pais != "")) {
+			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
+			 where Titulo like "%'.$titulo.'%" and IdPais = '.$pais.' and DATE_FORMAT(Fecha, "%d/%m/%Y") = "'.$fecha.'"';
+			
+		} else if (($titulo != "") && ($fecha != "") && ($pais == "")) { // Titulo y fecha
+			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
+			 where Titulo like "%'.$titulo.'%" and DATE_FORMAT(Fecha, "%d/%m/%Y") = "'.$fecha.'"';
+			
+		} else if (($titulo != "") && ($pais != "") && ($fecha == "")) { // Titulo y pais
+			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
+			 where Titulo like "%'.$titulo.'%" and IdPais = '.$pais;
+		
+		} else if (($titulo == "") && ($fecha != "") && ($pais != "")) { // Fecha y pais
+			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
+			 where IdPais = '.$pais.' and DATE_FORMAT(Fecha, "%d/%m/%Y") = "'.$fecha.'"';
+		
+		} else if (($titulo != "") && ($fecha == "") && ($pais == "")) { // Solo titulo
+			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
+			 where Titulo like "%'.$titulo.'%"';
+			 
+		} else if (($titulo == "") && ($fecha != "") && ($pais == "")) { // Solo fecha
+			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
+			 where DATE_FORMAT(Fecha, "%d/%m/%Y") = "'.$fecha.'"';
+			 
+		} else if (($titulo == "") && ($fecha == "") && ($pais != "")) { // Solo pais
+			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
+			 where IdPais = '.$pais;
+		} else {
+			echo '<p class="color_rojo">Introduce algunos datos para la búsqueda.</p>';
+			return;
+		}
+		
+		//$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais';
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
+		$tab = 11;
 		if ($resultado->num_rows > 0) {
 			while($fila = $resultado->fetch_object()) {
 				
@@ -165,8 +196,49 @@
 				</ul>';
 				$tab++;
 			}
+		} else {
+			echo '<p>No hay resultados.</p>';
 		}
 		$resultado->close();
 		$conexion->close();
 	}
+	
+	function CargarNumerosSelect($principio, $fin, $seleccionado) {
+		for ($i=$principio; $i<=$fin; $i++) {
+			
+			if ($i<10)
+				echo '<option value="0'.$i.'"';
+			else
+				echo '<option value="'.$i.'"';
+			
+			if ($i == $seleccionado)
+				echo' selected';
+			
+			echo '>'.$i.'</option>';
+		}
+	 }
+	 function CargarMeses($seleccionado) {
+		 $meses = array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto",
+			"septiembre", "octubre", "noviembre", "diciembre");
+			
+			$long = count($meses);
+			for ($i=0; $i<$long; $i++) {
+				echo '<option value="'.($i+1).'"';
+				
+					if (($i+1) == $seleccionado)
+					echo' selected';
+				
+				echo '>'.$meses[$i].'</option>';
+			}
+	 }
+	 
+	 function CargarPaises($seleccionado) {
+		$paises = CargarArrayPaises();
+		for ($i=0; $i<(count($paises)); $i++) {
+			echo '<option value="'.($i+1).'"';
+				if (($i+1) == $seleccionado)
+				echo' selected';
+			echo '>'.$paises[$i].'</option>';
+		}
+	 }
 ?>
