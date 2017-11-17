@@ -4,12 +4,27 @@
 	function CargarListaPaises() {
 		
 		$conexion = conecta();
-		$consulta = 'select * from paises';
+		$consulta = 'select IdPais, NomPais from paises';
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
 		if ($resultado->num_rows > 0) {
 			while($fila = $resultado->fetch_object()) { 
 				echo '<option value="'.$fila->IdPais.'">'.$fila->NomPais.'</option>';
+			}
+		}
+		$resultado->close();
+		$conexion->close();
+	}
+	
+	function CargarListaAlbumesPorUsuario($idUsuario) {
+		
+		$conexion = conecta();
+		$consulta = 'select IdAlbum, Titulo from albumes where Usuario = '.$idUsuario;
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		if ($resultado->num_rows > 0) {
+			while($fila = $resultado->fetch_object()) { 
+				echo '<option value="'.$fila->IdAlbum.'">'.$fila->Titulo.'</option>';
 			}
 		}
 		$resultado->close();

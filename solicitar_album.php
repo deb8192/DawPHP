@@ -4,6 +4,9 @@
  $keywords = 'pictures, images, imagen, imágenes, fotos, foto';
  $description = 'Página para solicitar la impresión de un álbum del usuario.';
  
+ // Para cargar la lista de paises
+ require_once("includes/functions.php");
+ 
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
  ?>
@@ -106,28 +109,12 @@ require_once("includes/cabecera.php");
 				<p><label for= "localidad">Localidad: <span class="asterisco_rojo">*</span></label>
 				<input type= "text" name="localidad" id="localidad" required="" tabindex="15"/></p>
 				
-				<p class="quitar_abajo">Provincia: <span class="asterisco_rojo">*</span></p>
-				<p class="quitar_arriba"><select name="provincia" required="" tabindex="16">
-					<option value="">Elija provincia...</option>
-					<option value="alava">Álava</option>
-					<option value="albacete">Albacete</option>
-					<option value="alicante">Alicante</option>
-					<option value="almeria">Almería</option>
-					<option value="avila">Ávila</option>	
-				</select></p>
+				<p><label for="Provincia">Provincia: <span class="asterisco_rojo">*</span></label>
+				<input type="text" name="Provincia" id="Provincia" required="" tabindex="16"/></p>
 				
 				<p class="quitar_abajo">País: <span class="asterisco_rojo">*</span></p>
 				<p class="quitar_arriba"><select name="pais" required="" tabindex="17">
-					<option value="">Elija país...</option>
-					<option value="Alemania">Alemania</option>
-					<option value="Escocia">Escocia</option>
-					<option value="España">España</option>
-					<option value="Francia">Francia</option>
-					<option value="Gales">Gales</option>
-					<option value="Grecia">Grecia</option>
-					<option value="Inglaterra">Inglaterra</option>
-					<option value="Irlanda">Irlanda</option>
-					<option value="Italia">Italia</option>
+					<?php CargarListaPaises(); ?>
 				</select></p>
 			</fieldset>
 			
@@ -145,11 +132,7 @@ require_once("includes/cabecera.php");
 				
 				<p class="quitar_abajo">Álbum: <span class="asterisco_rojo">*</span></p>
 				<p class="quitar_arriba"><select name="album" required="" tabindex="21">
-					<option value="">Elija álbum...</option>
-					<option value="album1">album 1</option>
-					<option value="album2">album 2</option>
-					<option value="album3">album 3</option>
-					<option value="album4">album 4</option>
+					<?php CargarListaAlbumesPorUsuario($_SESSION['usuario']['id']); ?>
 				</select></p> 
 				
 				<p><label for="fecha_recepcion">Fecha de recepción:</label>
