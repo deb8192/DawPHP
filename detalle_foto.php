@@ -21,7 +21,9 @@ require_once("includes/cabecera.php");
 		if (empty ($_SESSION['usuario'])){
 			echo '<h2>CONTENIDO NO DISPONIBLE</h2><p>Debes iniciar sesión para poder ver este contenido.</p>';
 		} else {
-			CargarDetalleFoto($_GET['id']);
+			if (!CargarDetalleFoto($_GET['id'])) {
+				echo '<h2>CONTENIDO NO DISPONIBLE</h2><p>El contenido que intentas buscar no existe.</p>';
+			}
 		} ?>
 	</section>
 	
