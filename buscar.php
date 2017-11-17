@@ -9,6 +9,58 @@
 
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
  require_once("includes/cabecera.php");
+ 
+ // Criterios de busqueda
+ $titulo = $dia = $mes = $anyo = $pais = "";
+ 
+ if (isset($_POST['buscar'])) {
+	if(!empty($_POST['titulo'])){
+		$titulo = $_POST['titulo'];
+	}
+	if(!empty($_POST['dia'])&&!empty($_POST['mes'])&&!empty($_POST['anyo'])){
+		$dia = $_POST['dia'];
+		$mes = $_POST['mes'];
+		$anyo = $_POST['anyo'];
+	}
+	if(!empty($_POST['pais'])){
+		$pais = $_POST['pais'];
+	}
+ }
+ 
+ function CargarNumerosSelect($principio, $fin, $seleccionado) {
+	for ($i=$principio; $i<=$fin; $i++) {
+		echo '<option value="'.$i.'"';
+		
+		if ($i == $seleccionado)
+			echo' selected';
+		
+		echo '>'.$i.'</option>';
+	}
+ }
+ function CargarMeses($seleccionado) {
+	 $meses = array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto",
+		"septiembre", "octubre", "noviembre", "diciembre");
+		
+		$long = count($meses);
+		for ($i=0; $i<$long; $i++) {
+			echo '<option value="'.($i+1).'"';
+			
+				if (($i+1) == $seleccionado)
+				echo' selected';
+			
+			echo '>'.$meses[$i].'</option>';
+		}
+ }
+ 
+ function CargarPaises($seleccionado) {
+	$paises = CargarArrayPaises();
+	for ($i=0; $i<(count($paises)); $i++) {
+		echo '<option value="'.($i+1).'"';
+			if (($i+1) == $seleccionado)
+			echo' selected';
+		echo '>'.$paises[$i].'</option>';
+	}
+ }
  ?>
  
  <body>
@@ -17,77 +69,40 @@
 	
 	<section class="form_busqueda">
 		<h2>Formulario de búsqueda</h2>
-		<form action="resultado_de_busqueda.php" method="post">
+		<form action="buscar.php" method="post">
 			<p>
 				<label for="titulo">Título:</label>
-				<input type="text" name="titulo" id="titulo" tabindex="5"/>
+				<input type="text" name="titulo" id="titulo" value="<?php echo $titulo; ?>" tabindex="5"/>
 			</p>
 			<p>Fecha:</p>
 			<p>
 				<select name="dia" tabindex="6">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-					<option value="13">13</option>
-					<option value="14">14</option>
-					<option value="15">15</option>
-					<option value="16">16</option>
-					<option value="17">17</option>
-					<option value="18">18</option>
-					<option value="19">19</option>
-					<option value="20">20</option>
-					<option value="21">21</option>
-					<option value="22">22</option>
-					<option value="23">23</option>
-					<option value="24">24</option>
-					<option value="25">25</option>
-					<option value="26">26</option>
-					<option value="27">27</option>
-					<option value="28">28</option>
-					<option value="29">29</option>
-					<option value="30">30</option>
-					<option value="31">31</option>
+				<?php CargarNumerosSelect(1,31, $dia); ?>
 				</select>
 				<select name="mes" tabindex="7">
-					<option value="enero">enero</option>
-					<option value="febrero">febrero</option>
-					<option value="marzo">marzo</option>
-					<option value="abril">abril</option>
-					<option value="mayo">mayo</option>
-					<option value="junio">junio</option>
-					<option value="julio">julio</option>
-					<option value="agosto">agosto</option>
-					<option value="septiembre">septiembre</option>
-					<option value="octubre">octubre</option>
-					<option value="noviembre">noviembre</option>
-					<option value="diciembre">diciembre</option>
+					<?php CargarMeses($mes); ?>
 				</select>
 				<select name="anyo" tabindex="8">
-					<option value="2017">2017</option>
-					<option value="2016">2016</option>
-					<option value="2015">2015</option>
-					<option value="2014">2014</option>
-					<option value="2013">2013</option>
+					<?php CargarNumerosSelect(2013,2017, $anyo); ?>
 				</select>
 			</p>
 			<p>
 				<label for="pais">País:</label>
 				<select name="pais" id="pais" tabindex="9">
-					<?php CargarListaPaises(); ?>
+					<?php CargarPaises($pais); ?>
 				</select>
 			</p>
 			<input type="submit" name="buscar" value="Buscar" tabindex="10"/>
 		</form>
+		
+		<?php
+			if (isset($_POST['buscar'])) {
+				echo '<section id="resultado_busqueda">
+					<h2>Resultado de la búsqueda</h2>';
+					BuscarFotos();
+				echo '</section>';
+			}
+		?>
 	</section>
-	
 	<!-- FOOTER con </body> y </html> -->
 	<?php require_once("includes/footer.php"); ?>

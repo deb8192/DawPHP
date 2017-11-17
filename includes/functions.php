@@ -1,34 +1,5 @@
 <?php
-	
 	require_once('admin/db.inc');
-	
-	function ComprobarLogin($usuario, $pass) {
-		session_start();
-		$conexion = conecta();
-		$consulta = "select IdUsuario, NomUsuario, Email, IF(Sexo = 1, 'Hombre', 'Mujer') as Sexo, DATE_FORMAT(FNacimiento, '%d/%m/%Y') as FNacimiento, Ciudad, NomPais, Foto from usuarios inner join paises on Pais = IdPais where Clave = SHA1('$pass')";
-		$resultado = ejecutaConsulta($conexion, $consulta);
-		
-		$existe = false;
-		if ($resultado->num_rows > 0) {
-			$fila = $resultado->fetch_object();
-			
-			//$_SESSION['usuario'] = true;
-			$_SESSION['usuario']['id'] = $fila->IdUsuario;
-			$_SESSION['usuario']['nombre'] = $fila->NomUsuario;
-			$_SESSION['usuario']['foto'] = $fila->Foto;
-			$_SESSION['usuario']['correo'] = $fila->Email;
-			$_SESSION['usuario']['sexo'] = $fila->Sexo;
-			$_SESSION['usuario']['fecha'] = $fila->FNacimiento;
-			$_SESSION['usuario']['ciudad'] = $fila->Ciudad;
-			$_SESSION['usuario']['pais'] = $fila->NomPais;
-			$existe = true;
-			
-			$_SESSION['error'] = $fila->NomUsuario;
-		}
-		$resultado->close();
-		$conexion->close();
-		return $existe;
-	}
 	
 	function CargarListaPaises() {
 		
@@ -43,6 +14,23 @@
 		}
 		$resultado->close();
 		$conexion->close();
+	}
+	
+	function CargarArrayPaises() {
+		
+		$conexion = conecta();
+		$consulta = 'select NomPais from paises order by IdPais';
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		$paises = array();
+		if ($resultado->num_rows > 0) {
+			while($fila = $resultado->fetch_object()) {
+				array_push ( $paises , $fila->NomPais );
+			}
+		}
+		$resultado->close();
+		$conexion->close();
+		return $paises;
 	}
 	
 	function CargarListaAlbumesPorUsuario($idUsuario) {
@@ -66,7 +54,7 @@
 		$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") As Fecha, NomPais from fotos inner join paises on Pais = IdPais order by FRegistro desc limit 0, 5';
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
-		$tab = 7;
+		$tab = 6;
 		if ($resultado->num_rows > 0) {
 			while($fila = $resultado->fetch_object()) {
 				
@@ -147,9 +135,10 @@
 	function BuscarFotos() {
 		
 		$conexion = conecta();
-		$consulta = 'select IdFoto, Fichero, Titulo, Fecha, Pais, NomPais from fotos, paises';
+		$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais';
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
+		$tab = 11;
 		if ($resultado->num_rows > 0) {
 			while($fila = $resultado->fetch_object()) {
 				

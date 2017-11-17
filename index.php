@@ -15,10 +15,7 @@ include_once("includes/cabecera.php");
 	<?php include_once("includes/header.php"); ?>
 	
 	<aside id="buscar">
-		<form action="buscar.php" method="post">
-			<input type="text" name="buscador" tabindex="5"/>
-			<input type="submit" name="buscar" value="Buscar" tabindex="6"/>
-		</form>
+		<a href="buscar.php" tabindex="5">Buscar</a>
 	</aside>
 	
 	<section id="principal">

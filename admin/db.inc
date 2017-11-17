@@ -19,7 +19,7 @@
 	}
 	
 	function conecta() {
-		require('configBD.inc');
+		require_once('configBD.inc');
 		
 		$conexion = @new mysqli(dbServer, dbUser, dbPassword);
 		compruebaErrorConexionMysql("Se ha producido un error al conectar con el servidor", $conexion);
