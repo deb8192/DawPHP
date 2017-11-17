@@ -89,7 +89,8 @@
 			
 		<?php if ((strpos($_SERVER['PHP_SELF'], 'solicitar_album') !== false) || 
 			(strpos($_SERVER['PHP_SELF'], 'respuesta_album') !== false ) ||
-			(strpos($_SERVER['PHP_SELF'], 'crear_album') !== false )) { ?>
+			(strpos($_SERVER['PHP_SELF'], 'crear_album') !== false ) ||
+			(strpos($_SERVER['PHP_SELF'], 'añadir_foto') !== false )) { ?>
 			
 			<nav id="menu_usuario">
 				<ul>

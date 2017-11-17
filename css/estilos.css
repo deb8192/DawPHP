@@ -337,7 +337,7 @@ img { border: 1px solid #000; }
 	margin-right: 20px;
 }
 
-.letra_roja, .asterisco_rojo {
+.letra_roja, .asterisco_rojo, .color_rojo {
 	color: red;
 }
 

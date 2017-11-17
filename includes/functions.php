@@ -118,7 +118,7 @@
 		
 		if ($resultado->num_rows > 0) {
 			while($fila = $resultado->fetch_object()) { 
-				echo '<li> '.$fila->IdAlbum.' - '.$fila->Titulo.': '.$fila->Descripcion.' <a href="ver_album.php?id='.$fila->IdAlbum.'" >Ver álbum</a></li>';
+				echo '<li><p> '.$fila->IdAlbum.' - '.$fila->Titulo.': '.$fila->Descripcion.' <a href="ver_album.php?id='.$fila->IdAlbum.'" >Ver álbum</a></p></li>';
 			}
 		}
 		$resultado->close();
