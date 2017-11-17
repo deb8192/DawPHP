@@ -18,9 +18,6 @@ include_once("includes/cabecera.php");
 		<h2>Introduce los datos de tu foto</h2>
 		<p class="letra_roja">(*) Campos obligatorios</p>
 		<form action="mis_albumes.php" method="post">
-			
-		
-				<legend>Datos personales</legend>
 				
 				<p><label for= "Titulo">Titulo: <span class="asterisco_rojo">*</span></label>
 				<input type= "text" name="Titulo" id="Titulo" required="" tabindex="4"/></p>  <!--obligatorio, máximo 200 caracteres entre nombre y apellidos-->
@@ -34,7 +31,7 @@ include_once("includes/cabecera.php");
 				</select>
 				
 				<p><label for= "urlFoto">Foto: <span class="asterisco_rojo">*</span></label>
-				<input type="file" name="archivo" required="" tabindex="7"/></p>
+				<input type="file" name="archivo" id="archivo" required="" tabindex="7"/></p>
 			
 				<p class="quitar_arriba"><select name="album" required="" tabindex="21">
 					<?php CargarListaAlbumesPorUsuario($_SESSION['usuario']['id']); ?>
