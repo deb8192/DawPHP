@@ -26,41 +26,6 @@
 		$pais = $_POST['pais'];
 	}
  }
- 
- function CargarNumerosSelect($principio, $fin, $seleccionado) {
-	for ($i=$principio; $i<=$fin; $i++) {
-		echo '<option value="'.$i.'"';
-		
-		if ($i == $seleccionado)
-			echo' selected';
-		
-		echo '>'.$i.'</option>';
-	}
- }
- function CargarMeses($seleccionado) {
-	 $meses = array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto",
-		"septiembre", "octubre", "noviembre", "diciembre");
-		
-		$long = count($meses);
-		for ($i=0; $i<$long; $i++) {
-			echo '<option value="'.($i+1).'"';
-			
-				if (($i+1) == $seleccionado)
-				echo' selected';
-			
-			echo '>'.$meses[$i].'</option>';
-		}
- }
- 
- function CargarPaises($seleccionado) {
-	$paises = CargarArrayPaises();
-	for ($i=0; $i<(count($paises)); $i++) {
-		echo '<option value="'.($i+1).'"';
-			if (($i+1) == $seleccionado)
-			echo' selected';
-		echo '>'.$paises[$i].'</option>';
-	}
- }
  ?>
  
  <body>
@@ -77,18 +42,22 @@
 			<p>Fecha:</p>
 			<p>
 				<select name="dia" tabindex="6">
-				<?php CargarNumerosSelect(1,31, $dia); ?>
+					<option value="">Elegir día...</option>
+					<?php CargarNumerosSelect(1,31, $dia); ?>
 				</select>
 				<select name="mes" tabindex="7">
+					<option value="">Elegir mes...</option>
 					<?php CargarMeses($mes); ?>
 				</select>
 				<select name="anyo" tabindex="8">
+					<option value="">Elegir año...</option>
 					<?php CargarNumerosSelect(2013,2017, $anyo); ?>
 				</select>
 			</p>
 			<p>
 				<label for="pais">País:</label>
 				<select name="pais" id="pais" tabindex="9">
+					<option value="">Elegir país...</option>
 					<?php CargarPaises($pais); ?>
 				</select>
 			</p>
@@ -99,7 +68,7 @@
 			if (isset($_POST['buscar'])) {
 				echo '<section id="resultado_busqueda">
 					<h2>Resultado de la búsqueda</h2>';
-					BuscarFotos();
+					BuscarFotos($titulo, $dia, $mes, $anyo, $pais);
 				echo '</section>';
 			}
 		?>

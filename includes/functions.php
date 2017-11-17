@@ -132,10 +132,52 @@
 		$resultado->close();
 		$conexion->close();
 	}
-	function BuscarFotos() {
+	
+	
+	// Funciones para el formulario de busqueda
+	function BuscarFotos($titulo, $dia, $mes, $anyo, $pais) {
 		
 		$conexion = conecta();
-		$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais';
+		
+		if ( ($dia != "") && ($mes != "") && ($anyo != "") ) {
+			$fecha = $dia.'/'.$mes.'/'.$anyo;
+		} else {
+			$fecha = "";
+		}
+		
+		if (($titulo != "") && ($fecha != "") && ($pais != "")) {
+			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
+			 where Titulo like "%'.$titulo.'%" and IdPais = '.$pais.' and DATE_FORMAT(Fecha, "%d/%m/%Y") = "'.$fecha.'"';
+			
+		} else if (($titulo != "") && ($fecha != "") && ($pais == "")) { // Titulo y fecha
+			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
+			 where Titulo like "%'.$titulo.'%" and DATE_FORMAT(Fecha, "%d/%m/%Y") = "'.$fecha.'"';
+			
+		} else if (($titulo != "") && ($pais != "") && ($fecha == "")) { // Titulo y pais
+			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
+			 where Titulo like "%'.$titulo.'%" and IdPais = '.$pais;
+		
+		} else if (($titulo == "") && ($fecha != "") && ($pais != "")) { // Fecha y pais
+			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
+			 where IdPais = '.$pais.' and DATE_FORMAT(Fecha, "%d/%m/%Y") = "'.$fecha.'"';
+		
+		} else if (($titulo != "") && ($fecha == "") && ($pais == "")) { // Solo titulo
+			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
+			 where Titulo like "%'.$titulo.'%"';
+			 
+		} else if (($titulo == "") && ($fecha != "") && ($pais == "")) { // Solo fecha
+			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
+			 where DATE_FORMAT(Fecha, "%d/%m/%Y") = "'.$fecha.'"';
+			 
+		} else if (($titulo == "") && ($fecha == "") && ($pais != "")) { // Solo pais
+			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
+			 where IdPais = '.$pais;
+		} else {
+			echo '<p class="color_rojo">Introduce algunos datos para la búsqueda.</p>';
+			return;
+		}
+		
+		//$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais';
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
 		$tab = 11;
@@ -154,8 +196,49 @@
 				</ul>';
 				$tab++;
 			}
+		} else {
+			echo '<p>No hay resultados.</p>';
 		}
 		$resultado->close();
 		$conexion->close();
 	}
+	
+	function CargarNumerosSelect($principio, $fin, $seleccionado) {
+		for ($i=$principio; $i<=$fin; $i++) {
+			
+			if ($i<10)
+				echo '<option value="0'.$i.'"';
+			else
+				echo '<option value="'.$i.'"';
+			
+			if ($i == $seleccionado)
+				echo' selected';
+			
+			echo '>'.$i.'</option>';
+		}
+	 }
+	 function CargarMeses($seleccionado) {
+		 $meses = array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto",
+			"septiembre", "octubre", "noviembre", "diciembre");
+			
+			$long = count($meses);
+			for ($i=0; $i<$long; $i++) {
+				echo '<option value="'.($i+1).'"';
+				
+					if (($i+1) == $seleccionado)
+					echo' selected';
+				
+				echo '>'.$meses[$i].'</option>';
+			}
+	 }
+	 
+	 function CargarPaises($seleccionado) {
+		$paises = CargarArrayPaises();
+		for ($i=0; $i<(count($paises)); $i++) {
+			echo '<option value="'.($i+1).'"';
+				if (($i+1) == $seleccionado)
+				echo' selected';
+			echo '>'.$paises[$i].'</option>';
+		}
+	 }
 ?>
