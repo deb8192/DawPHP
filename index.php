@@ -15,6 +15,7 @@ include_once("includes/cabecera.php");
 	<?php include_once("includes/header.php"); ?>
 	
 	<aside id="buscar">
+	<!-- Poner la lupa, es lupa.svg -->
 		<a href="buscar.php" tabindex="5">Buscar</a>
 	</aside>
 	

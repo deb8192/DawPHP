@@ -1,7 +1,6 @@
 <?php
 	session_start();
-	include_once('datosBD.php');
-	
+	require_once("includes/functions.php");
 	//cookie de la ultima visita
 		if(isset($_SESSION['usuario']['nombre']))
 		{
@@ -21,11 +20,8 @@
 		if (($_COOKIE["recordar_usuario"] !="") || ($_COOKIE["recordar_password"] !="") ){
 			
 			// Comprobamos si existe el usuario y tiene guardada la contrasenya
-			if (array_key_exists($_COOKIE["recordar_usuario"], $usuarios)) {
-			
-				if (strcmp ($_COOKIE["recordar_password"] , $usuarios[$_COOKIE["recordar_usuario"]]['passw'] ) == 0) {
-					$existe = 1;
-				}
+			if (ComprobarLogin ($_COOKIE["recordar_usuario"] , $_COOKIE["recordar_password"] )) {
+				$existe = 1;
 			}
 		}
 	}

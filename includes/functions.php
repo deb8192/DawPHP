@@ -15,6 +15,21 @@
 		$resultado->close();
 		$conexion->close();
 	}
+	function ComprobarLogin($usuario, $pass) {
+
+		$conexion = conecta();
+		$consulta = "select NomUsuario, Clave from usuarios where NomUsuario = '$usuario' and Clave = SHA1('$pass')";
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		$existe = false;
+		if ($resultado->num_rows > 0) {
+			$fila = $resultado->fetch_object();
+			$existe = true;
+		}
+		$resultado->close();
+		$conexion->close();
+		return $existe;
+	}
 	
 	function CargarArrayPaises() {
 		
@@ -116,8 +131,10 @@
 	function CargarAlbum($id_Album) {
 		
 		$conexion = conecta();
-		$consulta = 'select Fichero, Titulo from fotos where Album = '.$id_Album;
+		$consulta = 'select IdFoto, Fichero, Titulo from fotos where Album = '.$id_Album;
 		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		$tab = 4;
 		
 		if ($resultado->num_rows > 0) {
 			while($fila = $resultado->fetch_object()) {
@@ -125,7 +142,7 @@
 				echo '<ul class="lista_fotos">
 					<li>
 						<h3>'.$fila->Titulo.'</h3>
-						<img src="'.$fila->Fichero.'" alt="'.$fila->Titulo.'" width="200" height="150"/></a>
+						<a href="detalle_foto.php?id='.$fila->IdFoto.'" title="Ver '.$fila->Titulo.'" tabindex="'.$tab.'"><img src="'.$fila->Fichero.'" alt="'.$fila->Titulo.'" width="200" height="150"/></a>
 					</li>';
 			}
 		}
@@ -176,8 +193,6 @@
 			echo '<p class="color_rojo">Introduce algunos datos para la búsqueda.</p>';
 			return;
 		}
-		
-		//$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais';
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
 		$tab = 11;

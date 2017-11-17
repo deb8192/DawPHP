@@ -91,7 +91,9 @@
 			(strpos($_SERVER['PHP_SELF'], 'respuesta_album') !== false ) ||
 			(strpos($_SERVER['PHP_SELF'], 'crear_album') !== false ) ||
 			(strpos($_SERVER['PHP_SELF'], 'añadir_foto') !== false ) ||
-			(strpos($_SERVER['PHP_SELF'], 'mis_albumes') !== false ) ) { ?>
+			(strpos($_SERVER['PHP_SELF'], 'mis_albumes') !== false ) ||
+			(strpos($_SERVER['PHP_SELF'], 'ver_album') !== false ) ||
+			(strpos($_SERVER['PHP_SELF'], 'detalle_foto') !== false ) ) { ?>
 			
 			<nav id="menu_usuario">
 				<ul>
