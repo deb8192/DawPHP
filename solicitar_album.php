@@ -110,7 +110,7 @@ require_once("includes/cabecera.php");
 				<input type= "text" name="localidad" id="localidad" required="" tabindex="15"/></p>
 				
 				<p><label for="Provincia">Provincia: <span class="asterisco_rojo">*</span></label>
-				<input type="text" name="Provincia" id="Provincia" required="" tabindex="16"/></p>
+				<input type="text" name="provincia" id="provincia" required="" tabindex="16"/></p>
 				
 				<p class="quitar_abajo">País: <span class="asterisco_rojo">*</span></p>
 				<p class="quitar_arriba"><select name="pais" required="" tabindex="17">
