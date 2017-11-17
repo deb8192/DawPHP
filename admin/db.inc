@@ -8,7 +8,6 @@
 			exit();
 		}
 	}
-
 	function compruebaErrorMysql($mensaje, $conexion)
 	{
 		if ($conexion->errno != 0)
@@ -25,7 +24,6 @@
 		$conexion = @new mysqli(dbServer, dbUser, dbPassword);
 		compruebaErrorConexionMysql("Se ha producido un error al conectar con el servidor", $conexion);
         $conexion->set_charset("utf8");
-
 		$conexion->select_db(dbDatabase);
 		compruebaErrorMysql("Se ha producido un error al seleccionar la BBDD", $conexion);
 		

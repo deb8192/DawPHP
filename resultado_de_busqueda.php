@@ -4,8 +4,11 @@
  $keywords = 'pictures, images, imagen, imágenes, fotos, foto, buscar, busqueda, búsqueda';
  $description = 'Página de resultados de una búsqueda en una galería de fotos on-line.';
  
+ // Para cargar la lista de paises
+ require_once("includes/functions.php");
+
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
-require_once("includes/cabecera.php");
+ require_once("includes/cabecera.php");
  ?>
  
  <body>
@@ -14,7 +17,7 @@ require_once("includes/cabecera.php");
 	
 	<section class="form_busqueda">
 		<h2>Formulario de búsqueda</h2>
-				<form action="resultado_de_busqueda.php" method="post">
+		<form action="resultado_de_busqueda.php" method="post">
 			<p>
 				<label for="titulo">Título:</label>
 				<input type="text" name="titulo" id="titulo" tabindex="5"/>
@@ -79,15 +82,7 @@ require_once("includes/cabecera.php");
 			<p>
 				<label for="pais">País:</label>
 				<select name="pais" id="pais" tabindex="9">
-					<option value="Alemania">Alemania</option>
-					<option value="Escocia">Escocia</option>
-					<option value="España">España</option>
-					<option value="Francia">Francia</option>
-					<option value="Gales">Gales</option>
-					<option value="Grecia">Grecia</option>
-					<option value="Inglaterra">Inglaterra</option>
-					<option value="Irlanda">Irlanda</option>
-					<option value="Italia">Italia</option>
+					<?php CargarListaPaises(); ?>
 				</select>
 			</p>
 			<input type="submit" name="buscar" value="Buscar" tabindex="10"/>
@@ -116,6 +111,8 @@ require_once("includes/cabecera.php");
 	
 		<section id="resultado_busqueda">
 			<h2>Resultado de la búsqueda</h2>
+			<?php BuscarFotos(); ?>
+			<!--
 			<ul class="lista_fotos">
 				<li>
 					<h3><?php echo $fotos[0]['titulo']; ?></h3>
@@ -157,7 +154,7 @@ require_once("includes/cabecera.php");
 						<li><?php echo $fotos[0]['pais']; ?></li>
 					</ul>
 				</li>
-			</ul>
+			</ul>-->
 		</section>
 	</section>
 	

@@ -115,4 +115,29 @@
 		$resultado->close();
 		$conexion->close();
 	}
+	function BuscarFotos() {
+		
+		$conexion = conecta();
+		$consulta = 'select IdFoto, Fichero, Titulo, Fecha, Pais, NomPais from fotos, paises';
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		if ($resultado->num_rows > 0) {
+			while($fila = $resultado->fetch_object()) {
+				
+				echo '<ul class="lista_fotos">
+					<li>
+						<h3>'.$fila->Titulo.'</h3>
+						<a href="detalle_foto.php?id='.$fila->IdFoto.'" title="Ver '.$fila->Titulo.'" tabindex="'.$tab.'"><img src="'.$fila->Fichero.'" alt="'.$fila->Titulo.'" width="200" height="150"/></a>
+						<ul class="datos">
+							<li>'.$fila->Fecha.'</li>
+							<li>'.$fila->NomPais.'</li>
+						</ul>
+					</li>
+				</ul>';
+				$tab++;
+			}
+		}
+		$resultado->close();
+		$conexion->close();
+	}
 ?>
