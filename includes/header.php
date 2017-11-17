@@ -87,10 +87,11 @@
 		
 		<p id="bienvenida">Bienvenido/a <?php echo $_SESSION['usuario']['nombre']; ?> | <a class="salir" href="includes/logout.php" tabindex="2">Salir</a></p>
 			
-		<?php if ((strpos($_SERVER['PHP_SELF'], 'solicitar_album') !== false) || 
+		<?php if ( (strpos($_SERVER['PHP_SELF'], 'solicitar_album') !== false) || 
 			(strpos($_SERVER['PHP_SELF'], 'respuesta_album') !== false ) ||
 			(strpos($_SERVER['PHP_SELF'], 'crear_album') !== false ) ||
-			(strpos($_SERVER['PHP_SELF'], 'añadir_foto') !== false )) { ?>
+			(strpos($_SERVER['PHP_SELF'], 'añadir_foto') !== false ) ||
+			(strpos($_SERVER['PHP_SELF'], 'mis_albumes') !== false ) ) { ?>
 			
 			<nav id="menu_usuario">
 				<ul>
