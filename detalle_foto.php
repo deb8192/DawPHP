@@ -19,10 +19,10 @@ require_once("includes/cabecera.php");
 		<?php
 		// Los usuarios no registrados no pueden ver los detalles de las fotos.
 		if (empty ($_SESSION['usuario'])){
-			echo '<h2>CONTENIDO NO DISPONIBLE</h2><p>Debes iniciar sesión para poder ver este contenido.</p>';
+			ContenidoNoDisponible();
 		} else {
 			if (!CargarDetalleFoto($_GET['id'])) {
-				echo '<h2>CONTENIDO NO DISPONIBLE</h2><p>El contenido que intentas buscar no existe.</p>';
+				ContenidoNoExiste();
 			}
 		} ?>
 	</section>

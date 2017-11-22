@@ -16,10 +16,11 @@ require_once("includes/cabecera.php");
 	<?php require_once("includes/header.php");?>
 	
 	<section id="detalle_imagen">
-		<h2>Fotos</h2>
-		<ul class="lista-albumes">
-			<?php CargarAlbum($_GET['id']); ?>
-		</ul>
+		<?php
+			if (!CargarAlbum($_GET['id'], $_GET['titulo'])) {
+				ContenidoNoExiste();
+			}
+		?>
 	</section>
 	
 	<!-- FOOTER con </body> y </html> -->

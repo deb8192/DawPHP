@@ -124,54 +124,49 @@
 		
 		if ($resultado->num_rows > 0) {
 			while($fila = $resultado->fetch_object()) { 
-				echo '<li><p> '.$fila->IdAlbum.' - '.$fila->Titulo.': '.$fila->Descripcion.' <a href="ver_album.php?id='.$fila->IdAlbum.'" >Ver álbum</a></p></li>';
+				echo '<li><p> '.$fila->IdAlbum.' - '.$fila->Titulo.': '.$fila->Descripcion.' <a href="ver_album.php?id='.$fila->IdAlbum.'&titulo='.$fila->Titulo.'" >Ver álbum</a></p></li>';
 			}
 		}
 		$resultado->close();
 		$conexion->close();
 	}
 	
-	function CargarAlbum($id_Album) {
+	function CargarAlbum($id_Album, $tit_Album) {
 		
 		$conexion = conecta();
-		$consulta = 'select IdFoto, Fichero, Titulo from fotos where Album = '.$id_Album;
+		$consulta = 'select a.Titulo as ATitulo, IdFoto, Fichero, f.Titulo as FTitulo from fotos f inner join albumes a on IdAlbum = Album where Album = '.$id_Album;
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
 		$tab = 4;
-		
+		$existe = false;
 		if ($resultado->num_rows > 0) {
+			$existe = true;
+			
+			echo '<h2>'.$tit_Album.'</h2> <ul class="lista_fotos">';
 			while($fila = $resultado->fetch_object()) {
-				
-				echo '<ul class="lista_fotos">
-					<li>
-						<h3>'.$fila->Titulo.'</h3>
-						<a href="detalle_foto.php?id='.$fila->IdFoto.'" title="Ver '.$fila->Titulo.'" tabindex="'.$tab.'"><img src="'.$fila->Fichero.'" alt="'.$fila->Titulo.'" width="200" height="150"/></a>
+					echo '<li>
+						<h3>'.$fila->FTitulo.'</h3>
+						<a href="detalle_foto.php?id='.$fila->IdFoto.'" title="Ver '.$fila->FTitulo.'" tabindex="'.$tab.'"><img src="'.$fila->Fichero.'" alt="'.$fila->FTitulo.'" width="200" height="150"/></a>
 					</li>';
 			}
+			echo '</ul>';
 		}
 		$resultado->close();
 		$conexion->close();
+		return $existe;
 	}
 	
 	
 	// Funciones para el formulario de busqueda
-	function BuscarFotos($titulo, $dia, $mes, $anyo, $pais) {
-		
-		$conexion = conecta();
-		
-		if ( ($dia != "") && ($mes != "") && ($anyo != "") ) {
-			$fecha = $dia.'/'.$mes.'/'.$anyo;
-		} else {
-			$fecha = "";
-		}
+	function BuscarFotos($titulo, $fecha, $pais) {
 		
 		if (($titulo != "") && ($fecha != "") && ($pais != "")) {
 			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
-			 where Titulo like "%'.$titulo.'%" and IdPais = '.$pais.' and DATE_FORMAT(Fecha, "%d/%m/%Y") = "'.$fecha.'"';
+			 where Titulo like "%'.$titulo.'%" and IdPais = '.$pais.' and Fecha = "'.$fecha.'"';
 			
 		} else if (($titulo != "") && ($fecha != "") && ($pais == "")) { // Titulo y fecha
 			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
-			 where Titulo like "%'.$titulo.'%" and DATE_FORMAT(Fecha, "%d/%m/%Y") = "'.$fecha.'"';
+			 where Titulo like "%'.$titulo.'%" and Fecha = "'.$fecha.'"';
 			
 		} else if (($titulo != "") && ($pais != "") && ($fecha == "")) { // Titulo y pais
 			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
@@ -179,7 +174,7 @@
 		
 		} else if (($titulo == "") && ($fecha != "") && ($pais != "")) { // Fecha y pais
 			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
-			 where IdPais = '.$pais.' and DATE_FORMAT(Fecha, "%d/%m/%Y") = "'.$fecha.'"';
+			 where IdPais = '.$pais.' and Fecha = "'.$fecha.'"';
 		
 		} else if (($titulo != "") && ($fecha == "") && ($pais == "")) { // Solo titulo
 			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
@@ -187,15 +182,18 @@
 			 
 		} else if (($titulo == "") && ($fecha != "") && ($pais == "")) { // Solo fecha
 			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
-			 where DATE_FORMAT(Fecha, "%d/%m/%Y") = "'.$fecha.'"';
+			 where Fecha = "'.$fecha.'"';
 			 
 		} else if (($titulo == "") && ($fecha == "") && ($pais != "")) { // Solo pais
 			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
 			 where IdPais = '.$pais;
 		} else {
+			// Si no hay datos, sacacmos el mensaje y salimos de la función
 			echo '<p class="color_rojo">Introduce algunos datos para la búsqueda.</p>';
 			return;
 		}
+		
+		$conexion = conecta();
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
 		$tab = 11;
@@ -215,7 +213,7 @@
 				$tab++;
 			}
 		} else {
-			echo '<p>No hay resultados.</p>';
+			ContenidoNoExiste();
 		}
 		$resultado->close();
 		$conexion->close();
@@ -235,7 +233,7 @@
 			echo '>'.$i.'</option>';
 		}
 	 }
-	 function CargarMeses($seleccionado) {
+	 /*function CargarMeses($seleccionado) {
 		 $meses = array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto",
 			"septiembre", "octubre", "noviembre", "diciembre");
 			
@@ -248,7 +246,7 @@
 				
 				echo '>'.$meses[$i].'</option>';
 			}
-	 }
+	 }*/
 	 
 	 function CargarPaises($seleccionado) {
 		$paises = CargarArrayPaises();
@@ -259,4 +257,12 @@
 			echo '>'.$paises[$i].'</option>';
 		}
 	 }
+	 
+	function ContenidoNoExiste() {
+		echo '<h2>404 Error</h2><p>El contenido que intentas buscar no existe.</p>';
+	}
+	
+	function ContenidoNoDisponible() {
+		echo '<h2>CONTENIDO NO DISPONIBLE</h2><p>Debes iniciar sesión para poder ver este contenido.</p>';
+	}
 ?>
