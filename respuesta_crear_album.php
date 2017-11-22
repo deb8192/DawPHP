@@ -26,12 +26,11 @@ require_once("includes/cabecera.php");
 				echo "<p>Descripción: $descripcion_album</p>";
 			}
 			if(!empty($_POST['fecha_album'])){
-				$fecha_album = $_POST['fecha_album'];
-				echo "<p>Fecha: $fecha_album</p>";
+				$date = new DateTime($_POST['fecha_album']);
+				echo "<p>Fecha: ".$date->format('d-m-Y')."</p>";
 			}
 			if(!empty($_POST['pais'])){
-				$pais = $_POST['pais'];
-				echo "<p>País: $pais</p>";
+				echo "<p>País: ".CargarPais($_POST['pais'])."</p>";
 			}
 			?>
 	

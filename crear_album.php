@@ -32,6 +32,7 @@ require_once("includes/cabecera.php");
 				
 				<p class="quitar_abajo">País: <span class="asterisco_rojo">*</span></p>
 				<p class="quitar_arriba"><select id="pais" name="pais" required=""  tabindex="7">
+					<option value="">Elegir país...</option>
 					<?php CargarListaPaises(); ?>
 				</select></p>
 			<input type="submit" name="crear_album" value="Crear álbum" tabindex="8"/>

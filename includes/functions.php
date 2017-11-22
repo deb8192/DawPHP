@@ -48,6 +48,22 @@
 		return $paises;
 	}
 	
+	// Sólo para respuesta_crear_album.php
+	function CargarPais($id) {
+		
+		$conexion = conecta();
+		$consulta = 'select NomPais from paises where IdPais = '.$id;
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		if ($resultado->num_rows > 0) {
+			$fila = $resultado->fetch_object();
+			return $fila->NomPais;
+		}
+		$resultado->close();
+		$conexion->close();
+		return "";
+	}
+	
 	function CargarListaAlbumesPorUsuario($idUsuario) {
 		
 		$conexion = conecta();
