@@ -22,7 +22,6 @@ require_once("includes/cabecera.php");
 			$_SESSION['error'] = "Las contraseñas no coinciden.";
 			header("Location:registro.php");
 		}
-		$fecha = $_POST['dias'].'/'.$_POST['meses'].'/'.$_POST['anyos'];
 	?>
 	
 	<section id="datos_usuario">
@@ -36,7 +35,7 @@ require_once("includes/cabecera.php");
 		<p>Nombre: <?php echo $_POST['nombre']; ?></p>
 		<p>Email: <?php echo $_POST['correo']; ?></p>
 		<p>Sexo: <?php echo $_POST['sexo']; ?></p>
-		<p>Fecha: <?php echo $fecha; ?></p>
+		<p>Fecha: <?php echo $_POST['fecha_nac']; ?></p>
 		<p>Ciudad: <?php echo $_POST['ciudad']; ?></p>
 		<p>País: <?php echo $_POST['paises']; ?></p>
 	</section>

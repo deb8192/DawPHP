@@ -219,36 +219,7 @@
 		$conexion->close();
 	}
 	
-	function CargarNumerosSelect($principio, $fin, $seleccionado) {
-		for ($i=$principio; $i<=$fin; $i++) {
-			
-			if ($i<10)
-				echo '<option value="0'.$i.'"';
-			else
-				echo '<option value="'.$i.'"';
-			
-			if ($i == $seleccionado)
-				echo' selected';
-			
-			echo '>'.$i.'</option>';
-		}
-	 }
-	 /*function CargarMeses($seleccionado) {
-		 $meses = array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto",
-			"septiembre", "octubre", "noviembre", "diciembre");
-			
-			$long = count($meses);
-			for ($i=0; $i<$long; $i++) {
-				echo '<option value="'.($i+1).'"';
-				
-					if (($i+1) == $seleccionado)
-					echo' selected';
-				
-				echo '>'.$meses[$i].'</option>';
-			}
-	 }*/
-	 
-	 function CargarPaises($seleccionado) {
+	function CargarPaises($seleccionado) {
 		$paises = CargarArrayPaises();
 		for ($i=0; $i<(count($paises)); $i++) {
 			echo '<option value="'.($i+1).'"';
