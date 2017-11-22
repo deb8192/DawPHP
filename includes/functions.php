@@ -128,25 +128,41 @@
 		
 		if ($resultado->num_rows > 0) {
 			while($fila = $resultado->fetch_object()) { 
-				echo '<li><p> '.$fila->IdAlbum.' - '.$fila->Titulo.': '.$fila->Descripcion.' <a href="ver_album.php?id='.$fila->IdAlbum.'&titulo='.$fila->Titulo.'" >Ver álbum</a></p></li>';
+				echo '<li><p>'.$fila->Titulo.': '.$fila->Descripcion.' <a href="ver_album.php?id='.$fila->IdAlbum.'" >Ver álbum</a></p></li>';
 			}
 		}
 		$resultado->close();
 		$conexion->close();
 	}
 	
-	function CargarAlbum($id_Album, $tit_Album) {
+	function CargarAlbum($id_Album) {
+		
+		// Si el id no es numerico, salimos de la funcion
+		if (!is_numeric($id_Album))
+			return false;
 		
 		$conexion = conecta();
-		$consulta = 'select a.Titulo as ATitulo, IdFoto, Fichero, f.Titulo as FTitulo from fotos f inner join albumes a on IdAlbum = Album where Album = '.$id_Album;
+		$consulta = 'select Titulo from albumes where IdAlbum = '.$id_Album;
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
-		$tab = 4;
 		$existe = false;
 		if ($resultado->num_rows > 0) {
 			$existe = true;
+			$tit_Album = $resultado->fetch_object();
+			echo '<h2>'.$tit_Album->Titulo.'</h2>';
+		} else {
+			// Si no existe el album, salimos de la funcion cerrando la conexion
+			$resultado->close();
+			$conexion->close();
+			return $existe;
+		}
+		
+		$consulta = 'select a.Titulo as ATitulo, IdFoto, Fichero, f.Titulo as FTitulo from fotos f inner join albumes a on IdAlbum = Album where Album = '.$id_Album;
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		$tab = 4;
+		if ($resultado->num_rows > 0) {
 			
-			echo '<h2>'.$tit_Album.'</h2> <ul class="lista_fotos">';
+			echo '<ul class="lista_fotos">';
 			while($fila = $resultado->fetch_object()) {
 					echo '<li>
 						<h3>'.$fila->FTitulo.'</h3>

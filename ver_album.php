@@ -17,7 +17,11 @@ require_once("includes/cabecera.php");
 	
 	<section id="detalle_imagen">
 		<?php
-			if (!CargarAlbum($_GET['id'], $_GET['titulo'])) {
+			if ($_GET['id'] != null) {
+				if (!CargarAlbum($_GET['id'])) {
+					ContenidoNoExiste();
+				}
+			} else {
 				ContenidoNoExiste();
 			}
 		?>
