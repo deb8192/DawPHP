@@ -20,10 +20,12 @@ require_once("includes/cabecera.php");
 		// Los usuarios no registrados no pueden ver los detalles de las fotos.
 		if (empty ($_SESSION['usuario'])){
 			ContenidoNoDisponible();
-		} else {
+		} else if ($_GET['id'] != null) {
 			if (!CargarDetalleFoto($_GET['id'])) {
 				ContenidoNoExiste();
 			}
+		} else {
+			ContenidoNoExiste();
 		} ?>
 	</section>
 	

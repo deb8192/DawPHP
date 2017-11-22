@@ -92,6 +92,10 @@
 	
 	function CargarDetalleFoto($id) {
 		
+		// Si el id no es numerico, salimos de la funcion
+		if (!is_numeric($id))
+			return false;
+		
 		$conexion = conecta();
 		$consulta = 'select Fichero, f.Titulo as FTitulo, DATE_FORMAT(f.Fecha, "%d/%m/%Y") as FFecha, NomPais, a.Titulo as ATitulo, NomUsuario from fotos f inner join paises on Pais = IdPais inner join albumes a on Album = IdAlbum inner join usuarios on Usuario = IdUsuario where IdFoto = '.$id;
 		$resultado = ejecutaConsulta($conexion, $consulta);
