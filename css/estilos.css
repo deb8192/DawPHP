@@ -74,6 +74,20 @@ header a{
 .logo:hover, .registro:hover, .salir:hover {
 	color: orange;
 }
+
+.lupa {
+	border: none;
+	background-image: url(../img/lupa.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-size: 64px;
+	padding-right: 32px;
+	padding-bottom: 32px;
+	margin-left: -40px;
+}
+.lupa:hover {
+	background-position: -32px 0;
+}
 footer{
 		height:60px;
 		width:100%;

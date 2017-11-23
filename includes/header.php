@@ -16,7 +16,7 @@
 ?>
 
 <header>
-	<a class="logo" href="index.php" tabindex="1"><h1>PI</h1></a>
+	<a class="logo" href="index.php" title="PI" tabindex="1"><h1>PI</h1></a>
 	
 	<?php if (empty ($_SESSION['usuario']['nombre'])){ ?>
 			

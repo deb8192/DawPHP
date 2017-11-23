@@ -13,8 +13,7 @@ include_once("includes/cabecera.php");
 	<?php include_once("includes/header.php"); ?>
 	
 	<aside id="buscar">
-	<!-- Poner la lupa, es lupa.svg -->
-		<a href="buscar.php" tabindex="5">Buscar</a>
+		<a class="lupa" href="buscar.php" title="Buscar" tabindex="5"></a>
 	</aside>
 	
 	<section id="principal">
