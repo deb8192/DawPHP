@@ -141,11 +141,25 @@
 		$conexion = conecta();
 		$consulta = 'select IdAlbum, Titulo, Descripcion from albumes where Usuario = '.$idUsuario;
 		$resultado = ejecutaConsulta($conexion, $consulta);
+		$existe = false;
 		
 		if ($resultado->num_rows > 0) {
-			while($fila = $resultado->fetch_object()) { 
-				echo '<li><p>'.$fila->Titulo.': '.$fila->Descripcion.' <a href="ver_album.php?id='.$fila->IdAlbum.'" >Ver álbum</a></p></li>';
+			while($fila = $resultado->fetch_object()){
+				$consulta = 'select Fichero from fotos f inner join albumes a on a.IdAlbum = f.Album where a.IdAlbum = '.$fila->IdAlbum;
+				$resultado2 = ejecutaConsulta($conexion, $consulta);
+				
+				while($fila2 = $resultado2->fetch_object()) { 
+					echo '<li class="lista_de_albumes"><a href="ver_album.php?id='.$fila->IdAlbum.'"><img src="'.$fila2->Fichero.'" alt="'.$fila->Titulo.'" width="200" height="150"/></a>
+					<p> Título: '.$fila->Titulo.' </br> Descripión: '.$fila->Descripcion.' </br> <a href="ver_album.php?id='.$fila->IdAlbum.'" >Ver álbum</a></p></li>';
+				}
 			}
+			$existe = true;
+		}
+		 else {
+			// Si no existe el album, salimos de la funcion cerrando la conexion
+			$resultado->close();
+			$conexion->close();
+			return $existe;
 		}
 		$resultado->close();
 		$conexion->close();

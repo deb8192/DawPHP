@@ -16,11 +16,6 @@ body {
 h1, h2, h3, h4 {
 	font-family: Cambria, Georgia, Times New Roman, serif; 
 }
-
-.lista-albumes li {
-	float: none;
-}
-
 header {
 	height: 30px;
 	padding-top: 20px;
@@ -225,14 +220,19 @@ li {
 a { text-decoration: none; }
 img { border: 1px solid #000; }
 
-.lista_fotos {
+.lista_fotos, .lista-albumes {
 	margin-top: 20px;
 }
 
-.lista_fotos li {
+.lista_fotos li, .lista-albumes li {
 	float: left;
 	margin-bottom: 20px;
 	margin-right: 15px;
+}
+
+.lista_de_albumes p
+{
+	width: 200px;
 }
 
 .datos li {
