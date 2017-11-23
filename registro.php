@@ -3,12 +3,17 @@
  $title = 'Registro';
  $keywords = 'pictures, images, imagen, imágenes, fotos, foto, buscar, busqueda, búsqueda';
  $description = 'Página de registro de una galería de fotos on-line.';
- 
- // Para cargar la lista de paises
- require_once("includes/functions.php");
- 
+
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
+
+//Comparar contraseña con repetir contraseña
+if (isset($_POST['registro'])){
+	if (strcmp ($_POST['repassword'],$_POST['password2']) !== 0) {
+		$_SESSION['error']['activado'] = true;
+		$_SESSION['error']['descripcion'] = "Las contraseñas no coinciden.";
+	}
+}
  ?>
  
  <body>
@@ -18,7 +23,7 @@ require_once("includes/cabecera.php");
 	<section id="registro">
 		<h2>Registro</h2>
 		<p class="letra_roja">(*) Campos obligatorios</p>
-		<form id="form_registro" action="respuesta_registro.php" method="post">
+		<form id="form_registro" action="registro.php" method="post">
 		
 			<p><label for="nombre">Nombre: <span class="asterisco_rojo">*</span></label>
 			<input type="text" name="nombre" id="nombre" required="" tabindex="5"/></p>
@@ -57,6 +62,14 @@ require_once("includes/cabecera.php");
 			<input type="submit" name="registro" value="Registrarse" tabindex="15"/>
 		</form>
 	</section>
+	
+	<?php
+		/*if (isset($_POST['registro'])){
+			 //Comprobar desde la BD si existe el usuario.
+			 
+			 $nombre = addslashes($_POST['nombre']);
+		 }*/
+	?>
 	
 	<!-- FOOTER con </body> y </html> -->
 	<?php require_once("includes/footer.php"); ?>

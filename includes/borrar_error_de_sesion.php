@@ -1,7 +1,10 @@
 <?php
 	session_start();
-	if (isset($_SESSION['error'])) {
+	if ($_SESSION['error']['activado']) {
+		$url = $_SESSION['error']['url'];
 		unset($_SESSION['error']);
-		header("Location:../index.php");
+		
+		$_SESSION['error']['activado'] = false;
+		header("Location:../$url");
 	}
 ?>

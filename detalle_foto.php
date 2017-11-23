@@ -4,9 +4,6 @@
  $keywords = 'pictures, images, imagen, imágenes, fotos, foto, detalle, detalles';
  $description = 'Página de detalles de una foto de la galería on-line.';
  
- // Para cargar la lista de paises
- require_once("includes/functions.php");
- 
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
  ?>

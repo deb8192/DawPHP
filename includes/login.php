@@ -28,8 +28,9 @@
 	}
 	
 	function PasarErrorAlIndex() {
-		$_SESSION['error'] = "El usuario o la contraseña no coincide.";
-		header("Location:../index.php");
+		$_SESSION['error']['activado'] = true;
+		$_SESSION['error']['descripcion'] = "El usuario o la contraseña no coincide.";
+		header("Location:../".$_SESSION['error']['url']);
 	}
 	
 	if (isset($_POST['enviar'])) {

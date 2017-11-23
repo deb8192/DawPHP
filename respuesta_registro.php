@@ -6,6 +6,7 @@
  
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
+
  if (isset($_POST['registro'])){
 	 //Comprobar desde la BD si existe el usuario.
 	 
@@ -19,7 +20,9 @@ require_once("includes/cabecera.php");
 		
 		//Comparar contraseña con repetir contraseña
 		if (strcmp ($_POST['repassword'],$_POST['password2']) !== 0) {
-			$_SESSION['error'] = "Las contraseñas no coinciden.";
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['url'] = 'registro.php';
+			$_SESSION['error']['descripcion'] = "Las contraseñas no coinciden.";
 			header("Location:registro.php");
 		}
 	?>

@@ -3,9 +3,6 @@
  $title = 'Buscar';
  $keywords = 'pictures, images, imagen, imágenes, fotos, foto, buscar, busqueda, búsqueda';
  $description = 'Página de búsqueda de una galería de fotos on-line.';
- 
- // Para cargar la lista de paises
- require_once("includes/functions.php");
 
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
  require_once("includes/cabecera.php");

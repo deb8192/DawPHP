@@ -3,8 +3,6 @@
  $title = 'PI - Pictures & images';
  $keywords = 'pictures, images, imagen, imágenes, fotos, foto';
  $description = 'Página principal de una galería de fotos on-line.';
- // Para cargar la lista de paises
- require_once("includes/functions.php");
  
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 include_once("includes/cabecera.php");

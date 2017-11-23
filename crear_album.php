@@ -4,9 +4,6 @@
  $keywords = 'pictures, images, imagen, imágenes, fotos, foto';
  $description = 'Página página de confirmación de impresión de álbum.';
  
- // Para cargar la lista de paises
- require_once("includes/functions.php");
- 
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
  ?>

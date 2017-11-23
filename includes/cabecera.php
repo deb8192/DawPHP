@@ -1,6 +1,11 @@
 <?php
 	session_start();
 	require_once("includes/functions.php");
+	
+	// Errores del modal
+	if (!isset ($_SESSION['error'])) {
+		$_SESSION['error']['activado'] = false;
+	}
 	//cookie de la ultima visita
 		if(isset($_SESSION['usuario']['nombre']))
 		{
