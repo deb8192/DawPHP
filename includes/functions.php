@@ -15,10 +15,26 @@
 		$resultado->close();
 		$conexion->close();
 	}
+	function ComprobarNombreUsuario($usuario) {
+
+		$conexion = conecta();
+		$consulta = "select NomUsuario from usuarios where NomUsuario = '$usuario'";
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		$existe = false;
+		if ($resultado->num_rows > 0) {
+			$fila = $resultado->fetch_object();
+			$existe = true;
+		}
+		$resultado->close();
+		$conexion->close();
+		return $existe;
+	}
+	
 	function ComprobarLogin($usuario, $pass) {
 
 		$conexion = conecta();
-		$consulta = "select NomUsuario, Clave from usuarios where NomUsuario = '$usuario' and Clave = SHA1('$pass')";
+		$consulta = "select NomUsuario from usuarios where NomUsuario = '$usuario' and Clave = SHA1('$pass')";
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
 		$existe = false;
@@ -48,7 +64,6 @@
 		return $paises;
 	}
 	
-	// Sólo para respuesta_crear_album.php
 	function CargarPais($id) {
 		
 		$conexion = conecta();
@@ -143,28 +158,28 @@
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		$existe = false;
 		
+		// Si existe el usuario, sacamos todos los albumes
 		if ($resultado->num_rows > 0) {
 			while($fila = $resultado->fetch_object()){
 				$consulta = 'select Fichero from fotos f inner join albumes a on a.IdAlbum = f.Album where a.IdAlbum = '.$fila->IdAlbum;
 				$resultado2 = ejecutaConsulta($conexion, $consulta);
 				
 				echo '<li class="lista_de_albumes">';
+				echo '<a href="ver_album.php?id='.$fila->IdAlbum.'">';
 				if ($resultado2->num_rows > 0){ 
 					$fila2 = $resultado2->fetch_object();
-					echo '<a href="ver_album.php?id='.$fila->IdAlbum.'"><img src="'.$fila2->Fichero.'" alt="'.$fila->Titulo.'" width="200" height="150"/></a>';
+					echo '<img src="'.$fila2->Fichero.'" alt="'.$fila->Titulo.'" width="200" height="150"/>';
+				} else {
+					echo 'Sin foto';
 				}
-				echo '<p> Título: '.$fila->Titulo.' </br> Descripión: '.$fila->Descripcion.' </br> <a href="ver_album.php?id='.$fila->IdAlbum.'" >Ver álbum</a></p></li>';
+				echo '</a><p> Título: '.$fila->Titulo.' </br> Descripión: '.$fila->Descripcion.' </br> <a href="ver_album.php?id='.$fila->IdAlbum.'" >Ver álbum</a></p></li>';
 			}
+			$resultado2->close();
 			$existe = true;
-		}
-		 else {
-			// Si no existe el album, salimos de la funcion cerrando la conexion
-			$resultado->close();
-			$conexion->close();
-			return $existe;
 		}
 		$resultado->close();
 		$conexion->close();
+		return $existe;
 	}
 	
 	function CargarAlbum($id_Album) {
@@ -265,7 +280,7 @@
 				$tab++;
 			}
 		} else {
-			ContenidoNoExiste();
+			echo '<p>No hay resultados.</p>';
 		}
 		$resultado->close();
 		$conexion->close();
@@ -279,7 +294,7 @@
 				echo' selected';
 			echo '>'.$paises[$i].'</option>';
 		}
-	 }
+	}
 	 
 	function ContenidoNoExiste() {
 		echo '<h2>404 Error</h2><p>El contenido que intentas buscar no existe.</p>';

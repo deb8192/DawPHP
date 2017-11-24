@@ -12,8 +12,8 @@
 			if(isset($_COOKIE['last_visit']))
 				$last_visit = $_COOKIE['last_visit'];
 			else
-				$last_visit = date('d-m-Y H:i:s');
-			$current_visit = date('d-m-Y H:i:s');
+				$last_visit = date('d/m/Y H:i:s');
+			$current_visit = date('d/m/Y H:i:s');
 			setcookie("last_visit", $current_visit, (time()+60*60*24*30), '/');
 		}
 	

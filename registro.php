@@ -7,11 +7,33 @@
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
 
-//Comparar contraseña con repetir contraseña
 if (isset($_POST['registro'])){
+	
+	//Comparar contraseña con repetir contraseña
 	if (strcmp ($_POST['repassword'],$_POST['password2']) !== 0) {
 		$_SESSION['error']['activado'] = true;
 		$_SESSION['error']['descripcion'] = "Las contraseñas no coinciden.";
+	} else {
+		
+		if (ComprobarNombreUsuario($_POST['nombre'])) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "Usuario no disponible.";
+		} else {
+			$_SESSION['reg']['nombre'] = $_POST['nombre'];
+			$_SESSION['reg']['correo'] = $_POST['correo'];
+			$_SESSION['reg']['sexo'] = $_POST['sexo'];
+			$_SESSION['reg']['fecha'] = $_POST['fecha_nac'];
+			$_SESSION['reg']['ciudad'] = $_POST['ciudad'];
+			$_SESSION['reg']['pais'] = $_POST['paises'];
+			
+			// Foto por defecto
+			if (empty($_POST['fotoPerfil']))
+				$_SESSION['reg']['foto'] = 'perfiles/foto.jpg';
+			else
+				$_SESSION['reg']['foto'] = $_POST['fotoPerfil'];
+			
+			header("Location:respuesta_registro.php");
+		}
 	}
 }
  ?>
@@ -62,14 +84,6 @@ if (isset($_POST['registro'])){
 			<input type="submit" name="registro" value="Registrarse" tabindex="15"/>
 		</form>
 	</section>
-	
-	<?php
-		/*if (isset($_POST['registro'])){
-			 //Comprobar desde la BD si existe el usuario.
-			 
-			 $nombre = addslashes($_POST['nombre']);
-		 }*/
-	?>
 	
 	<!-- FOOTER con </body> y </html> -->
 	<?php require_once("includes/footer.php"); ?>

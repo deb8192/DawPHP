@@ -27,13 +27,13 @@ require_once("includes/cabecera.php");
 			}
 			if(!empty($_POST['fecha_album'])){
 				$date = new DateTime($_POST['fecha_album']);
-				echo "<p>Fecha: ".$date->format('d-m-Y')."</p>";
+				echo "<p>Fecha: ".$date->format('d/m/Y')."</p>";
 			}
 			if(!empty($_POST['pais'])){
 				echo "<p>País: ".CargarPais($_POST['pais'])."</p>";
 			}
 			?>
-	
+		</section>
 	<!-- FOOTER con </body> y </html> -->
 	<?php require_once("includes/footer.php"); ?>
 	

@@ -27,7 +27,7 @@
 		return $existe;
 	}
 	
-	function PasarErrorAlIndex() {
+	function ActivarErrorModal() {
 		$_SESSION['error']['activado'] = true;
 		$_SESSION['error']['descripcion'] = "El usuario o la contraseña no coincide.";
 		header("Location:../".$_SESSION['error']['url']);
@@ -49,7 +49,7 @@
 				}
 				header("Location:../menu_usuario.php");
 			} else {
-				PasarErrorAlIndex();
+				ActivarErrorModal();
 			}
 		} else if (isset($_COOKIE["recordar_usuario"]) && isset($_COOKIE["recordar_password"])) {
 			$usuario = $_COOKIE["recordar_usuario"];
@@ -58,7 +58,7 @@
 			if (ComprobarLogin($usuario, $password)) {
 				header("Location:../menu_usuario.php");
 			} else {
-				PasarErrorAlIndex();
+				ActivarErrorModal();
 			}
 		}
 		// Borrar las cookies

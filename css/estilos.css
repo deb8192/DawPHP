@@ -311,7 +311,8 @@ img { border: 1px solid #000; }
 #registro form #correo, #registro form #ciudad, #registro form pais, #registro form #foto,
 .form_busqueda form #titulo, .form_busqueda form #pais, #archivo, #Titulo, #fecha, #solicitar form input[type="text"],
 #solicitar form #email, #solicitar form select, #solicitar form #fecha_recepcion,
-#crear_album form #titulo_album_creado, #crear_album form #pais, #crear_album form #fecha_album {
+#crear_album form #titulo_album_creado, #crear_album form #pais, #crear_album form #fecha_album,
+#anyadirFoto form #pais, #anyadirFoto form #salbum {
 	width: 100%;
 }
 
