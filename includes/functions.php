@@ -1,6 +1,15 @@
 <?php
 	require_once('admin/db.inc');
 	
+	//No funciona del todo bien aun
+	function CrearUsuarioEnBD($nombre, $password, $correo, $sexo, $fecha_nac, $ciudad, $paises, $foto, $fRegistro){
+		$conexion = conecta();
+		$consulta = "INSERT INTO usuarios (NomUsuario, Clave, Email, Sexo, FNacimiento, Ciudad, Pais, Foto, FRegistro) VALUES ('$nombre',sha1('$password'),'$correo','$sexo','$fecha_nac','$ciudad','$paises','$foto','$fRegistro')";
+		ejecutaConsulta($conexion, $consulta);
+		
+		$conexion->close();
+	}
+	
 	function CargarListaPaises() {
 		
 		$conexion = conecta();

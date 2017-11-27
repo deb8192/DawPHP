@@ -19,12 +19,21 @@ if (isset($_POST['registro'])){
 			$_SESSION['error']['activado'] = true;
 			$_SESSION['error']['descripcion'] = "Usuario no disponible.";
 		} else {
+			if (empty($_POST['fotoPerfil'])){
+				CrearUsuarioEnBD($_POST['nombre'],$_POST['password2'],$_POST['correo'],$_POST['sexo'],
+				$_POST['fecha_nac'],$_POST['ciudad'],$_POST['paises'],'perfiles/foto.jpg',date('d/m/Y H:i:s'));
+			}
+			else{
+				CrearUsuarioEnBD($_POST['nombre'],$_POST['password2'],$_POST['correo'],$_POST['sexo'],
+				$_POST['fecha_nac'],$_POST['ciudad'],$_POST['paises'],$_POST['fotoPerfil'],date('d/m/Y H:i:s'));
+			}
+			/*
 			$_SESSION['reg']['nombre'] = $_POST['nombre'];
 			$_SESSION['reg']['correo'] = $_POST['correo'];
 			$_SESSION['reg']['sexo'] = $_POST['sexo'];
 			$_SESSION['reg']['fecha'] = $_POST['fecha_nac'];
 			$_SESSION['reg']['ciudad'] = $_POST['ciudad'];
-			$_SESSION['reg']['pais'] = $_POST['paises'];
+			$_SESSION['reg']['pais'] = $_POST['paises'];*/
 			
 			// Foto por defecto
 			if (empty($_POST['fotoPerfil']))
