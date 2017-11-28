@@ -272,7 +272,7 @@
 		$conexion = conecta();
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
-		$tab = 11;
+		$tab = 13;
 		if ($resultado->num_rows > 0) {
 			while($fila = $resultado->fetch_object()) {
 				

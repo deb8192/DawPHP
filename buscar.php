@@ -31,19 +31,19 @@
 		<h2>Formulario de búsqueda</h2>
 		<form action="buscar.php" method="post">
 			<p><label for="titulo">Título:</label>
-			<input type="text" name="titulo" id="titulo" value="<?php echo $titulo; ?>" tabindex="5"/></p>
+			<input type="text" name="titulo" id="titulo" value="<?php echo $titulo; ?>" tabindex="9"/></p>
 			
 			<p><label for="fecha_buscar">Fecha:</label>
-			<input type="date" name="fecha_buscar" id="fecha_buscar" value="<?php echo $fechaBuscar;?>" tabindex="6"/></p>
+			<input type="date" name="fecha_buscar" id="fecha_buscar" value="<?php echo $fechaBuscar;?>" tabindex="10"/></p>
 			
 			<p>
 				<label for="pais">País:</label>
-				<select name="pais" id="pais" tabindex="7">
+				<select name="pais" id="pais" tabindex="11">
 					<option value="">Elegir país...</option>
 					<?php CargarPaises($pais); ?>
 				</select>
 			</p>
-			<input type="submit" name="buscar" value="Buscar" tabindex="8"/>
+			<input type="submit" name="buscar" value="Buscar" tabindex="12"/>
 		</form>
 		
 		<?php
