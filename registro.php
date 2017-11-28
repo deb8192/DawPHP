@@ -57,40 +57,40 @@ if (isset($_POST['registro'])){
 		<form id="form_registro" action="registro.php" method="post">
 		
 			<p><label for="nombre">Nombre: <span class="asterisco_rojo">*</span></label>
-			<input type="text" name="nombre" id="nombre" required="" tabindex="5"/></p>
+			<input type="text" name="nombre" id="nombre" required="" tabindex="9"/></p>
 			
 			<p><label for="password2">Contraseña: <span class="asterisco_rojo">*</span></label>
-			<input type="password" name="password2" id="password2" required="" tabindex="6"/></p>
+			<input type="password" name="password2" id="password2" required="" tabindex="10"/></p>
 			
 			<p><label for="repassword">Repetir contraseña: <span class="asterisco_rojo">*</span></label>
-			<input type="password" name="repassword" id="repassword" required="" tabindex="7"/></p>
+			<input type="password" name="repassword" id="repassword" required="" tabindex="11"/></p>
 			
 			<p><label for="correo">Email: <span class="asterisco_rojo">*</span></label>
-			<input type="email" name="correo" id="correo" required="" tabindex="8"/></p>
+			<input type="email" name="correo" id="correo" required="" tabindex="12"/></p>
 			
 			<p>Sexo:
 				<label for="hombre">Hombre</label>
-				<input type="radio" name="sexo" value="Hombre" id="hombre" tabindex="9" checked>
+				<input type="radio" name="sexo" value="Hombre" id="hombre" tabindex="13" checked>
 				<label for="mujer">Mujer</label>
-				<input type="radio" name="sexo" value="Mujer" id="mujer" tabindex="10">
+				<input type="radio" name="sexo" value="Mujer" id="mujer" tabindex="14">
 			</p>
 			
 			<p><label for="fecha_nac">Fecha nacimiento:</label>
-			<input type="date" name="fecha_nac" id="fecha_nac" tabindex="11"/></p>
+			<input type="date" name="fecha_nac" id="fecha_nac" tabindex="15"/></p>
 			
 			<p><label for="ciudad">Ciudad: <span class="asterisco_rojo">*</span></label>
-			<input type="text" name="ciudad" id="ciudad" required="" tabindex="12"/></p>
+			<input type="text" name="ciudad" id="ciudad" required="" tabindex="16"/></p>
 			
 			<p><label for="pais">País:</label>
-				<select name="paises" tabindex="13" id="pais">
+				<select name="paises" tabindex="17" id="pais">
 					<?php CargarListaPaises(); ?>
 				</select>
 			</p>
 			
 			<p><label for="foto">Foto:</label>
-			<input type="file" name="fotoPerfil" id="foto" tabindex="14"/></p>
+			<input type="file" name="fotoPerfil" id="foto" tabindex="18"/></p>
 			
-			<input type="submit" name="registro" value="Registrarse" tabindex="15"/>
+			<input type="submit" name="registro" value="Registrarse" tabindex="19"/>
 		</form>
 	</section>
 	
