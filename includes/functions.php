@@ -169,19 +169,22 @@
 		
 		// Si existe el usuario, sacamos todos los albumes
 		if ($resultado->num_rows > 0) {
+			$tab=9;
 			while($fila = $resultado->fetch_object()){
 				$consulta = 'select Fichero from fotos f inner join albumes a on a.IdAlbum = f.Album where a.IdAlbum = '.$fila->IdAlbum;
 				$resultado2 = ejecutaConsulta($conexion, $consulta);
 				
 				echo '<li class="lista_de_albumes">';
-				echo '<a href="ver_album.php?id='.$fila->IdAlbum.'">';
-				if ($resultado2->num_rows > 0){ 
+				echo '<a href="ver_album.php?id='.$fila->IdAlbum.'" tabindex="'.$tab.'">';
+				$tab++;
+				if ($resultado2->num_rows > 0){
 					$fila2 = $resultado2->fetch_object();
 					echo '<img src="'.$fila2->Fichero.'" alt="'.$fila->Titulo.'" width="200" height="150"/>';
 				} else {
 					echo 'Sin foto';
 				}
-				echo '</a><p> Título: '.$fila->Titulo.' </br> Descripión: '.$fila->Descripcion.' </br> <a href="ver_album.php?id='.$fila->IdAlbum.'" >Ver álbum</a></p></li>';
+				echo '</a><p> Título: '.$fila->Titulo.' </br> Descripión: '.$fila->Descripcion.' </br> <a href="ver_album.php?id='.$fila->IdAlbum.'" tabindex="'.$tab.'">Ver álbum</a></p></li>';
+				$tab++;
 			}
 			$resultado2->close();
 			$existe = true;

@@ -19,20 +19,20 @@ require_once("includes/cabecera.php");
 			<form id="form_crear_album" action="respuesta_crear_album.php" method="post">
 				
 				<p><label for= "titulo_album_creado">Título: <span class="asterisco_rojo">*</span></label>
-				<input type= "text" name="titulo_album_creado" id="titulo_album_creado" required="" maxlength="100" tabindex="4"/></p>  
+				<input type= "text" name="titulo_album_creado" id="titulo_album_creado" required="" maxlength="100" tabindex="9"/></p>  
 			
 				<p class="descripcion_album">Descripción: <span class="asterisco_rojo">*</span></p>
-				<textarea name="descripcion_album" id="descripcion_album" required="" rows="4" cols="50" maxlength="4000" tabindex="5"></textarea>
+				<textarea name="descripcion_album" id="descripcion_album" required="" rows="4" cols="50" maxlength="4000" tabindex="10"></textarea>
 				
 				<p><label for= "fecha_album">Fecha: <span class="asterisco_rojo">*</span></label>
-				<input type="date" name="fecha_album" id="fecha_album" required="" tabindex="6"/></p>
+				<input type="date" name="fecha_album" id="fecha_album" required="" tabindex="11"/></p>
 				
 				<p class="quitar_abajo">País: <span class="asterisco_rojo">*</span></p>
-				<p class="quitar_arriba"><select id="pais" name="pais" required=""  tabindex="7">
+				<p class="quitar_arriba"><select id="pais" name="pais" required=""  tabindex="12">
 					<option value="">Elegir país...</option>
 					<?php CargarListaPaises(); ?>
 				</select></p>
-			<input type="submit" name="crear_album" value="Crear álbum" tabindex="8"/>
+			<input type="submit" name="crear_album" value="Crear álbum" tabindex="13"/>
 			</form>
 		</section>
 	
