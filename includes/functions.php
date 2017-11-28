@@ -109,7 +109,7 @@
 		$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") As Fecha, NomPais from fotos inner join paises on Pais = IdPais order by FRegistro desc limit 0, 5';
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
-		$tab = 6;
+		$tab = 10;
 		if ($resultado->num_rows > 0) {
 			while($fila = $resultado->fetch_object()) {
 				

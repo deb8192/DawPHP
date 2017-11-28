@@ -13,7 +13,7 @@ include_once("includes/cabecera.php");
 	<?php include_once("includes/header.php"); ?>
 	
 	<aside id="buscar">
-		<a class="lupa" href="buscar.php" title="Buscar" tabindex="5"></a>
+		<a class="lupa" href="buscar.php" title="Buscar" tabindex="9"></a>
 	</aside>
 	
 	<section id="principal">
