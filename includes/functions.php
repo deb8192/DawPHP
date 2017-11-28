@@ -88,6 +88,21 @@
 		return "";
 	}
 	
+	function CargarTituloAlbum($id) {
+		
+		$conexion = conecta();
+		$consulta = 'select Titulo from albumes where IdAlbum = '.$id;
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		if ($resultado->num_rows > 0) {
+			$fila = $resultado->fetch_object();
+			return $fila->Titulo;
+		}
+		$resultado->close();
+		$conexion->close();
+		return "";
+	}
+	
 	function CargarListaAlbumesPorUsuario($idUsuario) {
 		
 		$conexion = conecta();
@@ -200,22 +215,18 @@
 		if (!is_numeric($id_Album))
 			return false;
 		
-		$conexion = conecta();
-		$consulta = 'select Titulo from albumes where IdAlbum = '.$id_Album;
-		$resultado = ejecutaConsulta($conexion, $consulta);
-		
 		$existe = false;
-		if ($resultado->num_rows > 0) {
+		$tit_Album = CargarTituloAlbum($id_Album);
+		
+		if ($tit_Album != "") {
 			$existe = true;
-			$tit_Album = $resultado->fetch_object();
-			echo '<h2>'.$tit_Album->Titulo.'</h2>';
+			echo '<h2>'.$tit_Album.'</h2>';
 		} else {
-			// Si no existe el album, salimos de la funcion cerrando la conexion
-			$resultado->close();
-			$conexion->close();
+			// Si no existe el album, salimos de la funcion
 			return $existe;
 		}
 		
+		$conexion = conecta();
 		$consulta = 'select a.Titulo as ATitulo, IdFoto, Fichero, f.Titulo as FTitulo from fotos f inner join albumes a on IdAlbum = Album where Album = '.$id_Album;
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		$tab = 9;

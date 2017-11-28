@@ -69,48 +69,48 @@ require_once("includes/cabecera.php");
 				<legend>Datos personales</legend>
 				
 				<p><label for= "nombre">Nombre: <span class="asterisco_rojo">*</span></label>
-				<input type= "text" name="nombre" id="nombre" required="" maxlength="100" tabindex="4"/></p>  <!--obligatorio, máximo 200 caracteres entre nombre y apellidos-->
+				<input type= "text" name="nombre" id="nombre" required="" maxlength="100" tabindex="9"/></p>  <!--obligatorio, máximo 200 caracteres entre nombre y apellidos-->
 			
 				<p><label for= "apellidos">Apellidos: <span class="asterisco_rojo">*</span></label>
-				<input type= "text" name="apellidos" id="apellidos" required="" maxlength="100" tabindex="5"/></p>
+				<input type= "text" name="apellidos" id="apellidos" required="" maxlength="100" tabindex="10"/></p>
 				
 				<p><label for= "email">Email: <span class="asterisco_rojo">*</span></label>
-				<input type="email" name="email" id="email" required="" tabindex="6"/></p>
+				<input type="email" name="email" id="email" required="" tabindex="11"/></p>
 				
 				<p><label for= "titulo_album">Título del álbum: <span class="asterisco_rojo">*</span></label>
-				<input type= "text" name="titulo_album" id="titulo_album" required="" maxlength="200" tabindex="7"/></p>  <!--obligatorio, máximo 200 caracteres -->
+				<input type= "text" name="titulo_album" id="titulo_album" required="" maxlength="200" tabindex="12"/></p>  <!--obligatorio, máximo 200 caracteres -->
 			
 				<p class="quitar_margenes">Texto adicional:</p>  <!--opcional, máximo 4000 caracteres -->
-				<textarea name="area_texto" rows="4" cols="50" maxlength="4000" placeholder="Dedicatoria, descripción..." tabindex="8"></textarea>
+				<textarea name="area_texto" rows="4" cols="50" maxlength="4000" placeholder="Dedicatoria, descripción..." tabindex="13"></textarea>
 			</fieldset>
 			<fieldset class="direction">
 				<legend> Dirección </legend>
 				<p><label for= "calle">Calle: <span class="asterisco_rojo">*</span></label>
-				<input type= "text" name="calle" id="calle" required="" tabindex="9"/></p>
+				<input type= "text" name="calle" id="calle" required="" tabindex="14"/></p>
 				
 				<p><label for= "numero_portal">Número: <span class="asterisco_rojo">*</span></label>
-				<input type= "text" name="numero_portal" id="numero_portal" required="" tabindex="10"/></p>
+				<input type= "text" name="numero_portal" id="numero_portal" required="" tabindex="15"/></p>
 				
 				<p><label for= "escalera">Escalera:</label>
-				<input type= "text" name="escalera" id="escalera" tabindex="11"/></p>
+				<input type= "text" name="escalera" id="escalera" tabindex="16"/></p>
 				
 				<p><label for= "piso">Piso:</label>
-				<input type= "text" name="piso" id="piso" tabindex="12"/></p>
+				<input type= "text" name="piso" id="piso" tabindex="17"/></p>
 				
 				<p><label for= "puerta">Puerta:</label>
-				<input type= "text" name="puerta" id="puerta" tabindex="13"/></p>
+				<input type= "text" name="puerta" id="puerta" tabindex="18"/></p>
 				
 				<p><label for= "CP">Código postal: <span class="asterisco_rojo">*</span></label>
-				<input type= "text" name="CP" id="CP" required="" tabindex="14"/></p>
+				<input type= "text" name="CP" id="CP" required="" tabindex="19"/></p>
 				
 				<p><label for= "localidad">Localidad: <span class="asterisco_rojo">*</span></label>
-				<input type= "text" name="localidad" id="localidad" required="" tabindex="15"/></p>
+				<input type= "text" name="localidad" id="localidad" required="" tabindex="20"/></p>
 				
 				<p><label for="Provincia">Provincia: <span class="asterisco_rojo">*</span></label>
-				<input type="text" name="provincia" id="provincia" required="" tabindex="16"/></p>
+				<input type="text" name="provincia" id="provincia" required="" tabindex="21"/></p>
 				
 				<p class="quitar_abajo">País: <span class="asterisco_rojo">*</span></p>
-				<p class="quitar_arriba"><select name="pais" required="" tabindex="17">
+				<p class="quitar_arriba"><select name="pais" required="" tabindex="22">
 					<?php CargarListaPaises(); ?>
 				</select></p>
 			</fieldset>
@@ -119,32 +119,32 @@ require_once("includes/cabecera.php");
 				<legend> Configuración </legend>
 				
 				<p><label for="color_album">Color de la portada:</label>
-				<input type="color" name="color_album" id="color_album" value="#000000" tabindex="18"/></p>
+				<input type="color" name="color_album" id="color_album" value="#000000" tabindex="23"/></p>
 				
 				<p><label for= "numero_copias">Número de copias:</label>
-				<input type="number" name="numero_copias" id="numero_copias"  min="1" value="1" tabindex="19"/></p>
+				<input type="number" name="numero_copias" id="numero_copias"  min="1" value="1" tabindex="24"/></p>
 				
 				<p>Resolución de las fotos:</p>
-				<p class="resolucion">150dpi <input type="range" name="resolucion" min="150" max="900" step="150" value="150" tabindex="20"/> 900dpi</p>
+				<p class="resolucion">150dpi <input type="range" name="resolucion" min="150" max="900" step="150" value="150" tabindex="25"/> 900dpi</p>
 				
 				<p class="quitar_abajo">Álbum: <span class="asterisco_rojo">*</span></p>
-				<p class="quitar_arriba"><select name="album" required="" tabindex="21">
+				<p class="quitar_arriba"><select name="album" required="" tabindex="26">
 					<?php CargarListaAlbumesPorUsuario($_SESSION['usuario']['id']); ?>
 				</select></p> 
 				
 				<p><label for="fecha_recepcion">Fecha de recepción:</label>
-				<input type="date"  name="fecha_recepcion" id="fecha_recepcion" tabindex="22"/> </p>
+				<input type="date"  name="fecha_recepcion" id="fecha_recepcion" tabindex="27"/> </p>
 				
 				<p class="quitar_abajo">Color de las fotos:</p>
 				<p class="quitar_arriba">
 					<label for="blanco_negro">Blanco y negro</label>
-					<input type="radio" name="color_fotos" value="blanco_negro" id="blanco_negro" tabindex="23" checked>
+					<input type="radio" name="color_fotos" value="blanco_negro" id="blanco_negro" tabindex="28" checked>
 					<label for="foto_color">Color</label>
-					<input type="radio" name="color_fotos" value="color" id="foto_color" tabindex="24">
+					<input type="radio" name="color_fotos" value="color" id="foto_color" tabindex="29">
 				</p>
 			</fieldset>
 			
-			<input type="submit" name="solicitar_album" value="Solicitar álbum" tabindex="25"/>
+			<input type="submit" name="solicitar_album" value="Solicitar álbum" tabindex="30"/>
 		</form>
 	</section>
 	

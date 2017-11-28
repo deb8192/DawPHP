@@ -81,8 +81,7 @@ require_once("includes/cabecera.php");
 				echo "<p>Provincia: $provincia</p>";
 			}
 			if(!empty($_POST['pais'])){
-				$pais = $_POST['pais'];
-				echo "<p>Pais: $pais</p>";
+				echo '<p>Pais: '.CargarPais($_POST['pais']).'</p>';
 			}
 		?>
 				
@@ -102,8 +101,7 @@ require_once("includes/cabecera.php");
 				echo "<p>Resolucion de las fotos: $resolucion dpi</p>";
 			}
 			if(!empty($_POST['album'])){
-				$album = $_POST['album'];
-				echo "<p>Album: $album</p>";
+				echo '<p>Album: '.CargarTituloAlbum($_POST['album']).'</p>';
 			}
 			if(!empty($_POST['fecha_recepcion'])){
 				$fecha_recepcion = $_POST['fecha_recepcion'];
@@ -114,7 +112,7 @@ require_once("includes/cabecera.php");
 				if($color_fotos=="blanco_negro")
 					echo "<p>Color de las fotos: blanco y negro</p>";
 				else
-					echo "<p>Color de las fotos: color</p>";
+					echo "<p>Color de las fotos: a color</p>";
 			}
 			#calcular precio
 			$precio=0.10;		#una página por defecto
