@@ -9,6 +9,28 @@
 		
 		$conexion->close();
 	}
+	function CargarYMostrarUsuarioRegistrado($NombreUsuario){
+		
+		$conexion = conecta();
+		$consulta = "select NomUsuario, Email, Sexo, FNacimiento, Ciudad, NomPais from usuarios inner join paises on Pais = IdPais where NomUsuario = '$NombreUsuario'";
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		if ($resultado->num_rows > 0) {
+			$fila = $resultado->fetch_object();
+			echo '<img src="img/perfiles'.$fila->Foto.'" alt="Foto perfil" width="200" height="150"/>';
+		
+			echo '<p>Nombre: '.$fila->NomUsuario.'</p>';
+			echo '<p>Email: '.$fila->Email.'</p>';
+			echo '<p>Sexo: '.$fila->Sexo.'</p>';
+			echo '<p>Fecha: ';
+			if (!empty($fila->FNacimiento))
+				 echo $fila->FNacimiento.' </p>';
+			echo '<p>Ciudad: '.$fila->Ciudad.'</p>';
+			echo '<p>País:'.$fila->NomPais.'</p>';
+		}
+		$resultado->close();
+		$conexion->close();
+	}
 	
 	function CargarListaPaises() {
 		

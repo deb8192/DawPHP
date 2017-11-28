@@ -14,7 +14,7 @@ require_once("includes/cabecera.php");
 	
 	<section id="datos_usuario">
 		<h2>Datos personales</h2>
-		<img src="<?php echo $_SESSION['usuario']['foto']; ?>" alt="Foto perfil" width="200" height="150"/>
+		<img src="img/perfiles/<?php echo $_SESSION['usuario']['foto']; ?>" alt="Foto perfil" width="200" height="150"/>
 		<p>Nombre: <?php echo $_SESSION['usuario']['nombre']; ?></p>
 		<p>Email: <?php echo $_SESSION['usuario']['correo']; ?></p>
 		<p>Sexo: <?php echo $_SESSION['usuario']['sexo'] ; ?></p>
