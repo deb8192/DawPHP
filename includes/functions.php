@@ -218,7 +218,7 @@
 		
 		$consulta = 'select a.Titulo as ATitulo, IdFoto, Fichero, f.Titulo as FTitulo from fotos f inner join albumes a on IdAlbum = Album where Album = '.$id_Album;
 		$resultado = ejecutaConsulta($conexion, $consulta);
-		$tab = 4;
+		$tab = 9;
 		if ($resultado->num_rows > 0) {
 			
 			echo '<ul class="lista_fotos">';
