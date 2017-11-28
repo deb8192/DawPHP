@@ -18,24 +18,24 @@ include_once("includes/cabecera.php");
 		<form action="mis_albumes.php" method="post" >
 				
 				<p><label for= "Titulo">Titulo: <span class="asterisco_rojo">*</span></label>
-				<input type= "text" name="Titulo" id="Titulo" required="" tabindex="4"/></p>  <!--obligatorio, máximo 200 caracteres entre nombre y apellidos-->
+				<input type= "text" name="Titulo" id="Titulo" required="" tabindex="9"/></p>  <!--obligatorio, máximo 200 caracteres entre nombre y apellidos-->
 			
 				<p><label for= "fecha">Fecha: <span class="asterisco_rojo">*</span></label>
-				<input type= "date" name="fecha" id="fecha" required="" tabindex="5"/></p>
+				<input type= "date" name="fecha" id="fecha" required="" tabindex="10"/></p>
 				
 				<p><label for= "pais">Pais: <span class="asterisco_rojo">*</span></label>
-				<select name="paises" tabindex="15" id="pais">
+				<select name="paises" tabindex="11" id="pais">
 				<?php CargarListaPaises(); ?>
 				</select>
 				
 				<p><label for= "urlFoto">Foto: <span class="asterisco_rojo">*</span></label>
-				<input type="file" name="archivo" id="archivo" required="" tabindex="7"/></p>
+				<input type="file" name="archivo" id="archivo" required="" tabindex="12"/></p>
 			
-				<p class="quitar_arriba"><select name="album" required="" tabindex="21" id="salbum">
+				<p class="quitar_arriba"><select name="album" required="" tabindex="13" id="salbum">
 					<?php CargarListaAlbumesPorUsuario($_SESSION['usuario']['id']); ?>
 				</select></p> 
 			
-			<input type="submit" name="anyadirFoto" value="Subir foto" tabindex="25"/>
+			<input type="submit" name="anyadirFoto" value="Subir foto" tabindex="14"/>
 		</form>
 	</section>
 	
