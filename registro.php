@@ -41,6 +41,7 @@ if (isset($_POST['registro'])){
 				$_SESSION['reg']['foto'] = 'perfiles/foto.jpg';
 			else
 				$_SESSION['reg']['foto'] = $_POST['fotoPerfil'];
+			copy($_FILES['foto']['tmp_name'], "img/perfiles/".$_SESSION['reg']['foto']);
 			
 			header("Location:respuesta_registro.php");
 		}

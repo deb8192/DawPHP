@@ -1,27 +1,38 @@
 <?php
 	require_once('admin/db.inc');
 	
-	//No funciona del todo bien aun
+	//Registro funciona, solo falta subir las fotos a la carpeta y cambiar el formato de fecha
 	function CrearUsuarioEnBD($nombre, $password, $correo, $sexo, $fecha_nac, $ciudad, $paises, $foto, $fRegistro){
+		$sexo_usuario;
+		if($sexo = 'Hombre')
+			$sexo_usuario=1;
+		else
+			$sexo_usuario=2;
+		
 		$conexion = conecta();
-		$consulta = "INSERT INTO usuarios (NomUsuario, Clave, Email, Sexo, FNacimiento, Ciudad, Pais, Foto, FRegistro) VALUES ('$nombre',sha1('$password'),'$correo','$sexo','$fecha_nac','$ciudad','$paises','$foto','$fRegistro')";
+		$consulta = "INSERT INTO usuarios (NomUsuario, Clave, Email, Sexo, FNacimiento, Ciudad, Pais, Foto, FRegistro) VALUES ('$nombre',sha1('$password'),'$correo','$sexo_usuario','$fecha_nac','$ciudad','$paises','img/perfiles/$foto','$fRegistro')";
+		
 		ejecutaConsulta($conexion, $consulta);
+		
 		
 		$conexion->close();
 	}
 	function CargarYMostrarUsuarioRegistrado($NombreUsuario){
 		
 		$conexion = conecta();
-		$consulta = "select NomUsuario, Email, Sexo, FNacimiento, Ciudad, NomPais from usuarios inner join paises on Pais = IdPais where NomUsuario = '$NombreUsuario'";
+		$consulta = "select NomUsuario, Email, Sexo, FNacimiento, Ciudad, NomPais, Foto from usuarios inner join paises on Pais = IdPais where NomUsuario = '$NombreUsuario'";
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
 		if ($resultado->num_rows > 0) {
 			$fila = $resultado->fetch_object();
-			echo '<img src="img/perfiles'.$fila->Foto.'" alt="Foto perfil" width="200" height="150"/>';
+			echo '<img src="'.$fila->Foto.'" alt="Foto perfil" width="200" height="150"/>';
 		
 			echo '<p>Nombre: '.$fila->NomUsuario.'</p>';
 			echo '<p>Email: '.$fila->Email.'</p>';
-			echo '<p>Sexo: '.$fila->Sexo.'</p>';
+			if($fila->Sexo==1)
+				echo '<p>Sexo: Hombre</p>';
+			else
+				echo '<p>Sexo: Mujer</p>';
 			echo '<p>Fecha: ';
 			if (!empty($fila->FNacimiento))
 				 echo $fila->FNacimiento.' </p>';

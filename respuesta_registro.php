@@ -18,17 +18,6 @@ require_once("includes/cabecera.php");
 		<?php
 		CargarYMostrarUsuarioRegistrado($_SESSION['reg']['nombre']);
 		?>
-		<!--<img src="img/<?php echo $_SESSION['reg']['foto']; ?>" alt="Foto perfil" width="200" height="150"/>
-		
-		<p>Nombre: <?php echo $_SESSION['reg']['nombre']; ?></p>
-		<p>Email: <?php echo $_SESSION['reg']['correo']; ?></p>
-		<p>Sexo: <?php echo $_SESSION['reg']['sexo']; ?></p>
-		<p>Fecha: <?php
-			if (!empty($_SESSION['reg']['fecha_nac']))
-				 echo $_SESSION['reg']['fecha_nac']; 
-		?></p>
-		<p>Ciudad: <?php echo $_SESSION['reg']['ciudad']; ?></p>
-		<p>País: <?php echo CargarPais($_SESSION['reg']['pais']); ?></p>-->
 	</section>
 	
 	<!-- FOOTER con </body> y </html> -->
