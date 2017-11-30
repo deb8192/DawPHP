@@ -19,29 +19,31 @@ if (isset($_POST['registro'])){
 			$_SESSION['error']['activado'] = true;
 			$_SESSION['error']['descripcion'] = "Usuario no disponible.";
 		} else {
-			$fecha = date('d/m/Y H:i:s');
-			if (empty($_POST['fotoPerfil'])){
-				CrearUsuarioEnBD($_POST['nombre'],$_POST['password2'],$_POST['correo'],$_POST['sexo'],
-				$_POST['fecha_nac'],$_POST['ciudad'],$_POST['paises'],'perfiles/foto.jpg',$fecha);
-			}
-			else{
-				CrearUsuarioEnBD($_POST['nombre'],$_POST['password2'],$_POST['correo'],$_POST['sexo'],
-				$_POST['fecha_nac'],$_POST['ciudad'],$_POST['paises'],$_POST['fotoPerfil'],$fecha);
-			}
-			
-			$_SESSION['reg']['nombre'] = $_POST['nombre'];
-			$_SESSION['reg']['correo'] = $_POST['correo'];
-			$_SESSION['reg']['sexo'] = $_POST['sexo'];
-			$_SESSION['reg']['fecha'] = $_POST['fecha_nac'];
-			$_SESSION['reg']['ciudad'] = $_POST['ciudad'];
-			$_SESSION['reg']['pais'] = $_POST['paises'];
 			
 			// Foto por defecto
-			if (empty($_POST['fotoPerfil']))
-				$_SESSION['reg']['foto'] = 'perfiles/foto.jpg';
+			$foto_de_perfil = "";
+			$destino = "img/perfiles/";
+			$carpetaDeDestino = "";
+			$origen = "";
+			if($_FILES['fotoPerfil']['error']!=0)
+				$foto_de_perfil='img/perfiles/foto.jpg';
 			else
-				$_SESSION['reg']['foto'] = $_POST['fotoPerfil'];
-			copy($_FILES['foto']['tmp_name'], "img/perfiles/".$_SESSION['reg']['foto']);
+			{
+				$origen = $_FILES['fotoPerfil']['tmp_name'];
+				if($_FILES['fotoPerfil']['type']=="image/jpeg" || $_FILES['fotoPerfil']['type']=="image/pjpeg" || $_FILES['fotoPerfil']['type']=='image/gif' || $_FILES['fotoPerfil']['type']=="image/png")
+				{
+					$carpetaDeDestino = $destino . $_FILES['fotoPerfil']['name'];
+					move_uploaded_file($origen, $carpetaDeDestino);
+					$foto_de_perfil=$carpetaDeDestino;
+				}
+				else
+					$foto_de_perfil=$destino.'jackie.jpg';
+			}
+
+			CrearUsuarioEnBD($_POST['nombre'],$_POST['password2'],$_POST['correo'],$_POST['sexo'],
+			$_POST['fecha_nac'],$_POST['ciudad'],$_POST['paises'],$foto_de_perfil);
+			
+			$_SESSION['reg']['nombre'] = $_POST['nombre'];
 			
 			header("Location:respuesta_registro.php");
 		}

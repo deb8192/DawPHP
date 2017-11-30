@@ -2,15 +2,15 @@
 	require_once('admin/db.inc');
 	
 	//Registro funciona, solo falta subir las fotos a la carpeta y cambiar el formato de fecha
-	function CrearUsuarioEnBD($nombre, $password, $correo, $sexo, $fecha_nac, $ciudad, $paises, $foto, $fRegistro){
+	function CrearUsuarioEnBD($nombre, $password, $correo, $sexo, $fecha_nac, $ciudad, $paises, $foto){
 		$sexo_usuario;
-		if($sexo = 'Hombre')
+		if($sexo == 'Hombre')
 			$sexo_usuario=1;
 		else
 			$sexo_usuario=2;
 		
 		$conexion = conecta();
-		$consulta = "INSERT INTO usuarios (NomUsuario, Clave, Email, Sexo, FNacimiento, Ciudad, Pais, Foto, FRegistro) VALUES ('$nombre',sha1('$password'),'$correo','$sexo_usuario','$fecha_nac','$ciudad','$paises','img/perfiles/$foto','$fRegistro')";
+		$consulta = "INSERT INTO usuarios (NomUsuario, Clave, Email, Sexo, FNacimiento, Ciudad, Pais, Foto) VALUES ('$nombre',sha1('$password'),'$correo','$sexo_usuario','$fecha_nac','$ciudad','$paises','$foto')";
 		
 		ejecutaConsulta($conexion, $consulta);
 		
