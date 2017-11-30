@@ -1,46 +1,42 @@
 <?php
 	require_once('admin/db.inc');
 	
-	//Registro funciona, solo falta subir las fotos a la carpeta y cambiar el formato de fecha
 	function CrearUsuarioEnBD($nombre, $password, $correo, $sexo, $fecha_nac, $ciudad, $paises, $foto){
-		$sexo_usuario;
-		if($sexo == 'Hombre')
+		
+		$sexo_usuario=2; // Iniciamos como mujer
+		if ($sexo == 'Hombre')
 			$sexo_usuario=1;
-		else
-			$sexo_usuario=2;
 		
 		$conexion = conecta();
 		$consulta = "INSERT INTO usuarios (NomUsuario, Clave, Email, Sexo, FNacimiento, Ciudad, Pais, Foto) VALUES ('$nombre',sha1('$password'),'$correo','$sexo_usuario','$fecha_nac','$ciudad','$paises','$foto')";
-		
 		ejecutaConsulta($conexion, $consulta);
 		
-		
-		$conexion->close();
-	}
-	function CargarYMostrarUsuarioRegistrado($NombreUsuario){
-		
-		$conexion = conecta();
-		$consulta = "select NomUsuario, Email, Sexo, FNacimiento, Ciudad, NomPais, Foto from usuarios inner join paises on Pais = IdPais where NomUsuario = '$NombreUsuario'";
+		$consulta = "select IdUsuario, DATE_FORMAT(FNacimiento, '%d/%m/%Y') As FNacimiento from usuarios where NomUsuario='".$nombre."'";
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
 		if ($resultado->num_rows > 0) {
 			$fila = $resultado->fetch_object();
-			echo '<img src="'.$fila->Foto.'" alt="Foto perfil" width="200" height="150"/>';
-		
-			echo '<p>Nombre: '.$fila->NomUsuario.'</p>';
-			echo '<p>Email: '.$fila->Email.'</p>';
-			if($fila->Sexo==1)
-				echo '<p>Sexo: Hombre</p>';
-			else
-				echo '<p>Sexo: Mujer</p>';
-			echo '<p>Fecha: ';
-			if (!empty($fila->FNacimiento))
-				 echo $fila->FNacimiento.' </p>';
-			echo '<p>Ciudad: '.$fila->Ciudad.'</p>';
-			echo '<p>País:'.$fila->NomPais.'</p>';
+			$_SESSION['usuario']['id'] = $fila->IdUsuario;
+			$_SESSION['usuario']['nombre'] = $nombre;
+			$_SESSION['usuario']['foto'] = $foto;
+			$_SESSION['usuario']['correo'] = $correo;
+			$_SESSION['usuario']['sexo'] = $sexo;
+			$_SESSION['usuario']['fecha'] = $fila->FNacimiento;
+			$_SESSION['usuario']['ciudad'] = $ciudad;
+			$_SESSION['usuario']['pais'] = CargarPais($_POST['paises']);
+		} else {
+			$id = -1;
 		}
 		$resultado->close();
 		$conexion->close();
+		
+		if ($id >= 0) {
+			header("Location: menu_usuario.php");
+		} else {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "No se ha podido insertar el usuario.";
+			header("Location:../".$_SESSION['error']['url']);
+		}
 	}
 	
 	function CargarListaPaises() {

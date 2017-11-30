@@ -22,7 +22,12 @@ include_once("includes/cabecera.php");
 			if (isset($_POST['aceptar'])) {
 				$resultado = darseDeBaja($_SESSION['usuario']['id']);
 				
-				if ($resultado === TRUE) {// Borramos la sesión
+				if ($resultado === TRUE) {
+					// Borramos la img de perfil
+					if ($_SESSION['usuario']['foto'] !== 'img/perfiles/foto.jpg')
+						unlink($_SESSION['usuario']['foto']);
+					
+					// Borramos la sesión
 					$_SESSION = array();
 					session_destroy();
 					header("Location: darse_baja.php");

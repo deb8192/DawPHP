@@ -19,33 +19,29 @@ if (isset($_POST['registro'])){
 			$_SESSION['error']['activado'] = true;
 			$_SESSION['error']['descripcion'] = "Usuario no disponible.";
 		} else {
-			
 			// Foto por defecto
-			$foto_de_perfil = "";
 			$destino = "img/perfiles/";
-			$carpetaDeDestino = "";
-			$origen = "";
-			if($_FILES['fotoPerfil']['error']!=0)
-				$foto_de_perfil='img/perfiles/foto.jpg';
-			else
-			{
-				$origen = $_FILES['fotoPerfil']['tmp_name'];
-				if($_FILES['fotoPerfil']['type']=="image/jpeg" || $_FILES['fotoPerfil']['type']=="image/pjpeg" || $_FILES['fotoPerfil']['type']=='image/gif' || $_FILES['fotoPerfil']['type']=="image/png")
-				{
+			$foto_de_perfil = $destino.'foto.jpg';
+			
+			if ($_FILES['fotoPerfil']['error'] == 0) {
+				
+				$tipo = $_FILES['fotoPerfil']['type'];
+				if ($tipo=="image/jpeg" || $tipo=="image/pjpeg" ||
+					$tipo=='image/gif' || $tipo=="image/png") {
+					
+					// Sacamos el destino con el nombre de la foto
+					$origen = $_FILES['fotoPerfil']['tmp_name'];
 					$carpetaDeDestino = $destino . $_FILES['fotoPerfil']['name'];
-					move_uploaded_file($origen, $carpetaDeDestino);
 					$foto_de_perfil=$carpetaDeDestino;
+					
+					// Movemos el fichero de la carpeta temporal a la de perfiles
+					move_uploaded_file($origen, $carpetaDeDestino);
 				}
-				else
-					$foto_de_perfil=$destino.'jackie.jpg';
 			}
-
+			
+			// Creamos el usuario e iniciamos sesión si todo ha ido bien
 			CrearUsuarioEnBD($_POST['nombre'],$_POST['password2'],$_POST['correo'],$_POST['sexo'],
-			$_POST['fecha_nac'],$_POST['ciudad'],$_POST['paises'],$foto_de_perfil);
-			
-			$_SESSION['reg']['nombre'] = $_POST['nombre'];
-			
-			header("Location:respuesta_registro.php");
+				$_POST['fecha_nac'],$_POST['ciudad'],$_POST['paises'],$foto_de_perfil);
 		}
 	}
 }
@@ -58,7 +54,7 @@ if (isset($_POST['registro'])){
 	<section id="registro">
 		<h2>Registro</h2>
 		<p class="letra_roja">(*) Campos obligatorios</p>
-		<form id="form_registro" action="registro.php" method="post">
+		<form id="form_registro" enctype="multipart/form-data" action="registro.php" method="post">
 		
 			<p><label for="nombre">Nombre: <span class="asterisco_rojo">*</span></label>
 			<input type="text" name="nombre" id="nombre" required="" tabindex="9"/></p>
