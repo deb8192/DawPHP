@@ -204,6 +204,14 @@
 		return $existe;
 	}
 	
+	function CrearAlbum($titulo_album_creado, $descripcion_album, $date, $pais, $usuario){
+		$conexion = conecta();
+		$consulta = "INSERT INTO albumes (Titulo, Descripcion, Fecha, Pais, Usuario) VALUES ('$titulo_album_creado', '$descripcion_album', '$date', '$pais', '$usuario')";
+		ejecutaConsulta($conexion, $consulta);
+		
+		$conexion->close();
+	}
+	
 	function CargarAlbumes($idUsuario) {
 		
 		$conexion = conecta();
