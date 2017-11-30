@@ -210,14 +210,10 @@
 	
 	function CrearAlbum($titulo_album_creado, $descripcion_album, $date, $pais, $usuario){
 		$conexion = conecta();
-		$consulta = "INSERT INTO albumes (Titulo, Descripcion, Fecha, Pais, Usuario) VALUES ('$titulo_album_creado',$descripcion_album,'$date','$pais', '$usuario')";
+		$consulta = "INSERT INTO albumes (Titulo, Descripcion, Fecha, Pais, Usuario) VALUES ('$titulo_album_creado', '$descripcion_album', '$date', '$pais', '$usuario')";
 		ejecutaConsulta($conexion, $consulta);
 		
-		$idAlbum = mysql_insert_id();
-		
-		$resultado->close();
 		$conexion->close();
-		return $idAlbum;
 	}
 	
 	function CargarAlbumes($idUsuario) {
