@@ -16,6 +16,7 @@
 		
 		if ($resultado->num_rows > 0) {
 			$fila = $resultado->fetch_object();
+			$id = $fila->IdUsuario;
 			$_SESSION['usuario']['id'] = $fila->IdUsuario;
 			$_SESSION['usuario']['nombre'] = $nombre;
 			$_SESSION['usuario']['foto'] = $foto;
