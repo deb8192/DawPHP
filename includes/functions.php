@@ -359,4 +359,12 @@
 	function ContenidoNoDisponible() {
 		echo '<h2>CONTENIDO NO DISPONIBLE</h2><p>Debes iniciar sesión para poder ver este contenido.</p>';
 	}
+	
+	function darseDeBaja($id) {
+		$conexion = conecta();
+		$consulta = "delete from usuarios where IdUsuario=".$id;
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		$conexion->close();
+		return $resultado;
+	}
 ?>
