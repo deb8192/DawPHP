@@ -23,7 +23,19 @@ if (isset($_POST['anyadirFoto'])){
 			// Movemos el fichero de la carpeta temporal a la de perfiles
 			move_uploaded_file($origen, $carpetaDeDestino);
 			SubirFoto($_POST['Titulo'], $_POST['descripcion_foto'], $_POST['fecha'], $_POST['paises'], $_POST['album'], $foto_a_subir);
-			header("Location: mis_albumes.php");
+			
+			$_SESSION['foto']['titulo'] = $_POST['Titulo'];
+			$_SESSION['foto']['descripcion_foto'] = $_POST['descripcion_foto'];
+			$_SESSION['foto']['foto'] = $foto_a_subir;
+			
+			$date = new DateTime($_POST['fecha']);
+			$fecha = $date->format('d/m/Y');
+			$_SESSION['foto']['fecha'] = $fecha;
+			
+			$_SESSION['foto']['pais'] = $_POST['paises'];
+			$_SESSION['foto']['album'] = $_POST['album'];
+			
+			header("Location: respuesta_anyadir_foto.php");
 		}
 	} else {
 		$_SESSION['error']['activado'] = true;

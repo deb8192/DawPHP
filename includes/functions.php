@@ -7,11 +7,14 @@
 		if ($sexo == 'Hombre')
 			$sexo_usuario=1;
 		
+		$date = new DateTime($fecha_nac);
+		$fecha = $date->format('d/m/Y');
+		
 		$conexion = conecta();
 		$consulta = "INSERT INTO usuarios (NomUsuario, Clave, Email, Sexo, FNacimiento, Ciudad, Pais, Foto) VALUES ('$nombre',sha1('$password'),'$correo','$sexo_usuario','$fecha_nac','$ciudad','$paises','$foto')";
 		ejecutaConsulta($conexion, $consulta);
 		
-		$consulta = "select IdUsuario, DATE_FORMAT(FNacimiento, '%d/%m/%Y') As FNacimiento from usuarios where NomUsuario='".$nombre."'";
+		$consulta = "select IdUsuario from usuarios where NomUsuario='".$nombre."'";
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
 		if ($resultado->num_rows > 0) {
@@ -22,7 +25,7 @@
 			$_SESSION['usuario']['foto'] = $foto;
 			$_SESSION['usuario']['correo'] = $correo;
 			$_SESSION['usuario']['sexo'] = $sexo;
-			$_SESSION['usuario']['fecha'] = $fila->FNacimiento;
+			$_SESSION['usuario']['fecha'] = $fecha;
 			$_SESSION['usuario']['ciudad'] = $ciudad;
 			$_SESSION['usuario']['pais'] = CargarPais($_POST['paises']);
 		} else {
@@ -247,6 +250,8 @@
 			}
 			$resultado2->close();
 			$existe = true;
+		} else {
+			noHayContenido();
 		}
 		$resultado->close();
 		$conexion->close();
@@ -375,6 +380,10 @@
 	
 	function albumSinContenido() {
 		echo '<p>Este álbum no tiene contenido.</p>';
+	}
+	
+	function noHayContenido() {
+		echo '<p>Todavía no tienes álbumes creados.</p>';
 	}
 	
 	function darseDeBaja($id) {
