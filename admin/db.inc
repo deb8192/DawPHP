@@ -4,7 +4,7 @@
 	{
 		if ($conexion->connect_errno != 0)
 		{
-			echo $mensaje.' : '.$conexion->connect_error();
+			echo $mensaje.' : '.$conexion->connect_error;
 			exit();
 		}
 	}
@@ -12,7 +12,7 @@
 	{
 		if ($conexion->errno != 0)
 		{
-			echo $mensaje.' : '.$conexion->error();
+			echo $mensaje.' : '.$conexion->error;
 			$conexion->close();
 			exit();
 		}
