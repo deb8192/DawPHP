@@ -16,21 +16,15 @@ require_once("includes/cabecera.php");
 			<h2>Álbum creado</h2>
 			
 			<?php
-
-			if(!empty($_POST['titulo_album_creado'])){
+			
+			if (isset($_POST['crear_album'])) {
 				$titulo_album_creado = $_POST['titulo_album_creado'];
-				echo "<p>Título del álbum: $titulo_album_creado</p>";
-			}
-			if(!empty($_POST['descripcion_album'])){
 				$descripcion_album = $_POST['descripcion_album'];
-				echo "<p>Descripción: $descripcion_album</p>";
-			}
-			if(!empty($_POST['fecha_album'])){
 				$date = new DateTime($_POST['fecha_album']);
-				echo "<p>Fecha: ".$date->format('d/m/Y')."</p>";
-			}
-			if(!empty($_POST['pais'])){
-				echo "<p>País: ".CargarPais($_POST['pais'])."</p>";
+				$pais = $_POST['pais'];
+				$id_album = CrearAlbum($titulo_album_creado, $descripcion_album, $date, $pais, $_SESSION['usuario']['id']);
+
+				CargarAlbum($id_album);
 			}
 			?>
 		</section>
