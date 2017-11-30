@@ -22,7 +22,7 @@ require_once("includes/cabecera.php");
 			$date = new DateTime($_POST['fecha_album']);
 			$fecha = $date->format('d/m/Y');
 			$pais = $_POST['pais'];
-			CrearAlbum($titulo_album_creado, $descripcion_album, $fecha, $pais, $_SESSION['usuario']['id']);
+			CrearAlbum($titulo_album_creado, $descripcion_album, $_POST['fecha_album'], $pais, $_SESSION['usuario']['id']);
 			if(!empty($_POST['titulo_album_creado'])){
 				$titulo_album_creado = $_POST['titulo_album_creado'];
 				echo "<p>Título del álbum: $titulo_album_creado</p>";
