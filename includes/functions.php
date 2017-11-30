@@ -205,9 +205,16 @@
 		return $existe;
 	}
 	
-	function CrearAlbum($titulo_album_creado, $descripcion_album, $date, $pais, $usuario){
+	function CrearAlbum($titulo_album_creado, $descripcion_album, $date, $pais, $usuario) {
 		$conexion = conecta();
 		$consulta = "INSERT INTO albumes (Titulo, Descripcion, Fecha, Pais, Usuario) VALUES ('$titulo_album_creado', '$descripcion_album', '$date', '$pais', '$usuario')";
+		ejecutaConsulta($conexion, $consulta);
+		$conexion->close();
+	}
+	
+	function SubirFoto($titulo, $descripcion, $fecha, $pais, $album, $fichero) {
+		$conexion = conecta();
+		$consulta = "INSERT INTO fotos (Titulo, Descripcion, Fecha, Pais, Album, Fichero) VALUES ('$titulo', '$descripcion', '$fecha', '$pais', '$album','$fichero')";
 		ejecutaConsulta($conexion, $consulta);
 		$conexion->close();
 	}
