@@ -209,7 +209,6 @@
 		$conexion = conecta();
 		$consulta = "INSERT INTO albumes (Titulo, Descripcion, Fecha, Pais, Usuario) VALUES ('$titulo_album_creado', '$descripcion_album', '$date', '$pais', '$usuario')";
 		ejecutaConsulta($conexion, $consulta);
-		
 		$conexion->close();
 	}
 	
@@ -278,6 +277,8 @@
 					</li>';
 			}
 			echo '</ul>';
+		} else {
+			albumSinContenido();
 		}
 		$resultado->close();
 		$conexion->close();
@@ -363,6 +364,10 @@
 	
 	function ContenidoNoDisponible() {
 		echo '<h2>CONTENIDO NO DISPONIBLE</h2><p>Debes iniciar sesión para poder ver este contenido.</p>';
+	}
+	
+	function albumSinContenido() {
+		echo '<p>Este álbum no tiene contenido.</p>';
 	}
 	
 	function darseDeBaja($id) {
