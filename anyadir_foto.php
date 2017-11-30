@@ -14,7 +14,7 @@ if (isset($_POST['anyadirFoto'])){
 		if ($tipo=="image/jpeg" || $tipo=="image/pjpeg" ||
 			$tipo=='image/gif' || $tipo=="image/png") {
 			
-			$destino = "img/albumes";
+			$destino = "img/albumes/";
 			// Sacamos el destino con el nombre de la foto
 			$origen = $_FILES['archivo']['tmp_name'];
 			$carpetaDeDestino = $destino . $_FILES['archivo']['name'];
