@@ -8,6 +8,7 @@
 require_once("includes/cabecera.php");
 
 if (isset($_POST['registro'])){
+	$_SESSION['error']['activado'] = false;
 	
 	//Comparar contraseña con repetir contraseña
 	if (strcmp ($_POST['repassword'],$_POST['password2']) !== 0) {
@@ -18,7 +19,39 @@ if (isset($_POST['registro'])){
 		if (ComprobarNombreUsuario($_POST['nombre'])) {
 			$_SESSION['error']['activado'] = true;
 			$_SESSION['error']['descripcion'] = "Usuario no disponible.";
+			
+			// Comprobar longitud del nombre
+		} else if (!ComprobarLongitud(3, 15, $_POST['nombre'])) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "El tamaño del nombre debe ser de 3 a 15 caracteres.";
+			
+			// Comprobar caracteres del nombre
+		} else if (!ComprobarPatron("/^([a-zA-Z0-9]{3,15})$/", $_POST['nombre'])) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "El nombre sólo debe contener letras y números.";
+			
+			// Comprobar longitud contrasenya
+		} else if (!ComprobarLongitud(6, 15, $_POST['password2'])) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "El tamaño de la contraseña debe ser de 6 a 15 caracteres.";
+			
+			// Comprobar caracteres de la contrasenya
+		} else if (!ComprobarPatron("^(?=(?:.*\d){1,})(?=(?:.*[A-Z]){1,})(?=(?:.*[a-z]){1,})\S{6,15}$", $_POST['password2'])) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "La contraseña debe tener como mínimo 1 número, 1 letra minúscula y otra mayúscula.";
+			
+			// Comprobar email
+		} else if (!ComprobarPatron("/@([\w]{2,4})\./", $_POST['correo'])) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "Dominio principal de correo no válido. De 2 a 4 caracteres detrás del @.";
+			
+			// Comprobar fecha nacimiento
+		} else if (!ComprobarFecha($_POST['fecha_nac'])) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "Fecha no válida.";
+			
 		} else {
+			
 			// Foto por defecto
 			$destino = "img/perfiles/";
 			$foto_de_perfil = $destino.'foto.jpg';
@@ -75,8 +108,8 @@ if (isset($_POST['registro'])){
 				<input type="radio" name="sexo" value="Mujer" id="mujer" tabindex="14">
 			</p>
 			
-			<p><label for="fecha_nac">Fecha nacimiento:</label>
-			<input type="date" name="fecha_nac" id="fecha_nac" tabindex="15"/></p>
+			<p><label for="fecha_nac">Fecha nacimiento: <span class="asterisco_rojo">*</span></label>
+			<input type="date" name="fecha_nac" id="fecha_nac" required="" tabindex="15"/></p>
 			
 			<p><label for="ciudad">Ciudad: <span class="asterisco_rojo">*</span></label>
 			<input type="text" name="ciudad" id="ciudad" required="" tabindex="16"/></p>

@@ -74,6 +74,41 @@
 		return $existe;
 	}
 	
+	function ComprobarLongitud($min, $max, $frase) {
+		if( (strlen($frase) >= $min) && (strlen($frase) <= $max) )
+			return true;
+		else
+			return false;
+	}
+	
+	function ComprobarPatron($patron, $nombre) {
+		
+		if(preg_match($patron, $nombre))
+			return true;
+		else
+			return false;
+	}
+	
+	function ComprobarFecha($fecha) {
+		
+		$valores = explode('-', $fecha);
+		$dia = $valores[2];
+		$mes = $valores[1];
+		$anyo = $valores[0];
+		
+		if(count($valores) == 3 && checkdate($mes, $dia, $anyo)) {
+			
+			$hoy = getdate();
+			$anyoActual = $hoy['year'];
+			$mesActual = $hoy['mon'];
+			$diaActual = $hoy['mday'];
+			if (($anyo <= $anyoActual) && ($mes <= $mesActual) && ($dia <= $diaActual))
+				return true;
+		}
+		
+		return false;
+	}
+	
 	function ComprobarLogin($usuario, $pass) {
 
 		$conexion = conecta();
