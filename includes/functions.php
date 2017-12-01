@@ -57,6 +57,7 @@
 		$resultado->close();
 		$conexion->close();
 	}
+
 	function ComprobarNombreUsuario($usuario) {
 
 		$conexion = conecta();
@@ -297,6 +298,68 @@
 		return $existe;
 	}
 	
+	function BuscarUsuario($idUsuario){
+		$conexion = conecta();
+		$consulta = 'select NomUsuario, Clave, Email, Sexo, FNacimiento, Ciudad, Pais, Foto from usuarios where IdUsuario = '.$idUsuario;
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		if($resultado->num_rows>0)
+		{
+			$fila = $resultado->fetch_object();
+			echo '<p class="letra_roja">(*) Campos obligatorios</p>
+			<form id="form_modificar_datos" enctype="multipart/form-data" action="menu_.php" method="post">
+		
+			<p><label for="nombre">Nombre: <span class="asterisco_rojo">*</span></label>
+			<input type="text" name="nombre" id="nombre" value='.$fila->NomUsuario.' required="" tabindex="9"/></p>
+			
+			<p><label for="password2">Contraseña nueva: <span class="asterisco_rojo">*</span></label>
+			<input type="password" name="password2" id="password2" required="" tabindex="10"/></p>
+			
+			<p><label for="repassword">Repetir contraseña nueva: <span class="asterisco_rojo">*</span></label>
+			<input type="password" name="repassword" id="repassword" required="" tabindex="11"/></p>
+			
+			<p><label for="correo">Email: <span class="asterisco_rojo">*</span></label>
+			<input type="email" name="correo" id="correo" value='.$fila->Email.' required="" tabindex="12"/></p>
+			
+			<p>Sexo:';
+			if($fila->Sexo == 1){
+				echo '<label for="hombre">Hombre</label>
+				<input type="radio" name="sexo" value="Hombre" id="hombre" tabindex="13" checked>
+				<label for="mujer">Mujer</label>
+				<input type="radio" name="sexo" value="Mujer" id="mujer" tabindex="14">';
+			}
+			else{
+				echo '<label for="hombre">Hombre</label>
+				<input type="radio" name="sexo" value="Hombre" id="hombre" tabindex="13" 
+				<label for="mujer">Mujer</label>
+				<input type="radio" name="sexo" value="Mujer" id="mujer" tabindex="14" checked>';
+			}
+			echo '</p>
+			
+			<p><label for="fecha_nac">Fecha nacimiento:</label>
+			<input type="date" name="fecha_nac" id="fecha_nac" value='.$fila->FNacimiento.' tabindex="15"/></p>
+			
+			<p><label for="ciudad">Ciudad: <span class="asterisco_rojo">*</span></label>
+			<input type="text" name="ciudad" id="ciudad" value='.$fila->Ciudad.' required="" tabindex="16"/></p>
+			
+			<p><label for="pais">País:</label>
+				<select name="paises" tabindex="17" id="pais">
+					<option value="">Elegir país...</option>';
+					CargarPaises($fila->Pais);
+				echo '</select>
+			</p>
+			
+			<p><label for="foto">Foto:</label></p>
+			<p><img src="'.$fila->Foto.'"alt="Foto perfil" width="200" height="150"/></p>
+			<p><input type="file" name="fotoPerfil" id="foto"  tabindex="18"/></p>
+			
+			<p><label for="password">Introduce tu contraseña antigua: <span class="asterisco_rojo">*</span></label>
+			<input type="password" name="password" id="password" required="" tabindex="19"/></p>
+			
+			<input type="submit" name="modificar" value="Modificar datos" tabindex="20"/>
+		</form>';
+		}
+	}
 	
 	// Funciones para el formulario de busqueda
 	function BuscarFotos($titulo, $fecha, $pais) {
