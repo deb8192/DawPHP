@@ -6,6 +6,39 @@
  
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
+
+function Coste($color_fotos, $color_album, $resolucion, $numero_copias) {
+	#calcular precio
+	$precio=0.10;		#una página por defecto
+	if($color_fotos === "color")
+		$precio+=0.03;	#una sóla foto
+	if($color_album !== "#000000" )
+		$precio+=0.51;
+	if($resolucion > 450)
+		$precio+=0.10;
+	$precio*=$numero_copias;
+	return $precio;
+}
+
+if (isset($_POST['solicitar_album'])){
+	
+	$nom = $_POST['nombre'] ." ". $_POST['apellidos'];
+	
+	if(!empty($_POST['area_texto'])&&$_POST['area_texto']!=" "){
+		$area_texto = $_POST['area_texto'];
+	} else {
+		$area_texto=$_POST['titulo_album'];
+	}
+	
+	$direccion = $_POST['calle'] .'|'. $_POST['numero_portal'] .'|'. $_POST['CP'] .'|'. $_POST['localidad'] .'|'. $_POST['provincia'] .'|'. $_POST['pais'];
+	
+	$coste = Coste($_POST['color_fotos'], $_POST['color_album'],
+		$_POST['resolucion'], $_POST['numero_copias']);
+		
+	GuardarSolicitud($_POST['album'], $nom, $_POST['titulo_album'], $area_texto,
+		$_POST['email'], $direccion, $_POST['color_album'], $_POST['numero_copias'], 
+		$_POST['resolucion'], $_POST['fecha_recepcion'], $_POST['color_fotos'], $coste);
+}
  ?>
  
  <body>
@@ -50,24 +83,13 @@ require_once("includes/cabecera.php");
 		<?php
 			if(!empty($_POST['calle'])){
 				$calle = $_POST['calle'];
-				echo "<p>Calle: $calle</p>";
+				echo "<p>Dirección de domicilio: $calle</p>";
 			}
 			if(!empty($_POST['numero_portal'])){
 				$numero_portal = $_POST['numero_portal'];
 				echo "<p>Numero: $numero_portal</p>";
 			}
-			if(!empty($_POST['escalera'])){
-				$escalera = $_POST['escalera'];
-				echo "<p>Escalera: $escalera</p>";
-			}
-			if(!empty($_POST['piso'])){
-				$piso = $_POST['piso'];
-				echo "<p>Piso: $piso</p>";
-			}
-			if(!empty($_POST['puerta'])){
-				$puerta = $_POST['puerta'];
-				echo "<p>Puerta: $puerta</p>";
-			}
+			
 			if(!empty($_POST['CP'])){
 				$CP = $_POST['CP'];
 				echo "<p>Código postal: $CP</p>";
@@ -104,7 +126,9 @@ require_once("includes/cabecera.php");
 				echo '<p>Album: '.CargarTituloAlbum($_POST['album']).'</p>';
 			}
 			if(!empty($_POST['fecha_recepcion'])){
-				$fecha_recepcion = $_POST['fecha_recepcion'];
+				
+				$date = new DateTime($_POST['fecha_recepcion']);
+				$fecha_recepcion = $date->format('d/m/Y');
 				echo "<p>Fecha de recepción: $fecha_recepcion</p>";
 			}
 			if(!empty($_POST['color_fotos'])){
@@ -114,17 +138,8 @@ require_once("includes/cabecera.php");
 				else
 					echo "<p>Color de las fotos: a color</p>";
 			}
-			#calcular precio
-			$precio=0.10;		#una página por defecto
-			if($color_fotos === "color")
-				$precio+=0.03;	#una sóla foto
-			if($color_album !== "#000000" )
-				$precio+=0.51;
-			if($resolucion > 450)
-				$precio+=0.10;
-			$precio*=$numero_copias;
 		?>
-		<p>Precio: <?php echo number_format($precio, 2, '.','') ."€"?></p>
+		<p>Precio: <?php echo number_format($coste, 2, '.','') ."€"?></p>
 	</section>
 	
 	<!-- FOOTER con </body> y </html> -->

@@ -146,6 +146,18 @@
 			return false;
 	}
 	
+	function ComprobarMayusMinusNumeros($pass) {
+		$minus = "([a-z]+)";
+		$mayus = "([A-Z]+)";
+		$num = "([0-9]+)";
+		
+		if (ComprobarPatron($minus, $pass))
+			if (ComprobarPatron($mayus, $pass))
+				if (ComprobarPatron($num, $pass))
+					return true;
+		return false;
+	}
+	
 	function ComprobarPatron($patron, $nombre) {
 		
 		if(preg_match($patron, $nombre))
@@ -319,6 +331,13 @@
 	function SubirFoto($titulo, $descripcion, $fecha, $pais, $album, $fichero) {
 		$conexion = conecta();
 		$consulta = "INSERT INTO fotos (Titulo, Descripcion, Fecha, Pais, Album, Fichero) VALUES ('$titulo', '$descripcion', '$fecha', '$pais', '$album','$fichero')";
+		ejecutaConsulta($conexion, $consulta);
+		$conexion->close();
+	}
+	
+	function GuardarSolicitud($album, $nombre, $titulo, $descripcion, $email, $direccion, $color_portada, $copias, $resolucion, $fecha, $color_fotos, $coste) {
+		$conexion = conecta();
+		$consulta = "INSERT INTO solicitudes (Album, Nombre, Titulo, Descripcion, Email, Direccion, Color, Copias, Resolucion, Fecha, IColor, Coste) VALUES ('$album', '$nombre', '$titulo', '$descripcion', '$email', '$direccion', '$color_portada', '$copias', '$resolucion', '$fecha', '$color_fotos', '$coste')";
 		ejecutaConsulta($conexion, $consulta);
 		$conexion->close();
 	}

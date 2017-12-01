@@ -85,20 +85,13 @@ require_once("includes/cabecera.php");
 			</fieldset>
 			<fieldset class="direction">
 				<legend> Dirección </legend>
-				<p><label for= "calle">Calle: <span class="asterisco_rojo">*</span></label>
+				<p><label for= "calle">Dirección de domicilio: <span class="asterisco_rojo">*</span></label>
 				<input type= "text" name="calle" id="calle" required="" tabindex="14"/></p>
 				
 				<p><label for= "numero_portal">Número: <span class="asterisco_rojo">*</span></label>
 				<input type= "text" name="numero_portal" id="numero_portal" required="" tabindex="15"/></p>
 				
-				<p><label for= "escalera">Escalera:</label>
-				<input type= "text" name="escalera" id="escalera" tabindex="16"/></p>
 				
-				<p><label for= "piso">Piso:</label>
-				<input type= "text" name="piso" id="piso" tabindex="17"/></p>
-				
-				<p><label for= "puerta">Puerta:</label>
-				<input type= "text" name="puerta" id="puerta" tabindex="18"/></p>
 				
 				<p><label for= "CP">Código postal: <span class="asterisco_rojo">*</span></label>
 				<input type= "text" name="CP" id="CP" required="" tabindex="19"/></p>

@@ -36,9 +36,14 @@ if (isset($_POST['registro'])){
 			$_SESSION['error']['descripcion'] = "El tamaño de la contraseña debe ser de 6 a 15 caracteres.";
 			
 			// Comprobar caracteres de la contrasenya
-		} else if (!ComprobarPatron("^(?=(?:.*\d){1,})(?=(?:.*[A-Z]){1,})(?=(?:.*[a-z]){1,})\S{6,15}$", $_POST['password2'])) {
+		} else if (!ComprobarPatron("/^([a-zA-Z0-9_]{6,15})$/", $_POST['password2'])) {
 			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "La contraseña debe tener como mínimo 1 número, 1 letra minúscula y otra mayúscula.";
+			$_SESSION['error']['descripcion'] = "La contraseña sólo debe contener letras y números.";
+			
+			// Comprobar mayus, minus y numero contrasenya
+		} else if (!ComprobarMayusMinusNumeros($_POST['password2'])) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "La contraseña debe tener un nº, una letra minúscula y otra mayúscula.";
 			
 			// Comprobar email
 		} else if (!ComprobarPatron("/@([\w]{2,4})\./", $_POST['correo'])) {
