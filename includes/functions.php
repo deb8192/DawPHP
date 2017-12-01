@@ -200,6 +200,7 @@
 			return false;
 	}
 	
+	// apañar fecha
 	function ComprobarFecha($fecha) {
 		
 		$valores = explode('-', $fecha);
@@ -207,13 +208,16 @@
 		$mes = $valores[1];
 		$anyo = $valores[0];
 		
-		if(count($valores) == 3 && checkdate($mes, $dia, $anyo)) {
+		if (count($valores) == 3 && checkdate($mes, $dia, $anyo)) {
 			
 			$hoy = getdate();
 			$anyoActual = $hoy['year'];
 			$mesActual = $hoy['mon'];
 			$diaActual = $hoy['mday'];
-			if (($anyo <= $anyoActual) && ($mes <= $mesActual) && ($dia <= $diaActual))
+			if ($anyo == $anyoActual) {
+				if (($mes <= $mesActual) && ($dia <= $diaActual))
+					return true;
+			} else if ($anyo < $anyoActual)
 				return true;
 		}
 		
