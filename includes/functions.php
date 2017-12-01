@@ -43,6 +43,71 @@
 		}
 	}
 	
+	function ModificarUsuarioEnBD($nombre, $password, $passwordAnt, $correo, $sexo, $fecha_nac, $ciudad, $paises, $foto, $id){
+		
+		$sexo_usuario=2; // Iniciamos como mujer
+		if ($sexo == 'Hombre')
+			$sexo_usuario=1;
+		
+		$date = new DateTime($fecha_nac);
+		$fecha = $date->format('d/m/Y');
+		
+		$conexion = conecta();
+		$consulta = "SELECT Clave from usuario where IdUsuarios = '$id'";
+		$resultado = ejecutaConsulta($conexion, $consulta);
+		
+		$hecho = false;
+		if ($resultado->num_rows > 0){
+			$fila = $resultado->fetch_object();
+			if (strcmp ($fila->Clave, sha1($passwordAnt)) !== 0){
+				$_SESSION['error']['activado'] = true;
+				$_SESSION['error']['descripcion'] = "Las contraseñas no coinciden.";
+			}
+			else{
+				if (ComprobarNombreUsuario($_POST['nombre'])) {
+					$_SESSION['error']['activado'] = true;
+					$_SESSION['error']['descripcion'] = "Usuario no disponible.";
+				} else {
+					$hecho = true;
+				}
+			}
+		}
+		
+		if($hecho){
+		
+			$consulta = "UPDATE usuarios SET NomUsuario='$nombre', Clave = sha1('$password'), Email='$correo', Sexo='$sexo_usuario', FNacimiento='$fecha_nac', Ciudad='$ciudad', Pais='$ciudad', Foto='$foto' WHERE IdUsuario = '$id'";
+			$resultado = ejecutaConsulta($conexion, $consulta);
+		
+			$consulta = "select * from usuarios where IdUsuario='$id'";
+			$resultado = ejecutaConsulta($conexion, $consulta);
+		
+			if ($resultado->num_rows > 0) {
+				$fila = $resultado->fetch_object();
+				$id = $fila->IdUsuario;
+				$_SESSION['usuario']['id'] = $fila->IdUsuario;
+				$_SESSION['usuario']['nombre'] = $nombre;
+				$_SESSION['usuario']['foto'] = $foto;
+				$_SESSION['usuario']['correo'] = $correo;
+				$_SESSION['usuario']['sexo'] = $sexo;
+				$_SESSION['usuario']['fecha'] = $fecha;
+				$_SESSION['usuario']['ciudad'] = $ciudad;
+				$_SESSION['usuario']['pais'] = CargarPais($_POST['paises']);
+			} else {
+			$id = -1;
+			}
+			$resultado->close();
+			$conexion->close();
+		
+			if ($id >= 0) {
+				header("Location: menu_usuario.php");
+			} else {
+				$_SESSION['error']['activado'] = true;
+				$_SESSION['error']['descripcion'] = "No se ha podido modificar el usuario.";
+				header("Location:../".$_SESSION['error']['url']);
+			}
+		}
+	}
+	
 	function CargarListaPaises() {
 		
 		$conexion = conecta();
@@ -307,7 +372,7 @@
 		{
 			$fila = $resultado->fetch_object();
 			echo '<p class="letra_roja">(*) Campos obligatorios</p>
-			<form id="form_modificar_datos" enctype="multipart/form-data" action="menu_.php" method="post">
+			<form id="form_modificar_datos" enctype="multipart/form-data" action="mis_datos.php" method="post">
 		
 			<p><label for="nombre">Nombre: <span class="asterisco_rojo">*</span></label>
 			<input type="text" name="nombre" id="nombre" value='.$fila->NomUsuario.' required="" tabindex="9"/></p>

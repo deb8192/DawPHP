@@ -180,13 +180,13 @@ footer{
 	visibility:hidden;
 	display: none;
 }
-#anyadirFoto, #principal, #buscar, #registro, .form_busqueda, #solicitar, .tarifas,
+#modificar_datos_usuario, #anyadirFoto, #principal, #buscar, #registro, .form_busqueda, #solicitar, .tarifas,
 #datos_usuario,#respuesta_album, .letra_roja, h1, h2, h3, h4, .inicio_error, #crear_album, #respuesta_crear_album {
 	padding: 0;
 	margin: 0;
 }
 
-#anyadirFoto, #principal, #registro, .form_busqueda, #solicitar, #datos_usuario, #crear_album ,
+#modificar_datos_usuario, #anyadirFoto, #principal, #registro, .form_busqueda, #solicitar, #datos_usuario, #crear_album ,
 #respuesta_album, #detalle_imagen, #respuesta_crear_album {
 	background-color: #FFF;
 	padding-left: 40px;
@@ -194,12 +194,12 @@ footer{
 	margin-bottom: 60px;
 }
 
-#anyadirFoto > h2, #principal > h2, #registro > h2, .form_busqueda > h2, #solicitar > h2,
+ #modificar_datos_usuario > h2,#anyadirFoto > h2, #principal > h2, #registro > h2, .form_busqueda > h2, #solicitar > h2,
 #datos_usuario > h2, #respuesta_album > h2, #respuesta_album > h3, #crear_album > h2,
 #detalle_imagen > h2, #respuesta_crear_album > h2 {
 	margin-top: 20px;
 }
-#anyadirFoto, #principal, #registro, .form_busqueda, #solicitar, 
+#modificar_datos_usuario, #anyadirFoto, #principal, #registro, .form_busqueda, #solicitar, 
 #datos_usuario, #respuesta_album, #detalle_imagen, #crear_album, #respuesta_crear_album  {
 	width: 55%;
 	float: left;
@@ -277,14 +277,14 @@ img { border: 1px solid #000; }
 
 
 /* Estilos form compartidos*/
-#anyadirFoto form, #registro form, .form_busqueda form,  #solicitar form, #crear_album form {
+#modificar_datos_usuario form, #anyadirFoto form, #registro form, .form_busqueda form,  #solicitar form, #crear_album form {
 	margin: 0 auto;
 	max-width: 480px;
 	min-width: 150px;
 	overflow: hidden;
 }
 
-#anyadirFoto form input[type=submit], #registro form input[type=submit], .form_busqueda input[type=submit],
+#modificar_datos_usuario form input[type=submit], #anyadirFoto form input[type=submit], #registro form input[type=submit], .form_busqueda input[type=submit],
 #solicitar form input[type=submit],  #crear_album form input[type=submit] {
 	margin-right: 10%;
 	float: right;
@@ -298,16 +298,16 @@ img { border: 1px solid #000; }
 	padding: 10px;
 }*/
 
-#anyadirFoto form p, #registro form p, .form_busqueda form p, #solicitar form p, #crear_album form p {
+#modificar_datos_usuario form p, #anyadirFoto form p, #registro form p, .form_busqueda form p, #solicitar form p, #crear_album form p {
 	margin-right: 40px;
 }
 
-#anyadirFoto form label, #registro form label, .form_busqueda form label, #solicitar form label #crear_album form label {
+#modificar_datos_usuario form label, #anyadirFoto form label, #registro form label, .form_busqueda form label, #solicitar form label #crear_album form label {
     display: block;
     margin-bottom: 3px;
 }
 
-#anyadirFoto form, #registro form #nombre, #registro form #password2, #registro form #repassword,
+#modificar_datos_usuario form, #anyadirFoto form, #registro form #nombre, #registro form #password2, #registro form #repassword,
 #registro form #correo, #registro form #ciudad, #registro form pais, #registro form #foto,
 .form_busqueda form #titulo, .form_busqueda form #pais, #archivo, #Titulo, #fecha, #solicitar form input[type="text"],
 #solicitar form #email, #solicitar form select, #solicitar form #fecha_recepcion,
@@ -494,7 +494,7 @@ img { border: 1px solid #000; }
 
 /* para 854px o menos */
 
-@media screen and (max-width:1024px) {
+@media screen and (max-width:1100px) {
 	
 	header {
 		height: 30px;
@@ -634,7 +634,7 @@ img { border: 1px solid #000; }
 		clear: left;
 	}
 	
-	#anyadirFoto, #buscar, #principal, #solicitar, .tarifas, .tarifas table, #detalle_imagen, #datos_usuario, 
+	#modificar_datos_usuario, #anyadirFoto, #buscar, #principal, #solicitar, .tarifas, .tarifas table, #detalle_imagen, #datos_usuario, 
 	#solicitar, .form_busqueda, #respuesta_album, #crear_album, #respuesta_crear_album {
 		width: auto;
 		float: none;
@@ -647,7 +647,7 @@ img { border: 1px solid #000; }
 		margin-left: -35px;
 	}
 	
-	#anyadirFoto, #principal, #detalle_imagen, #datos_usuario, .form_busqueda, #solicitar, #respuesta_album{
+	#modificar_datos_usuario, #anyadirFoto, #principal, #detalle_imagen, #datos_usuario, .form_busqueda, #solicitar, #respuesta_album{
 		margin-left: 0;
 	}
 	
@@ -684,10 +684,11 @@ img { border: 1px solid #000; }
 		width: 220px;
 	}
 	
-	#registro form #hombre, #registro form #mujer {
+	#modificar_datos_usuario form, #registro form #hombre, #registro form #mujer {
 		margin-left: 0;
 	}
 	
+	#modificar_datos_usuario form label[for="hombre"], #modificar_datos_usuario form label[for="mujer"],
 	#registro form label[for="hombre"], #registro form label[for="mujer"],
 	#registro form select[name="dias"] {
 		margin-left: 5px;
