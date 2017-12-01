@@ -1,6 +1,35 @@
 <?php
 	require_once('admin/db.inc');
 	
+	function enviarDatosBD($nombre,$pass,$pass2,$correo,$sexo,
+				$fecha_nac,$ciudad,$paises,$fotoPerfil, $id)
+	{
+		// Foto por defecto
+			$destino = "img/perfiles/";
+			$foto_de_perfil = $destino.'foto.jpg';
+			
+			if ($fotoPerfil['error'] == 0) {
+				
+				$tipo = $fotoPerfil['type'];
+				if ($tipo=="image/jpeg" || $tipo=="image/pjpeg" ||
+					$tipo=='image/gif' || $tipo=="image/png") {
+					
+					// Sacamos el destino con el nombre de la foto
+					$origen = $fotoPerfil['tmp_name'];
+					$carpetaDeDestino = $destino . $fotoPerfil['name'];
+					$foto_de_perfil=$carpetaDeDestino;
+					
+					// Movemos el fichero de la carpeta temporal a la de perfiles
+					move_uploaded_file($origen, $carpetaDeDestino);
+				}
+			}
+			
+			// Creamos el usuario e iniciamos sesión si todo ha ido bien
+			ModificarUsuarioEnBD($nombre,$pass,$pass2,$correo,$sexo,
+				$fecha_nac,$ciudad,$paises,$foto_de_perfil, $id);
+
+	}
+	
 	function CrearUsuarioEnBD($nombre, $password, $correo, $sexo, $fecha_nac, $ciudad, $paises, $foto){
 		
 		$sexo_usuario=2; // Iniciamos como mujer
@@ -49,11 +78,21 @@
 		if ($sexo == 'Hombre')
 			$sexo_usuario=1;
 		
+		$fila='';
 		$date = new DateTime($fecha_nac);
 		$fecha = $date->format('d/m/Y');
 		
 		$conexion = conecta();
-		$consulta = "SELECT Clave from usuario where IdUsuarios = '$id'";
+		
+		if($foto=='')
+		{
+			$consulta = "SELECT Foto from usuarios where IdUsuario = '$id'";
+			$resultado = ejecutaConsulta($conexion, $consulta);
+			$fila = $resultado->fetch_object();
+			$foto = $fila->Foto;
+		}
+		
+		$consulta = "SELECT Clave from usuarios where IdUsuario = '$id'";
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
 		$hecho = false;
@@ -64,18 +103,13 @@
 				$_SESSION['error']['descripcion'] = "Las contraseñas no coinciden.";
 			}
 			else{
-				if (ComprobarNombreUsuario($_POST['nombre'])) {
-					$_SESSION['error']['activado'] = true;
-					$_SESSION['error']['descripcion'] = "Usuario no disponible.";
-				} else {
-					$hecho = true;
-				}
+					$hecho = true;	
 			}
 		}
 		
 		if($hecho){
 		
-			$consulta = "UPDATE usuarios SET NomUsuario='$nombre', Clave = sha1('$password'), Email='$correo', Sexo='$sexo_usuario', FNacimiento='$fecha_nac', Ciudad='$ciudad', Pais='$ciudad', Foto='$foto' WHERE IdUsuario = '$id'";
+			$consulta = "UPDATE usuarios SET NomUsuario='$nombre', Clave = sha1('$password'), Email='$correo', Sexo='$sexo_usuario', FNacimiento='$fecha_nac', Ciudad='$ciudad', Pais='$paises', Foto='$foto' WHERE IdUsuario = '$id'";
 			$resultado = ejecutaConsulta($conexion, $consulta);
 		
 			$consulta = "select * from usuarios where IdUsuario='$id'";

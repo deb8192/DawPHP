@@ -13,41 +13,65 @@ require_once("includes/cabecera.php");
 	if (strcmp ($_POST['repassword'],$_POST['password2']) !== 0) {
 		$_SESSION['error']['activado'] = true;
 		$_SESSION['error']['descripcion'] = "Las contraseñas no coinciden.";
+		echo $_SESSION['error']['descripcion'];
 	} else {
 		
-		if (ComprobarNombreUsuario($_POST['nombre'])) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "Usuario no disponible.";
-		} else {
-			// Foto por defecto
-			$destino = "img/perfiles/";
-			$foto_de_perfil = $destino.'foto.jpg';
-			
-			if ($_FILES['fotoPerfil']['error'] == 0) {
-				
-				$tipo = $_FILES['fotoPerfil']['type'];
-				if ($tipo=="image/jpeg" || $tipo=="image/pjpeg" ||
-					$tipo=='image/gif' || $tipo=="image/png") {
-					
-					// Sacamos el destino con el nombre de la foto
-					$origen = $_FILES['fotoPerfil']['tmp_name'];
-					$carpetaDeDestino = $destino . $_FILES['fotoPerfil']['name'];
-					$foto_de_perfil=$carpetaDeDestino;
-					
-					// Movemos el fichero de la carpeta temporal a la de perfiles
-					move_uploaded_file($origen, $carpetaDeDestino);
-				}
+		if (strcmp ($_SESSION['usuario']['nombre'],$_POST['nombre'])!==0){
+			if (ComprobarNombreUsuario($_POST['nombre'])) {
+				$_SESSION['error']['activado'] = true;
+				$_SESSION['error']['descripcion'] = "Usuario no disponible.";
+				echo $_SESSION['error']['descripcion'];
 			}
+			// Comprobar longitud del nombre
+			else if (!ComprobarLongitud(3, 15, $_POST['nombre'])) {
+				$_SESSION['error']['activado'] = true;
+				$_SESSION['error']['descripcion'] = "El tamaño del nombre debe ser de 3 a 15 caracteres.";
+				echo $_SESSION['error']['descripcion'];
 			
-			// Creamos el usuario e iniciamos sesión si todo ha ido bien
-			ModificarUsuarioEnBD($_POST['nombre'],$_POST['password2'],$_POST['password'],$_POST['correo'],$_POST['sexo'],
-				$_POST['fecha_nac'],$_POST['ciudad'],$_POST['paises'],$foto_de_perfil, $_SESSION['usuario']['id']);
+			// Comprobar caracteres del nombre
+			} else if (!ComprobarPatron("/^([a-zA-Z0-9]{3,15})$/", $_POST['nombre'])) {
+				$_SESSION['error']['activado'] = true;
+				$_SESSION['error']['descripcion'] = "El nombre sólo debe contener letras y números.";
+				echo $_SESSION['error']['descripcion'];
+			
+			}
+			// Comprobar longitud contrasenya
+		}  else if (!ComprobarLongitud(6, 15, $_POST['password2'])) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "El tamaño de la contraseña debe ser de 6 a 15 caracteres.";
+			echo $_SESSION['error']['descripcion'];
+			
+			// Comprobar caracteres de la contrasenya
+		} else if (!ComprobarPatron("^(?=(?:.*\d){1,})(?=(?:.*[A-Z]){1,})(?=(?:.*[a-z]){1,})\S{6,15}$", $_POST['password2'])) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "La contraseña debe tener como mínimo 1 número, 1 letra minúscula y otra mayúscula.";
+			echo $_SESSION['error']['descripcion'];
+			
+			// Comprobar email
+		} else if (!ComprobarPatron("/@([\w]{2,4})\./", $_POST['correo'])) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "Dominio principal de correo no válido. De 2 a 4 caracteres detrás del @.";
+			echo $_SESSION['error']['descripcion'];
+			
+			// Comprobar fecha nacimiento
+		} else if (!ComprobarFecha($_POST['fecha_nac'])) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "Fecha no válida.";
+			echo $_SESSION['error']['descripcion'];
+			
+		}else if (strcmp ($_SESSION['usuario']['password'],$_POST['password']) !== 0) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "Pasword Incorrecto.";
+			echo $_SESSION['error']['descripcion'];
+		} 
+		else {
+			echo 'medio va';
+			enviarDatosBD($_POST['nombre'],$_POST['password2'],$_POST['password'],$_POST['correo'],$_POST['sexo'],
+			$_POST['fecha_nac'],$_POST['ciudad'],$_POST['paises'],$_FILES['fotoPerfil'], $_SESSION['usuario']['id']);
+		
 		}
 	}
 }
-else{
-	$_SESSION['error']['activado'] = true;
-	$_SESSION['error']['descripcion'] = "Esto no funciona.";}
   ?>
  <body>
 	<!-- HEADER -->

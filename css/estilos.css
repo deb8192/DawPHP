@@ -307,7 +307,8 @@ img { border: 1px solid #000; }
     margin-bottom: 3px;
 }
 
-#modificar_datos_usuario form, #anyadirFoto form, #registro form #nombre, #registro form #password2, #registro form #repassword,
+#modificar_datos_usuario form, #modificar_datos_usuario form input[type="text"], #modificar_datos_usuario form input[type="email"], #modificar_datos_usuario form input[type="password"],
+#modificar_datos_usuario form input[type="date"], #anyadirFoto form, #registro form #nombre, #registro form #password2, #registro form #repassword,
 #registro form #correo, #registro form #ciudad, #registro form pais, #registro form #foto,
 .form_busqueda form #titulo, .form_busqueda form #pais, #archivo, #Titulo, #fecha, #solicitar form input[type="text"],
 #solicitar form #email, #solicitar form select, #solicitar form #fecha_recepcion,
@@ -324,6 +325,7 @@ img { border: 1px solid #000; }
 }
 
 #registro form label[for="hombre"], #registro form label[for="mujer"],
+#modificar_datos_usuario form label[for="hombre"], #modificar_datos_usuario form label[for="mujer"],
 #registro form select[name="dias"], .form_busqueda form select[name="dia"],
 #solicitar form input[name="color_album"], #solicitar form input[name="numero_copias"],
 #solicitar form label[for="blanco_negro"], #solicitar form label[for="foto_color"],
@@ -336,6 +338,7 @@ img { border: 1px solid #000; }
 /* Form registro y solicitar*/
 #anyadirFoto form select [name="paises"],
 #registro form label[for="hombre"], #registro form label[for="mujer"],
+#modificar_datos_usuario form label[for="hombre"], #modificar_datos_usuario form label[for="mujer"],
 #solicitar form label[for="color_album"], #solicitar form label[for="numero_copias"],
 #solicitar form label[for="blanco_negro"], #solicitar form label[for="foto_color"] {
 	display: inline;
@@ -684,7 +687,7 @@ img { border: 1px solid #000; }
 		width: 220px;
 	}
 	
-	#modificar_datos_usuario form, #registro form #hombre, #registro form #mujer {
+	#modificar_datos_usuario form #hombre, #modificar_datos_usuario form #mujer, #registro form #hombre, #registro form #mujer {
 		margin-left: 0;
 	}
 	
