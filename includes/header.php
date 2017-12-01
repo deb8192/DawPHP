@@ -7,7 +7,8 @@
 		<li><a href="mis_albumes.php" tabindex="4">Mis álbumes</a></li>
 		<li><a href="crear_album.php" tabindex="5">Crear álbum</a></li>
 		<li><a href="solicitar_album.php" tabindex="6">Solicitar álbum</a></li>
-		<li><a href="anyadir_foto.php"  tabindex="7">Añadir foto</a></li>';
+		<li><a href="anyadir_foto.php"  tabindex="7">Añadir foto</a></li>
+		<li><a href="mis_datos.php"  tabindex="7">Mis datos</a></li>';
 	}
 	function menuUsuarioIrAlPerfil() {
 		echo '<li><a href="menu_usuario.php" tabindex="2">Perfil</a></li>
