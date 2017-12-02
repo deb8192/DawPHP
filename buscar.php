@@ -40,7 +40,7 @@
 				<label for="pais">País:</label>
 				<select name="pais" id="pais" tabindex="11">
 					<option value="">Elegir país...</option>
-					<?php CargarPaises($pais); ?>
+					<?php CargarPaisSeleccionado($pais); ?>
 				</select>
 			</p>
 			<input type="submit" name="buscar" value="Buscar" tabindex="12"/>

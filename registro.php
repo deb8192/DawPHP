@@ -7,80 +7,58 @@
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
 
-if (isset($_POST['registro'])){
+if (isset($_SESSION['reg'])) {
+	$nom = $_SESSION['reg']['nom'];
+	$pass = $_SESSION['reg']['pass'];
+	$rePas = $_SESSION['reg']['rePas'];
+	$mail = $_SESSION['reg']['mail'];
+	$fecha = $_SESSION['reg']['fecha'];
+	$ciudad = $_SESSION['reg']['ciudad'];
+	$pais = $_SESSION['reg']['pais'];
+	$sexo = $_SESSION['reg']['sexo'];
+} else {
+	$nom=$pass=$rePas=$mail=$fecha=$ciudad=$pais=$sexo="";
+}
+
+if (isset($_POST['registro'])) {
 	$_SESSION['error']['activado'] = false;
 	
-	//Comparar contraseña con repetir contraseña
-	if (strcmp ($_POST['repassword'],$_POST['password2']) !== 0) {
-		$_SESSION['error']['activado'] = true;
-		$_SESSION['error']['descripcion'] = "Las contraseñas no coinciden.";
-	} else {
+	$_SESSION['reg']['nom'] = $nom = $_POST['nombre'];
+	$_SESSION['reg']['pass'] = $pass = $_POST['password2'];
+	$_SESSION['reg']['rePas'] = $rePas = $_POST['repassword'];
+	$_SESSION['reg']['mail'] = $mail = $_POST['correo'];
+	$_SESSION['reg']['fecha'] = $fecha = $_POST['fecha_nac'];
+	$_SESSION['reg']['ciudad'] = $ciudad = $_POST['ciudad'];
+	$_SESSION['reg']['pais'] = $pais = $_POST['paises'];
+	$_SESSION['reg']['sexo'] = $sexo = $_POST['sexo'];
+	
+	$valor = Comprobaciones($nom, $pass, $rePas, $mail, $fecha, $sexo,
+		$ciudad, $pais);
+	
+	if ($valor) {
+		// Foto por defecto
+		$destino = "img/perfiles/";
+		$foto_de_perfil = $destino.'foto.jpg';
 		
-		if (ComprobarNombreUsuario($_POST['nombre'])) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "Usuario no disponible.";
+		if ($_FILES['fotoPerfil']['error'] == 0) {
 			
-			// Comprobar longitud del nombre
-		} else if (!ComprobarLongitud(3, 15, $_POST['nombre'])) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "El tamaño del nombre debe ser de 3 a 15 caracteres.";
-			
-			// Comprobar caracteres del nombre
-		} else if (!ComprobarPatron("/^([a-zA-Z0-9]{3,15})$/", $_POST['nombre'])) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "El nombre sólo debe contener letras y números.";
-			
-			// Comprobar longitud contrasenya
-		} else if (!ComprobarLongitud(6, 15, $_POST['password2'])) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "El tamaño de la contraseña debe ser de 6 a 15 caracteres.";
-			
-			// Comprobar caracteres de la contrasenya
-		} else if (!ComprobarPatron("/^([a-zA-Z0-9_]{6,15})$/", $_POST['password2'])) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "La contraseña sólo debe contener letras y números.";
-			
-			// Comprobar mayus, minus y numero contrasenya
-		} else if (!ComprobarMayusMinusNumeros($_POST['password2'])) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "La contraseña debe tener un nº, una letra minúscula y otra mayúscula.";
-			
-			// Comprobar email
-		} else if (!ComprobarPatron("/@([\w]{2,4})\./", $_POST['correo'])) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "Dominio principal de correo no válido. De 2 a 4 caracteres detrás del @.";
-			
-			// Comprobar fecha nacimiento
-		} else if (!ComprobarFecha($_POST['fecha_nac'])) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "Fecha no válida.";
-			
-		} else {
-			
-			// Foto por defecto
-			$destino = "img/perfiles/";
-			$foto_de_perfil = $destino.'foto.jpg';
-			
-			if ($_FILES['fotoPerfil']['error'] == 0) {
+			$tipo = $_FILES['fotoPerfil']['type'];
+			if ($tipo=="image/jpeg" || $tipo=="image/pjpeg" ||
+				$tipo=='image/gif' || $tipo=="image/png") {
 				
-				$tipo = $_FILES['fotoPerfil']['type'];
-				if ($tipo=="image/jpeg" || $tipo=="image/pjpeg" ||
-					$tipo=='image/gif' || $tipo=="image/png") {
-					
-					// Sacamos el destino con el nombre de la foto
-					$origen = $_FILES['fotoPerfil']['tmp_name'];
-					$carpetaDeDestino = $destino . $_FILES['fotoPerfil']['name'];
-					$foto_de_perfil=$carpetaDeDestino;
-					
-					// Movemos el fichero de la carpeta temporal a la de perfiles
-					move_uploaded_file($origen, $carpetaDeDestino);
-				}
+				// Sacamos el destino con el nombre de la foto
+				$origen = $_FILES['fotoPerfil']['tmp_name'];
+				$carpetaDeDestino = $destino . $_FILES['fotoPerfil']['name'];
+				$foto_de_perfil=$carpetaDeDestino;
+				
+				// Movemos el fichero de la carpeta temporal a la de perfiles
+				move_uploaded_file($origen, $carpetaDeDestino);
 			}
-			
-			// Creamos el usuario e iniciamos sesión si todo ha ido bien
-			CrearUsuarioEnBD($_POST['nombre'],$_POST['password2'],$_POST['correo'],$_POST['sexo'],
-				$_POST['fecha_nac'],$_POST['ciudad'],$_POST['paises'],$foto_de_perfil);
 		}
+		// Borramos los datos del registro de la sesion
+		unset($_SESSION['reg']);
+		// Creamos el usuario e iniciamos sesión si todo ha ido bien
+		CrearUsuarioEnBD($nom,$pass,$mail,$sexo,$fecha,$ciudad,$pais,$foto_de_perfil);
 	}
 }
  ?>
@@ -95,33 +73,48 @@ if (isset($_POST['registro'])){
 		<form id="form_registro" enctype="multipart/form-data" action="registro.php" method="post">
 		
 			<p><label for="nombre">Nombre: <span class="asterisco_rojo">*</span></label>
-			<input type="text" name="nombre" id="nombre" required="" tabindex="9"/></p>
+			<input type="text" name="nombre" id="nombre" required="" tabindex="9" value="<?php echo $nom;?>"/></p>
 			
 			<p><label for="password2">Contraseña: <span class="asterisco_rojo">*</span></label>
-			<input type="password" name="password2" id="password2" required="" tabindex="10"/></p>
+			<input type="password" name="password2" id="password2" required="" tabindex="10" value="<?php echo $pass;?>"/></p>
 			
 			<p><label for="repassword">Repetir contraseña: <span class="asterisco_rojo">*</span></label>
-			<input type="password" name="repassword" id="repassword" required="" tabindex="11"/></p>
+			<input type="password" name="repassword" id="repassword" required="" tabindex="11" value="<?php echo $rePas;?>"/></p>
 			
 			<p><label for="correo">Email: <span class="asterisco_rojo">*</span></label>
-			<input type="email" name="correo" id="correo" required="" tabindex="12"/></p>
+			<input type="email" name="correo" id="correo" required="" tabindex="12" value="<?php echo $mail;?>"/></p>
 			
 			<p>Sexo:
 				<label for="hombre">Hombre</label>
-				<input type="radio" name="sexo" value="Hombre" id="hombre" tabindex="13" checked>
+				<input type="radio" name="sexo" value="Hombre" id="hombre" tabindex="13"
+				<?php 
+					if (($sexo=='Hombre') || ($sexo=='')) {
+						echo 'checked="checked"';
+					}
+				?>>
 				<label for="mujer">Mujer</label>
-				<input type="radio" name="sexo" value="Mujer" id="mujer" tabindex="14">
+				<input type="radio" name="sexo" value="Mujer" id="mujer" tabindex="14"
+				<?php 
+					if ($sexo=='Mujer') {
+						echo 'checked="checked"';
+					}
+				?>>
 			</p>
 			
 			<p><label for="fecha_nac">Fecha nacimiento: <span class="asterisco_rojo">*</span></label>
-			<input type="date" name="fecha_nac" id="fecha_nac" required="" tabindex="15"/></p>
+			<input type="date" name="fecha_nac" id="fecha_nac" required="" tabindex="15" value="<?php echo $fecha;?>"/></p>
 			
 			<p><label for="ciudad">Ciudad: <span class="asterisco_rojo">*</span></label>
-			<input type="text" name="ciudad" id="ciudad" required="" tabindex="16"/></p>
+			<input type="text" name="ciudad" id="ciudad" required="" tabindex="16" value="<?php echo $ciudad;?>"/></p>
 			
 			<p><label for="pais">País:</label>
 				<select name="paises" tabindex="17" id="pais">
-					<?php CargarListaPaises(); ?>
+					<?php 
+					if ($pais=="")
+						CargarListaPaises();
+					else
+						CargarPaisSeleccionado($pais);
+					?>
 				</select>
 			</p>
 			

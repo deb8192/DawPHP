@@ -228,6 +228,69 @@
 		return false;
 	}
 	
+	function Comprobaciones($nombre, $pass, $repassword, $mail, $fecha,
+		$sexo, $ciudad, $pais) {
+		
+		$patronNom = "/^([a-zA-Z0-9]{3,15})$/";
+		$patronPass = "/^([a-zA-Z0-9_]{6,15})$/";
+		$patronMail = "/@([\w]{2,4})\./";
+		
+		if (ComprobarNombreUsuario($nombre)) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "Usuario no disponible.";
+			return false;
+			
+			// Comprobar longitud del nombre
+		} else if (!ComprobarLongitud(3, 15, $nombre)) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "El tamaño del nombre debe ser de 3 a 15 caracteres.";
+			return false;
+			
+			// Comprobar caracteres del nombre
+		} else if (!ComprobarPatron($patronNom, $nombre)) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "El nombre sólo debe contener letras y números.";
+			return false;
+			
+			// Comprobar longitud contrasenya
+		} else if (!ComprobarLongitud(6, 15, $pass)) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "El tamaño de la contraseña debe ser de 6 a 15 caracteres.";
+			return false;
+			
+			// Comprobar caracteres de la contrasenya
+		} else if (!ComprobarPatron($patronPass, $pass)) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "La contraseña sólo debe contener letras y números.";
+			return false;
+			
+			// Comprobar mayus, minus y numero contrasenya
+		} else if (!ComprobarMayusMinusNumeros($pass)) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "La contraseña debe tener un nº, una letra minúscula y otra mayúscula.";
+			return false;
+			
+			// Comparar contrasenya con repetir contrasenya
+		} if (strcmp ($repassword, $pass) !== 0) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "Las contraseñas no coinciden.";
+			return false;
+			
+			// Comprobar email
+		} else if (!ComprobarPatron($patronMail, $mail)) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "Dominio principal de correo no válido. De 2 a 4 caracteres detrás del @.";
+			return false;
+			
+			// Comprobar fecha nacimiento
+		} else if (!ComprobarFecha($fecha)) {
+			$_SESSION['error']['activado'] = true;
+			$_SESSION['error']['descripcion'] = "Fecha no válida.";
+			return false;
+		}
+		return true;
+	}
+	
 	function ComprobarLogin($usuario, $pass) {
 
 		$conexion = conecta();
@@ -506,7 +569,7 @@
 			<p><label for="pais">País:</label>
 				<select name="paises" tabindex="17" id="pais">
 					<option value="">Elegir país...</option>';
-					CargarPaises($fila->Pais);
+					CargarPaisSeleccionado($fila->Pais);
 				echo '</select>
 			</p>
 			
@@ -584,7 +647,7 @@
 		$conexion->close();
 	}
 	
-	function CargarPaises($seleccionado) {
+	function CargarPaisSeleccionado($seleccionado) {
 		$paises = CargarArrayPaises();
 		for ($i=0; $i<(count($paises)); $i++) {
 			echo '<option value="'.($i+1).'"';
