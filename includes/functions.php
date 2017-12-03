@@ -84,7 +84,7 @@
 		
 		$conexion = conecta();
 		
-		if($foto=='')
+		if($foto==NULL)
 		{
 			$consulta = "SELECT Foto from usuarios where IdUsuario = '$id'";
 			$resultado = ejecutaConsulta($conexion, $consulta);
@@ -101,6 +101,7 @@
 			if (strcmp ($fila->Clave, sha1($passwordAnt)) !== 0){
 				$_SESSION['error']['activado'] = true;
 				$_SESSION['error']['descripcion'] = "Las contraseñas no coinciden.";
+				header("../P6/mis_datos.php".$_SESSION['error']['url']);
 			}
 			else{
 					$hecho = true;	
