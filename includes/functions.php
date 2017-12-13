@@ -1,33 +1,17 @@
 <?php
 	require_once('admin/db.inc');
 	
-	function enviarDatosBD($nombre,$pass,$pass2,$correo,$sexo,
-				$fecha_nac,$ciudad,$paises,$fotoPerfil, $id)
-	{
-		// Foto por defecto
-			$destino = "img/perfiles/";
-			$foto_de_perfil = $destino.'foto.jpg';
-			
-			if ($fotoPerfil['error'] == 0) {
-				
-				$tipo = $fotoPerfil['type'];
-				if ($tipo=="image/jpeg" || $tipo=="image/pjpeg" ||
-					$tipo=='image/gif' || $tipo=="image/png") {
-					
-					// Sacamos el destino con el nombre de la foto
-					$origen = $fotoPerfil['tmp_name'];
-					$carpetaDeDestino = $destino . $fotoPerfil['name'];
-					$foto_de_perfil=$carpetaDeDestino;
-					
-					// Movemos el fichero de la carpeta temporal a la de perfiles
-					move_uploaded_file($origen, $carpetaDeDestino);
-				}
-			}
-			
-			// Creamos el usuario e iniciamos sesión si todo ha ido bien
-			ModificarUsuarioEnBD($nombre,$pass,$pass2,$correo,$sexo,
-				$fecha_nac,$ciudad,$paises,$foto_de_perfil, $id);
-
+	// TO DO: Meterlas por todos los php
+	function FormatearFechaBarras($fecha) {
+		$date = new DateTime($fecha);
+		$fechaNueva = $date->format('d/m/Y');
+		return $fechaNueva;
+	}
+	
+	function FormatearFechaGuiones($fecha) {
+		$date = new DateTime($fecha);
+		$fechaNueva = $date->format('Y-m-d');
+		return $fechaNueva;
 	}
 	
 	function CrearUsuarioEnBD($nombre, $password, $correo, $sexo, $fecha_nac, $ciudad, $paises, $foto){
@@ -36,8 +20,7 @@
 		if ($sexo == 'Hombre')
 			$sexo_usuario=1;
 		
-		$date = new DateTime($fecha_nac);
-		$fecha = $date->format('d/m/Y');
+		$fecha = FormatearFechaBarras($fecha_nac);
 		
 		$conexion = conecta();
 		$consulta = "INSERT INTO usuarios (NomUsuario, Clave, Email, Sexo, FNacimiento, Ciudad, Pais, Foto) VALUES ('$nombre',sha1('$password'),'$correo','$sexo_usuario','$fecha_nac','$ciudad','$paises','$foto')";
@@ -72,75 +55,30 @@
 		}
 	}
 	
-	function ModificarUsuarioEnBD($nombre, $password, $passwordAnt, $correo, $sexo, $fecha_nac, $ciudad, $paises, $foto, $id){
+	function ActualizarUsuario($id, $variable, $valor) {
 		
-		$sexo_usuario=2; // Iniciamos como mujer
-		if ($sexo == 'Hombre')
-			$sexo_usuario=1;
-		
-		$fila='';
-		$date = new DateTime($fecha_nac);
-		$fecha = $date->format('d/m/Y');
-		
+		// Obtenemos la cadena con los datos a modificar
+		$cadena = '';
+		for ($i=0; $i<count($variable); $i++) {
+			$cadena = $cadena.'"'.$variable[$i].'" = ';
+			
+			if ($variable[$i] == 'FNacimiento') {
+				$cadena = $cadena.FormatearFechaGuiones($valor[$i]);
+				
+			} else if (( $variable[$i] == 'Sexo') || ($variable[$i] == 'Pais')) {
+				$cadena = $cadena.$valor[$i];
+			} else {
+				$cadena = $cadena.'"'.$valor[$i].'"';
+			}
+			
+			if ((count($variable) > 1) && ($i < count($variable)-1)) {
+				$cadena = $cadena.', ';
+			}
+		}
 		$conexion = conecta();
-		
-		if($foto==NULL)
-		{
-			$consulta = "SELECT Foto from usuarios where IdUsuario = '$id'";
-			$resultado = ejecutaConsulta($conexion, $consulta);
-			$fila = $resultado->fetch_object();
-			$foto = $fila->Foto;
-		}
-		
-		$consulta = "SELECT Clave from usuarios where IdUsuario = '$id'";
-		$resultado = ejecutaConsulta($conexion, $consulta);
-		
-		$hecho = false;
-		if ($resultado->num_rows > 0){
-			$fila = $resultado->fetch_object();
-			if (strcmp ($fila->Clave, sha1($passwordAnt)) !== 0){
-				$_SESSION['error']['activado'] = true;
-				$_SESSION['error']['descripcion'] = "Las contraseñas no coinciden.";
-				header("../P6/mis_datos.php".$_SESSION['error']['url']);
-			}
-			else{
-					$hecho = true;	
-			}
-		}
-		
-		if($hecho){
-		
-			$consulta = "UPDATE usuarios SET NomUsuario='$nombre', Clave = sha1('$password'), Email='$correo', Sexo='$sexo_usuario', FNacimiento='$fecha_nac', Ciudad='$ciudad', Pais='$paises', Foto='$foto' WHERE IdUsuario = '$id'";
-			$resultado = ejecutaConsulta($conexion, $consulta);
-		
-			$consulta = "select * from usuarios where IdUsuario='$id'";
-			$resultado = ejecutaConsulta($conexion, $consulta);
-		
-			if ($resultado->num_rows > 0) {
-				$fila = $resultado->fetch_object();
-				$id = $fila->IdUsuario;
-				$_SESSION['usuario']['id'] = $fila->IdUsuario;
-				$_SESSION['usuario']['nombre'] = $nombre;
-				$_SESSION['usuario']['foto'] = $foto;
-				$_SESSION['usuario']['correo'] = $correo;
-				$_SESSION['usuario']['sexo'] = $sexo;
-				$_SESSION['usuario']['fecha'] = $fecha;
-				$_SESSION['usuario']['ciudad'] = $ciudad;
-				$_SESSION['usuario']['pais'] = CargarPais($_POST['paises']);
-			} else {
-			$id = -1;
-			}
-			$resultado->close();
-			$conexion->close();
-		
-			if ($id >= 0) {
-				header("Location: menu_usuario.php");
-			} else {
-				$_SESSION['error']['activado'] = true;
-				$_SESSION['error']['descripcion'] = "No se ha podido modificar el usuario.";
-				header("Location:../".$_SESSION['error']['url']);
-			}
-		}
+		$consulta = "UPDATE usuarios SET".$cadena." where IdUsuario = ".$id;
+		$conexion->close();
+		header("Location: menu_usuario.php");
 	}
 	
 	function CargarListaPaises() {

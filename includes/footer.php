@@ -1,5 +1,5 @@
 <footer id="pie">
-	<p>&copy;2017 Práctica 9 - Desarrollo de aplicaciones web</p>
+	<p>&copy;2017 Práctica 10 - Desarrollo de aplicaciones web</p>
 </footer>
 </body>
 </html>

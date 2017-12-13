@@ -1,4 +1,4 @@
-<?php 
+<?php
  // Título de la página, keywords y descripción
  $title = 'Registro';
  $keywords = 'pictures, images, imagen, imágenes, fotos, foto, buscar, busqueda, búsqueda';
@@ -7,72 +7,191 @@
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
 
-function Comprobaciones($nombre, $pass, $repassword, $mail, $fecha) {
-	
-	if (!ComprobarNombre($nombre)) {
-		return false;
-	} else if (!ComprobarContrasenya($pass, $repassword)) {
-		return false;
-	} else if (!ComprobarMail($mail)) {
-		return false;
-	} else if (!ComprobarFechaValida($fecha)) {
-		return false;
-	}
-	return true;
-}
-/*
 if (isset($_SESSION['mod'])) {
-	$nom = $_SESSION['mod']['nom'];
-	/*$pass = $_SESSION['mod']['pass'];
-	$rePas = $_SESSION['mod']['rePas'];*/
-	/*$mail = $_SESSION['mod']['mail'];
-	$fecha = $_SESSION['mod']['fecha'];
-	$ciudad = $_SESSION['mod']['ciudad'];
-	$pais = $_SESSION['mod']['pais'];
-	$sexo = $_SESSION['mod']['sexo'];
-	$foto = $_SESSION['mod']['foto'];
-} else {*/
-	$usu = BuscarUsuario($_SESSION['usuario']['id']);
 	
+	if (isset($_SESSION['mod']['nom']))
+		$nom = $_SESSION['mod']['nom'];
+	
+	if (isset($_SESSION['mod']['mail']))
+		$mail = $_SESSION['mod']['mail'];
+
+	if (isset($_SESSION['mod']['fecha']))
+		$fecha = $_SESSION['mod']['fecha'];
+
+	if (isset($_SESSION['mod']['ciudad']))
+		$ciudad = $_SESSION['mod']['ciudad'];
+
+	if (isset($_SESSION['mod']['pais']))
+		$pais = $_SESSION['mod']['pais'];
+
+	if (isset($_SESSION['mod']['sexo']))
+		$sexo = $_SESSION['mod']['sexo'];
+	
+	if (isset($_SESSION['mod']['foto']))
+		$foto = $_SESSION['mod']['foto'];
+	
+} else {
+	$usu = BuscarUsuario($_SESSION['usuario']['id']);
 	$nom=$usu->NomUsuario;
 	$mail=$usu->Email;
 	$fecha=$usu->FNacimiento;
 	$ciudad=$usu->Ciudad;
 	$pais=$usu->Pais;
 	$foto = $usu->Foto;
-	
+
 	if ($usu->Sexo == 2)
 		$sexo = "Mujer";
 	else
 		$sexo = "Hombre";
-//}
+}
 
 if (isset($_POST['modificar'])) {
 	$_SESSION['error']['activado'] = false;
 	
-	$_SESSION['mod']['nom'] = $nom = $_POST['nombre'];
-	/*$_SESSION['mod']['pass'] = */$pass = $_POST['password2'];//
-	/*$_SESSION['mod']['rePas'] = */$rePas = $_POST['repassword'];//
+	$nuevoNom = $_POST['nombre'];
+	$pass = $_POST['password2'];
+	$rePas = $_POST['repassword'];
 	$passAnterior = $_POST['password'];
-	$_SESSION['mod']['mail'] = $mail = $_POST['correo'];
-	$_SESSION['mod']['fecha'] = $fecha = $_POST['fecha_nac'];
-	$_SESSION['mod']['ciudad'] = $ciudad = $_POST['ciudad'];
-	$_SESSION['mod']['pais'] = $pais = $_POST['paises'];
-	$_SESSION['mod']['sexo'] = $sexo = $_POST['sexo'];
-	//$_SESSION['mod']['foto'] = $foto = "img/perfiles/".$_FILES['fotoPerfil']['name'];
+	$nuevoMail = $_POST['correo'];
+	$nuevaFecha = $_POST['fecha_nac'];
+	$nuevaCiudad = $_POST['ciudad'];
+	$nuevoPais = $_POST['paises'];
+	$nuevoSexo = $_POST['sexo'];
+	$nuevafoto = $_FILES['fotoPerfil']['name'];
+	
+	
+	$i = -1;
+	$variable = [];
+	$valor = [];
+	$error = false;
+	
+	// Si los 2 campos de modificar password contienen texto
+	if ((!empty($pass)) && (!empty($repassword))) {
+		if (ComprobarContrasenya($pass, $repassword)) {
+			$i++;
+			$variable[$i] = 'Clave';
+			$valor[$i] = sha1($pass);
+		} else {
+			$error = true;
+		}
+	}
+	
+	// Si son distintas las cadenas, modifica
+	if (strcmp ($nuevoNom , $nom ) !== 0) {
+		if (ComprobarNombre($nuevoNom)) {
+			$i++;
+			$variable[$i] = 'NomUsuario';
+			$valor[$i] = $nuevoNom;
+		} else {
+			$error = true;
+		}
+	}
+	
+	if (strcmp ($nuevoMail , $mail ) !== 0) {
+		if (ComprobarMail($nuevoMail)) {
+			$i++;
+			$variable[$i] = 'Email';
+			$valor[$i] = $nuevoMail;
+		} else {
+			$error = true;
+		}
+	}
+	
+	if (strcmp ($nuevaFecha , $fecha ) !== 0) {
+		if (ComprobarFechaValida($nuevaFecha)) {
+			$i++;
+			$variable[$i] = 'FNacimiento';
+			$valor[$i] = $nuevaFecha;
+		} else {
+			$error = true;
+		}
+	}
+	
+	if (strcmp ($nuevaCiudad , $ciudad ) !== 0) {
+		if (!empty($nuevaCiudad)) {
+			$i++;
+			$variable[$i] = 'Ciudad';
+			$valor[$i] = $nuevaCiudad;
+		} else {
+			$error = true;
+		}
+	}
+	
+	if (strcmp ($nuevoPais , $pais ) !== 0) {
+		$i++;
+		$variable[$i] = 'Pais';
+		$valor[$i] = $nuevoPais;
+	}
+	
+	if (strcmp ($nuevoSexo , $sexo ) !== 0) {
+		$i++;
+		$variable[$i] = 'Sexo';
+		$valor[$i] = $nuevoSexo;
+	}
+	
+	if ($nuevafoto !== '') {
+		$destino = "img/perfiles/";
+		
+		if ($_FILES['fotoPerfil']['error'] == 0) {
+		
+			$tipo = $_FILES['fotoPerfil']['type'];
+			if ($tipo=="image/jpeg" || $tipo=="image/pjpeg" ||
+				$tipo=='image/gif' || $tipo=="image/png") {
+				
+				// Sacamos el destino con el nombre de la foto
+				$origen = $_FILES['fotoPerfil']['tmp_name'];
+				$carpetaDeDestino = $destino . $nuevafoto;
+				$foto_de_perfil=$carpetaDeDestino;
+				
+				// Movemos el fichero de la carpeta temporal a la de perfiles
+				move_uploaded_file($origen, $carpetaDeDestino);
+				
+				$i++;
+				$variable[$i] = 'Foto';
+				$valor[$i] = $carpetaDeDestino;
+			}
+		} else {
+			$error = true;
+		}
+		$_SESSION['mod']['foto'] = $carpetaDeDestino;
+	} else {
+		$_SESSION['mod']['foto'] = $foto;
+	}
+	
+	$_SESSION['mod']['nom'] = $nuevoNom;
+	$_SESSION['mod']['mail'] = $nuevoMail;
+	$_SESSION['mod']['fecha'] = $nuevaFecha;
+	$_SESSION['mod']['ciudad'] = $nuevaCiudad;
+	$_SESSION['mod']['pais'] = $nuevoPais;
+	$_SESSION['mod']['sexo'] = $nuevoSexo;
+	
 	
 	// Comprobamos que la contrasenya anterior es correcta
 	if (!ComprobarLogin($_SESSION['usuario']['nombre'], $passAnterior)) {
 		$_SESSION['error']['activado'] = true;
 		$_SESSION['error']['descripcion'] = "Contraseña anterior incorrecta.";
+		
 	} else {
-		
-		/*$valor = Comprobaciones($nom, $pass, $rePas, $mail, $fecha);
-		
-		if ($valor) {
+		if (!$error) {
+			
+			// Revisar esto
+			$_SESSION['usuario']['nombre'] = $nuevoNom;
+			$_SESSION['usuario']['correo'] = $nuevoMail;
+			$_SESSION['usuario']['fecha'] = FormatearFechaBarras($nuevaFecha);
+			$_SESSION['usuario']['ciudad'] = $nuevaCiudad;
+			$_SESSION['usuario']['pais'] = CargarPais($nuevoPais);
+			$_SESSION['usuario']['sexo'] = $nuevoSexo;
+			$_SESSION['usuario']['foto'] = $carpetaDeDestino;
+			
+			
+			if ($i >= 0) {
 			// Borramos los datos a modificar de la sesion
 			unset($_SESSION['mod']);
-		}*/
+			
+			// Enviamos los arrays para modificar los datos en la BD
+			ActualizarUsuario($_SESSION['usuario']['id'], $variable, $valor);
+			}
+		}
 	}
 }
  ?>

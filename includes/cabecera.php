@@ -7,15 +7,15 @@
 		$_SESSION['error']['activado'] = false;
 	}
 	//cookie de la ultima visita
-		if(isset($_SESSION['usuario']['nombre']))
-		{
-			if(isset($_COOKIE['last_visit']))
-				$last_visit = $_COOKIE['last_visit'];
-			else
-				$last_visit = date('d/m/Y H:i:s');
-			$current_visit = date('d/m/Y H:i:s');
-			setcookie("last_visit", $current_visit, (time()+60*60*24*30), '/');
-		}
+	if(isset($_SESSION['usuario']['nombre']))
+	{
+		if(isset($_COOKIE['last_visit']))
+			$last_visit = $_COOKIE['last_visit'];
+		else
+			$last_visit = date('d/m/Y H:i:s');
+		$current_visit = date('d/m/Y H:i:s');
+		setcookie("last_visit", $current_visit, (time()+60*60*24*30), '/');
+	}
 	
 	// Comprobamos si hay cookies guardadas
 	$existe = 0;
@@ -29,6 +29,11 @@
 				$existe = 1;
 			}
 		}
+	}
+	
+	// Borramos los datos de sesión de modificar el usuario
+	if ((isset($_SESSION['mod'])) && (strpos($_SERVER['PHP_SELF'], 'mis_datos') === false )) {
+		unset($_SESSION['mod']);
 	}
 ?>
 <!DOCTYPE html>
