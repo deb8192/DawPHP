@@ -1,94 +1,141 @@
 <?php 
  // Título de la página, keywords y descripción
- $title = 'Mis datos';
- $keywords = 'pictures, images, imagen, imágenes, fotos, foto, modificar, nombre usuario, contraseña';
- $description = 'Página de modificacion de datos de usuario.';
- 
+ $title = 'Registro';
+ $keywords = 'pictures, images, imagen, imágenes, fotos, foto, buscar, busqueda, búsqueda';
+ $description = 'Página de registro de una galería de fotos on-line.';
+
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
- 
- if (isset($_POST['modificar'])){
+
+function Comprobaciones($nombre, $pass, $repassword, $mail, $fecha) {
 	
-	//Comparar contraseña con repetir contraseña
-		if (strcmp ($_SESSION['usuario']['nombre'],$_POST['nombre'])!==0){
-			if (ComprobarNombreUsuario($_POST['nombre'])) {
-				$_SESSION['error']['activado'] = true;
-				$_SESSION['error']['descripcion'] = "Usuario no disponible.";
-				header("../P6/mis_datos.php".$_SESSION['error']['url']);
-			}
-			// Comprobar longitud del nombre
-			else if (!ComprobarLongitud(3, 15, $_POST['nombre'])) {
-				$_SESSION['error']['activado'] = true;
-				$_SESSION['error']['descripcion'] = "El tamaño del nombre debe ser de 3 a 15 caracteres.";
-				header("Location:../P6/mis_datos.php".$_SESSION['error']['url']);
-			
-			// Comprobar caracteres del nombre
-			} else if (!ComprobarPatron("/^([a-zA-Z0-9]{3,15})$/", $_POST['nombre'])) {
-				$_SESSION['error']['activado'] = true;
-				$_SESSION['error']['descripcion'] = "El nombre sólo debe contener letras y números.";
-				header("../P6/mis_datos.php".$_SESSION['error']['url']);
-			}
-		}
-		// Comprobar longitud contrasenya
-		if (!ComprobarLongitud(6, 15, $_POST['password2'])) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "El tamaño de la contraseña debe ser de 6 a 15 caracteres.";
-			header("../P6/mis_datos.php".$_SESSION['error']['url']);
-				
-		// Comprobar caracteres de la contrasenya
-		} else if (!ComprobarPatron("/^([a-zA-Z0-9_]{6,15})$/", $_POST['password2'])) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "La contraseña sólo debe contener letras y números.";
-			header("../P6/mis_datos.php".$_SESSION['error']['url']);
-			
-		// Comprobar mayus, minus y numero contrasenya
-		} else if (!ComprobarMayusMinusNumeros($_POST['password2'])) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "La contraseña debe tener un nº, una letra minúscula y otra mayúscula.";
-			header("../P6/mis_datos.php".$_SESSION['error']['url']);
-			
-		} else if (strcmp ($_POST['repassword'],$_POST['password2']) !== 0) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "Las contraseñas no coinciden.";
-			header("../P6/mis_datos.php".$_SESSION['error']['url']);
-		
-			// Comprobar email
-		} else if (!ComprobarPatron("/@([\w]{2,4})\./", $_POST['correo'])) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "Dominio principal de correo no válido. De 2 a 4 caracteres detrás del @.";
-			header("../P6/mis_datos.php".$_SESSION['error']['url']);
-			
-			// Comprobar fecha nacimiento
-		} else if (!ComprobarFecha($_POST['fecha_nac'])) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "Fecha no válida.";
-			header("../P6/mis_datos.php".$_SESSION['error']['url']);
-				
-		}/*else if (strcmp ($_SESSION['usuario']['password'], ($_POST['password'])) !== 0) {
-			$_SESSION['error']['activado'] = true;
-			$_SESSION['error']['descripcion'] = "Pasword Incorrecto.";
-			header("../P6/mis_datos.php".$_SESSION['error']['url']);
-		} */
-		else {
-			enviarDatosBD($_POST['nombre'],$_POST['password2'],$_POST['password'],$_POST['correo'],$_POST['sexo'],
-			$_POST['fecha_nac'],$_POST['ciudad'],$_POST['paises'],$_FILES['fotoPerfil'], $_SESSION['usuario']['id']);
-			
-		}
-	
+	if (!ComprobarNombre($nombre)) {
+		return false;
+	} else if (!ComprobarContrasenya($pass, $repassword)) {
+		return false;
+	} else if (!ComprobarMail($mail)) {
+		return false;
+	} else if (!ComprobarFechaValida($fecha)) {
+		return false;
+	}
+	return true;
 }
-  ?>
+/*
+if (isset($_SESSION['mod'])) {
+	$nom = $_SESSION['mod']['nom'];
+	/*$pass = $_SESSION['mod']['pass'];
+	$rePas = $_SESSION['mod']['rePas'];*/
+	/*$mail = $_SESSION['mod']['mail'];
+	$fecha = $_SESSION['mod']['fecha'];
+	$ciudad = $_SESSION['mod']['ciudad'];
+	$pais = $_SESSION['mod']['pais'];
+	$sexo = $_SESSION['mod']['sexo'];
+	$foto = $_SESSION['mod']['foto'];
+} else {*/
+	$usu = BuscarUsuario($_SESSION['usuario']['id']);
+	
+	$nom=$usu->NomUsuario;
+	$mail=$usu->Email;
+	$fecha=$usu->FNacimiento;
+	$ciudad=$usu->Ciudad;
+	$pais=$usu->Pais;
+	$foto = $usu->Foto;
+	
+	if ($usu->Sexo == 2)
+		$sexo = "Mujer";
+	else
+		$sexo = "Hombre";
+//}
+
+if (isset($_POST['modificar'])) {
+	$_SESSION['error']['activado'] = false;
+	
+	$_SESSION['mod']['nom'] = $nom = $_POST['nombre'];
+	/*$_SESSION['mod']['pass'] = */$pass = $_POST['password2'];//
+	/*$_SESSION['mod']['rePas'] = */$rePas = $_POST['repassword'];//
+	$passAnterior = $_POST['password'];
+	$_SESSION['mod']['mail'] = $mail = $_POST['correo'];
+	$_SESSION['mod']['fecha'] = $fecha = $_POST['fecha_nac'];
+	$_SESSION['mod']['ciudad'] = $ciudad = $_POST['ciudad'];
+	$_SESSION['mod']['pais'] = $pais = $_POST['paises'];
+	$_SESSION['mod']['sexo'] = $sexo = $_POST['sexo'];
+	//$_SESSION['mod']['foto'] = $foto = "img/perfiles/".$_FILES['fotoPerfil']['name'];
+	
+	// Comprobamos que la contrasenya anterior es correcta
+	if (!ComprobarLogin($_SESSION['usuario']['nombre'], $passAnterior)) {
+		$_SESSION['error']['activado'] = true;
+		$_SESSION['error']['descripcion'] = "Contraseña anterior incorrecta.";
+	} else {
+		
+		/*$valor = Comprobaciones($nom, $pass, $rePas, $mail, $fecha);
+		
+		if ($valor) {
+			// Borramos los datos a modificar de la sesion
+			unset($_SESSION['mod']);
+		}*/
+	}
+}
+ ?>
+ 
  <body>
 	<!-- HEADER -->
-	<?php require_once("includes/header.php"); ?>
+	<?php require_once("includes/header.php");?>
 	
 	<section id="modificar_datos_usuario">
-		
 		<h2>Modificar mis datos</h2>
+		<p class="letra_roja">(*) Campos obligatorios</p>
+		<form id="form_modificar_datos" enctype="multipart/form-data" action="mis_datos.php" method="post">
 		
-		<?php
-		BuscarUsuario($_SESSION['usuario']['id']);
-		?>
-		
+			<p><label for="nombre">Nombre: </label>
+			<input type="text" name="nombre" id="nombre" tabindex="9" value="<?php echo $nom;?>"/></p>
+			
+			<p><label for="password2">Contraseña nueva: </label>
+			<input type="password" name="password2" id="password2" tabindex="10"/></p>
+			
+			<p><label for="repassword">Repetir contraseña nueva: </label>
+			<input type="password" name="repassword" id="repassword" tabindex="11"/></p>
+			
+			<p><label for="correo">Email: </label>
+			<input type="email" name="correo" id="correo" tabindex="12" value="<?php echo $mail;?>"/></p>
+			
+			<p>Sexo:
+				<label for="hombre">Hombre</label>
+				<input type="radio" name="sexo" value="Hombre" id="hombre" tabindex="13"
+				<?php 
+					if (($sexo=='Hombre') || ($sexo=='')) {
+						echo 'checked="checked"';
+					}
+				?>>
+				<label for="mujer">Mujer</label>
+				<input type="radio" name="sexo" value="Mujer" id="mujer" tabindex="14"
+				<?php 
+					if ($sexo=='Mujer') {
+						echo 'checked="checked"';
+					}
+				?>>
+			</p>
+			
+			<p><label for="fecha_nac">Fecha nacimiento: </label>
+			<input type="date" name="fecha_nac" id="fecha_nac" tabindex="15" value="<?php echo $fecha;?>"/></p>
+			
+			<p><label for="ciudad">Ciudad: </label>
+			<input type="text" name="ciudad" id="ciudad" tabindex="16" value="<?php echo $ciudad;?>"/></p>
+			
+			<p><label for="pais">País:</label>
+				<select name="paises" tabindex="17" id="pais">
+					<?php CargarPaisSeleccionado($pais); ?>
+				</select>
+			</p>
+			
+			<p><label for="foto">Foto:</label>
+			<p><img src="<?php echo $foto; ?>" alt="Foto perfil" width="200" height="150"/></p>
+			<input type="file" name="fotoPerfil" id="foto" tabindex="18"/></p>
+			
+			<p><label for="password">Introduce tu contraseña antigua: <span class="asterisco_rojo">*</span></label>
+			<input type="password" name="password" id="password" required="" tabindex="19"/></p>
+			
+			<input type="submit" name="modificar" value="Modificar datos" tabindex="20"/>
+		</form>
 	</section>
 	
 	<!-- FOOTER con </body> y </html> -->

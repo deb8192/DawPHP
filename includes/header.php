@@ -24,9 +24,6 @@
 			<form id="inicio_sesion" action="includes/login.php" method="post">
 			
 			<?php
-				// Guardamos la url
-				$_SESSION['error']['url'] = substr($_SERVER['PHP_SELF'],4);
-				
 				// Si no hay cookies guardadas
 				if ($existe == 0) {
 			?>
@@ -78,15 +75,6 @@
 				</ul>
 			</form>
 	<?php
-		if ($_SESSION['error']['activado']) { ?>
-			<div class="caja_modal">
-				<input id="cerrar-modal" name="modal" type="radio" /> 
-				<label for="cerrar-modal"> <a href="includes/borrar_error_de_sesion.php"> X </a></label>
-				<div id="modal">
-					<p class="inicio_error"><?php echo $_SESSION['error']['descripcion']; ?></p>
-				</div>
-			</div>
-	<?php }
 	} else { 
 		?>
 		
@@ -142,5 +130,18 @@
 			</ul>
 		</nav>
 	<?php }
+	}
+	// Guardamos la url
+	$_SESSION['error']['url'] = substr($_SERVER['PHP_SELF'],4);
+	
+	// Modal de error
+	if ($_SESSION['error']['activado']) { 
+		echo '<div class="caja_modal">
+			<input id="cerrar-modal" name="modal" type="radio" /> 
+			<label for="cerrar-modal"> <a href="includes/borrar_error_de_sesion.php"> X </a></label>
+			<div id="modal">
+				<p class="inicio_error">'.$_SESSION['error']['descripcion'].'</p>
+			</div>
+		</div>';
 	} ?>
 </header>

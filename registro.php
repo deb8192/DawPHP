@@ -7,6 +7,20 @@
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
 
+function Comprobaciones($nombre, $pass, $repassword, $mail, $fecha) {
+	
+	if (!ComprobarNombre($nombre)) {
+		return false;
+	} else if (!ComprobarContrasenya($pass, $repassword)) {
+		return false;
+	} else if (!ComprobarMail($mail)) {
+		return false;
+	} else if (!ComprobarFechaValida($fecha)) {
+		return false;
+	}
+	return true;
+}
+
 if (isset($_SESSION['reg'])) {
 	$nom = $_SESSION['reg']['nom'];
 	$pass = $_SESSION['reg']['pass'];
@@ -32,8 +46,7 @@ if (isset($_POST['registro'])) {
 	$_SESSION['reg']['pais'] = $pais = $_POST['paises'];
 	$_SESSION['reg']['sexo'] = $sexo = $_POST['sexo'];
 	
-	$valor = Comprobaciones($nom, $pass, $rePas, $mail, $fecha, $sexo,
-		$ciudad, $pais);
+	$valor = Comprobaciones($nom, $pass, $rePas, $mail, $fecha);
 	
 	if ($valor) {
 		// Foto por defecto

@@ -229,12 +229,8 @@
 		return false;
 	}
 	
-	function Comprobaciones($nombre, $pass, $repassword, $mail, $fecha,
-		$sexo, $ciudad, $pais) {
-		
+	function ComprobarNombre($nombre) {
 		$patronNom = "/^([a-zA-Z0-9]{3,15})$/";
-		$patronPass = "/^([a-zA-Z0-9_]{6,15})$/";
-		$patronMail = "/@([\w]{2,4})\./";
 		
 		if (ComprobarNombreUsuario($nombre)) {
 			$_SESSION['error']['activado'] = true;
@@ -252,9 +248,15 @@
 			$_SESSION['error']['activado'] = true;
 			$_SESSION['error']['descripcion'] = "El nombre sólo debe contener letras y números.";
 			return false;
-			
-			// Comprobar longitud contrasenya
-		} else if (!ComprobarLongitud(6, 15, $pass)) {
+		}
+		return true;
+	}
+	
+	function ComprobarContrasenya($pass, $repassword) {
+		$patronPass = "/^([a-zA-Z0-9_]{6,15})$/";
+		
+		// Comprobar longitud contrasenya
+		if (!ComprobarLongitud(6, 15, $pass)) {
 			$_SESSION['error']['activado'] = true;
 			$_SESSION['error']['descripcion'] = "El tamaño de la contraseña debe ser de 6 a 15 caracteres.";
 			return false;
@@ -276,15 +278,23 @@
 			$_SESSION['error']['activado'] = true;
 			$_SESSION['error']['descripcion'] = "Las contraseñas no coinciden.";
 			return false;
-			
-			// Comprobar email
-		} else if (!ComprobarPatron($patronMail, $mail)) {
+		}
+		return true;
+	}
+	
+	function ComprobarMail($mail) {
+		$patronMail = "/@([\w]{2,4})\./";
+		
+		if (!ComprobarPatron($patronMail, $mail)) {
 			$_SESSION['error']['activado'] = true;
 			$_SESSION['error']['descripcion'] = "Dominio principal de correo no válido. De 2 a 4 caracteres detrás del @.";
 			return false;
-			
-			// Comprobar fecha nacimiento
-		} else if (!ComprobarFecha($fecha)) {
+		}
+		return true;
+	}
+	
+	function ComprobarFechaValida($fecha) {
+		if (!ComprobarFecha($fecha)) {
 			$_SESSION['error']['activado'] = true;
 			$_SESSION['error']['descripcion'] = "Fecha no válida.";
 			return false;
@@ -528,9 +538,13 @@
 		$consulta = 'select NomUsuario, Clave, Email, Sexo, FNacimiento, Ciudad, Pais, Foto from usuarios where IdUsuario = '.$idUsuario;
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
-		if($resultado->num_rows>0)
-		{
+		if($resultado->num_rows>0) {
 			$fila = $resultado->fetch_object();
+		}
+		$resultado->close();
+		$conexion->close();
+		return $fila;
+		/*
 			echo '<p class="letra_roja">(*) Campos obligatorios</p>
 			<form id="form_modificar_datos" enctype="multipart/form-data" action="mis_datos.php" method="post">
 		
@@ -583,7 +597,7 @@
 			
 			<input type="submit" name="modificar" value="Modificar datos" tabindex="20"/>
 		</form>';
-		}
+		}*/
 	}
 	
 	// Funciones para el formulario de busqueda
