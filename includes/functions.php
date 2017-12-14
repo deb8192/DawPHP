@@ -629,6 +629,12 @@
 		echo '<p>Todavía no tienes álbumes creados.</p>';
 	}
 	
+	function EliminarFotoPerfil($foto) {
+		// Comprobamos que no sea la foto por defecto
+		if ($foto !== 'img/perfiles/foto.jpg')
+			unlink($foto);
+	}
+	
 	function darseDeBaja($id) {
 		$conexion = conecta();
 		$consulta = "delete from usuarios where IdUsuario=".$id;

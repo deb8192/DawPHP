@@ -172,6 +172,9 @@ if (isset($_POST['modificar'])) {
 				
 				
 				if ($foto2 != '') {
+					//Borramos la foto antigua
+					EliminarFotoPerfil($copiaFoto);
+					
 					// Sacamos el destino con el nombre de la foto
 					$origen = $_FILES['fotoPerfil']['tmp_name'];
 					
