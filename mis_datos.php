@@ -29,7 +29,7 @@ if (isset($_SESSION['mod'])) {
 	$ciudad = $_SESSION['mod']['ciudad'];
 	$pais = $_SESSION['mod']['pais'];
 	$sexo = $_SESSION['mod']['sexo'];
-	//$foto = $_SESSION['mod']['foto'];
+	$foto = $_SESSION['mod']['foto'];
 } else {
 	$nom = $copiaNom;
 	$mail = $copiaMail;
@@ -42,6 +42,7 @@ if (isset($_SESSION['mod'])) {
 
 if (isset($_POST['modificar'])) {
 	$_SESSION['error']['activado'] = false;
+	$destino = "img/perfiles/";
 	
 	$_SESSION['mod']['nom'] = $nom = $_POST['nombre'];
 	$_SESSION['mod']['pass'] = $pass = $_POST['password2'];
@@ -51,6 +52,8 @@ if (isset($_POST['modificar'])) {
 	$_SESSION['mod']['ciudad'] = $ciudad = $_POST['ciudad'];
 	$_SESSION['mod']['pais'] = $pais = $_POST['paises'];
 	$_SESSION['mod']['sexo'] = $sexo = $_POST['sexo'];
+	$_SESSION['mod']['foto'] = $foto = $copiaFoto;
+	$foto2 = $destino.$_FILES['fotoPerfil']['name'];
 	$passAnterior = $_POST['password'];
 	
 	// Comprobamos que la contrasenya anterior es correcta
@@ -76,7 +79,26 @@ if (isset($_POST['modificar'])) {
 			}
 		}
 		
-		// Aquí va la comprobación de la foto
+		if ($foto2 != '') {
+			if (strcmp ($copiaFoto , $foto2 ) !== 0) {
+				$_SESSION['mod']['foto'] = $foto2;
+				if ($_FILES['fotoPerfil']['error'] == 0) {
+					$tipo = $_FILES['fotoPerfil']['type'];
+					if ($tipo=="image/jpeg" || $tipo=="image/pjpeg" ||
+						$tipo=='image/gif' || $tipo=="image/png") {
+							
+						$i++;
+						$variable[$i] = 'Foto';
+						$valor[$i] = $foto2;
+					}
+				} else {
+					$_SESSION['error']['activado'] = true;
+					$_SESSION['error']['descripcion'] = "Error al subir la imagen.";
+					$error = true;
+				}
+				
+			}
+		}
 		
 		if (strcmp ($copiaSexo , $sexo ) !== 0) {
 			$i++;
@@ -146,7 +168,17 @@ if (isset($_POST['modificar'])) {
 				$_SESSION['usuario']['ciudad'] = $_SESSION['mod']['ciudad'];
 				$_SESSION['usuario']['pais'] = CargarPais($_SESSION['mod']['pais']);
 				$_SESSION['usuario']['sexo'] = $_SESSION['mod']['sexo'];
-				//$_SESSION['usuario']['foto'] =
+				$_SESSION['usuario']['foto'] = $_SESSION['mod']['foto'];
+				
+				
+				if ($foto2 != '') {
+					// Sacamos el destino con el nombre de la foto
+					$origen = $_FILES['fotoPerfil']['tmp_name'];
+					
+					// Movemos el fichero de la carpeta temporal a la de perfiles
+					// El destino se lo hemos añadido a $foto al cogerlo del POST
+					move_uploaded_file($origen, $foto2);
+				}
 				
 				// Borramos los datos a modificar de la sesion
 				unset($_SESSION['mod']);
