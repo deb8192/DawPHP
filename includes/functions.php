@@ -60,10 +60,11 @@
 		// Obtenemos la cadena con los datos a modificar
 		$cadena = '';
 		for ($i=0; $i<count($variable); $i++) {
-			$cadena = $cadena.'"'.$variable[$i].'" = ';
+			$cadena = $cadena.$variable[$i].' = ';
 			
 			if ($variable[$i] == 'FNacimiento') {
-				$cadena = $cadena.FormatearFechaGuiones($valor[$i]);
+				echo $valor[$i];
+				$cadena = $cadena.'"'.FormatearFechaGuiones($valor[$i]).'"';
 				
 			} else if (( $variable[$i] == 'Sexo') || ($variable[$i] == 'Pais')) {
 				$cadena = $cadena.$valor[$i];
@@ -75,8 +76,10 @@
 				$cadena = $cadena.', ';
 			}
 		}
+		
 		$conexion = conecta();
-		$consulta = "UPDATE usuarios SET".$cadena." where IdUsuario = ".$id;
+		$consulta = "UPDATE usuarios SET ".$cadena." where IdUsuario = ".$id;
+		$resultado = ejecutaConsulta($conexion, $consulta);
 		$conexion->close();
 		header("Location: menu_usuario.php");
 	}
