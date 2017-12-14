@@ -24,8 +24,7 @@ include_once("includes/cabecera.php");
 				
 				if ($resultado === TRUE) {
 					// Borramos la img de perfil
-					if ($_SESSION['usuario']['foto'] !== 'img/perfiles/foto.jpg')
-						unlink($_SESSION['usuario']['foto']);
+					EliminarFotoPerfil($_SESSION['usuario']['foto']);
 					
 					// Borramos la sesión
 					$_SESSION = array();
