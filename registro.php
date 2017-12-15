@@ -55,8 +55,8 @@ if (isset($_POST['registro'])) {
 		
 		// Se renombra si hay otro fichero con el mismo nombre
 		$nomFich = $_FILES['fotoPerfil']['name'];
-		if (ComprobarFicherosIguales($nomFich)) {
-			$nomFich = RenombrarFichero($nomFich);
+		if (ComprobarFicherosIguales($destino, $nomFich)) {
+			$nomFich = RenombrarFichero($destino, $nomFich);
 		}
 		
 		if ($_FILES['fotoPerfil']['error'] == 0) {

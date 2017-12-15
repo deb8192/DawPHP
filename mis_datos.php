@@ -88,8 +88,8 @@ if (isset($_POST['modificar'])) {
 			if (strcmp ($copiaFoto , $destino.$nomFich ) !== 0) {
 				
 				// Se renombra si hay otro fichero con el mismo nombre
-				if (ComprobarFicherosIguales($nomFich)) {
-					$nomFich = RenombrarFichero($nomFich);
+				if (ComprobarFicherosIguales($destino, $nomFich)) {
+					$nomFich = RenombrarFichero($destino, $nomFich);
 				}
 				
 				if ($_FILES['fotoPerfil']['error'] == 0) {

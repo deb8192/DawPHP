@@ -629,17 +629,15 @@
 		echo '<p>Todavía no tienes álbumes creados.</p>';
 	}
 	
-	function RenombrarFichero($nomFich) {
-		while (ComprobarFicherosIguales($nomFich)) {
+	function RenombrarFichero($nomdir, $nomFich) {
+		while (ComprobarFicherosIguales($nomdir, $nomFich)) {
 			$nomFich = "0".$nomFich;
 		}
 		return $nomFich;
 	}
 	
-	function ComprobarFicherosIguales($fichero2) {
-		$nomdir = "img/perfiles/";
+	function ComprobarFicherosIguales($nomdir, $fichero2) {
 		$dir = opendir($nomdir);
-		
 		while(($fichero1 = readdir($dir)) != FALSE) {
 			if (strcmp($fichero1, $fichero2) == 0) {
 				closedir($dir);
