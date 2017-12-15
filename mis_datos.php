@@ -85,29 +85,29 @@ if (isset($_POST['modificar'])) {
 			
 			// Comprobamos que el nombre es distinto al que tenemos
 			$nomFich = $_FILES['fotoPerfil']['name'];
-			if (strcmp ($copiaFoto , $destino.$nomFich ) !== 0) {
+			//if (strcmp ($copiaFoto , $destino.$nomFich ) !== 0) {
 				
-				// Se renombra si hay otro fichero con el mismo nombre
-				if (ComprobarFicherosIguales($destino, $nomFich)) {
-					$nomFich = RenombrarFichero($destino, $nomFich);
-				}
-				
-				if ($_FILES['fotoPerfil']['error'] == 0) {
-					$tipo = $_FILES['fotoPerfil']['type'];
-					if ($tipo=="image/jpeg" || $tipo=="image/pjpeg" ||
-						$tipo=='image/gif' || $tipo=="image/png") {
-						
-						$foto2 = $destino.$nomFich;
-						$i++;
-						$variable[$i] = 'Foto';
-						$valor[$i] = $foto2;
-					}
-				} else {
-					$_SESSION['error']['activado'] = true;
-					$_SESSION['error']['descripcion'] = "Error al subir la imagen.";
-					$error = true;
-				}
+			// Se renombra si hay otro fichero con el mismo nombre
+			if (ComprobarFicherosIguales($destino, $nomFich)) {
+				$nomFich = RenombrarFichero($destino, $nomFich);
 			}
+			
+			if ($_FILES['fotoPerfil']['error'] == 0) {
+				$tipo = $_FILES['fotoPerfil']['type'];
+				if ($tipo=="image/jpeg" || $tipo=="image/pjpeg" ||
+					$tipo=='image/gif' || $tipo=="image/png") {
+					
+					$foto2 = $destino.$nomFich;
+					$i++;
+					$variable[$i] = 'Foto';
+					$valor[$i] = $foto2;
+				}
+			} else {
+				$_SESSION['error']['activado'] = true;
+				$_SESSION['error']['descripcion'] = "Error al subir la imagen.";
+				$error = true;
+			}
+			//}
 		}
 		
 		if (strcmp ($copiaSexo , $sexo ) !== 0) {

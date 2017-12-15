@@ -9,31 +9,42 @@ include_once("includes/cabecera.php");
 
 if (isset($_POST['anyadirFoto'])){
 	
+	$idAlbum = $_POST['album'];
+	$destino = "img/albumes/".$_SESSION['usuario']['id']."/".$idAlbum."/";
+	if (!file_exists($idAlbum)) {	// Si no existe el album, lo crea
+		mkdir($destino);
+	}
+	
+	// Se renombra si hay otro fichero con el mismo nombre
+	$nomFich = $_FILES['archivo']['name'];
+	if (ComprobarFicherosIguales($destino, $nomFich)) {
+		$nomFich = RenombrarFichero($destino, $nomFich);
+	}
+	
 	if ($_FILES['archivo']['error'] == 0) {
 		$tipo = $_FILES['archivo']['type'];
 		if ($tipo=="image/jpeg" || $tipo=="image/pjpeg" ||
 			$tipo=='image/gif' || $tipo=="image/png") {
 			
-			$destino = "img/albumes/";
 			// Sacamos el destino con el nombre de la foto
 			$origen = $_FILES['archivo']['tmp_name'];
-			$carpetaDeDestino = $destino . $_FILES['archivo']['name'];
+			$carpetaDeDestino = $destino.$nomFich;
 			$foto_a_subir=$carpetaDeDestino;
 			
-			// Movemos el fichero de la carpeta temporal a la de perfiles
+			// Movemos el fichero de la carpeta temporal a la de albumes
 			move_uploaded_file($origen, $carpetaDeDestino);
+			
 			SubirFoto($_POST['Titulo'], $_POST['descripcion_foto'], $_POST['fecha'], $_POST['paises'], $_POST['album'], $foto_a_subir);
 			
 			$_SESSION['foto']['titulo'] = $_POST['Titulo'];
 			$_SESSION['foto']['descripcion_foto'] = $_POST['descripcion_foto'];
 			$_SESSION['foto']['foto'] = $foto_a_subir;
 			
-			$date = new DateTime($_POST['fecha']);
-			$fecha = $date->format('d/m/Y');
+			$fecha = FormatearFechaBarras($_POST['fecha']);
 			$_SESSION['foto']['fecha'] = $fecha;
 			
 			$_SESSION['foto']['pais'] = $_POST['paises'];
-			$_SESSION['foto']['album'] = $_POST['album'];
+			$_SESSION['foto']['album'] = $idAlbum;
 			
 			header("Location: respuesta_anyadir_foto.php");
 		}

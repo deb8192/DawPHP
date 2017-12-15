@@ -47,6 +47,9 @@
 		$conexion->close();
 		
 		if ($id >= 0) {
+			// Le creamos su carpeta de albumes
+			mkdir("img/albumes/".$id);
+			
 			header("Location: menu_usuario.php");
 		} else {
 			$_SESSION['error']['activado'] = true;

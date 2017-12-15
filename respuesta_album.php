@@ -126,9 +126,7 @@ if (isset($_POST['solicitar_album'])){
 				echo '<p>Album: '.CargarTituloAlbum($_POST['album']).'</p>';
 			}
 			if(!empty($_POST['fecha_recepcion'])){
-				
-				$date = new DateTime($_POST['fecha_recepcion']);
-				$fecha_recepcion = $date->format('d/m/Y');
+				$fecha_recepcion = FormatearFechaBarras($_POST['fecha_recepcion']);
 				echo "<p>Fecha de recepción: $fecha_recepcion</p>";
 			}
 			if(!empty($_POST['color_fotos'])){

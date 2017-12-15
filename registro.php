@@ -74,9 +74,9 @@ if (isset($_POST['registro'])) {
 			}
 		}
 		
-		
 		// Borramos los datos del registro de la sesion
 		unset($_SESSION['reg']);
+		
 		// Creamos el usuario e iniciamos sesión si todo ha ido bien
 		CrearUsuarioEnBD($nom,$pass,$mail,$sexo,$fecha,$ciudad,$pais,$foto_de_perfil);
 	}

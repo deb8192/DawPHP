@@ -19,24 +19,30 @@ require_once("includes/cabecera.php");
 
 			$titulo_album_creado = $_POST['titulo_album_creado'];
 			$descripcion_album = $_POST['descripcion_album'];
-			$date = new DateTime($_POST['fecha_album']);
-			$fecha = $date->format('d/m/Y');
+			$fecha = FormatearFechaBarras($_POST['fecha_album']);
 			$pais = $_POST['pais'];
+			
+			/*$destino = "img/albumes/".$_SESSION['usuario']['id']."/";
+			$nomAlbum = trim(strtolower($titulo_album_creado)); // Minúsculas y sin espacios al principio y final
+			$nomAlbum = str_replace(' ', '-', $nomAlbum);		// Convertimos espacios en guiones
+			
+			while (file_exists($destino.$nomAlbum)) {	// Comprobamos si existe
+				$nomAlbum = $nomAlbum."0";
+			}
+			mkdir($destino.$nomAlbum);					// Creamos la carpeta del album
+			*/
 			CrearAlbum($titulo_album_creado, $descripcion_album, $_POST['fecha_album'], $pais, $_SESSION['usuario']['id']);
 			if(!empty($_POST['titulo_album_creado'])){
-				$titulo_album_creado = $_POST['titulo_album_creado'];
 				echo "<p>Título del álbum: $titulo_album_creado</p>";
 			}
 			if(!empty($_POST['descripcion_album'])){
-				$descripcion_album = $_POST['descripcion_album'];
 				echo "<p>Descripción: $descripcion_album</p>";
 			}
 			if(!empty($_POST['fecha_album'])){
-				$date = new DateTime($_POST['fecha_album']);
-				echo "<p>Fecha: ".$date->format('d/m/Y')."</p>";
+				echo "<p>Fecha: $fecha</p>";
 			}
 			if(!empty($_POST['pais'])){
-				echo "<p>País: ".CargarPais($_POST['pais'])."</p>";
+				echo "<p>País: ".CargarPais($pais)."</p>";
 			}
 			?>
 		</section>
