@@ -20,6 +20,10 @@ include_once("includes/cabecera.php");
 		<h2>Inicio</h2>
 		<?php CargarUltimasFotos(); ?>
 	</section>
+	<section id="principal">
+		<h2>Fotos seleccionadas</h2>
+		<?php MostrarFotoSeleccionada(); ?>
+	</section>
 	
 	<!-- FOOTER con </body> y </html> -->
 	<?php include_once("includes/footer.php"); ?>

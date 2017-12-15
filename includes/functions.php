@@ -47,9 +47,6 @@
 		$conexion->close();
 		
 		if ($id >= 0) {
-			// Le creamos su carpeta de albumes
-			mkdir("img/albumes/".$id);
-			
 			header("Location: menu_usuario.php");
 		} else {
 			$_SESSION['error']['activado'] = true;
@@ -63,11 +60,10 @@
 		// Obtenemos la cadena con los datos a modificar
 		$cadena = '';
 		for ($i=0; $i<count($variable); $i++) {
-			$cadena = $cadena.$variable[$i].' = ';
+			$cadena = $cadena.'"'.$variable[$i].'" = ';
 			
 			if ($variable[$i] == 'FNacimiento') {
-				echo $valor[$i];
-				$cadena = $cadena.'"'.FormatearFechaGuiones($valor[$i]).'"';
+				$cadena = $cadena.FormatearFechaGuiones($valor[$i]);
 				
 			} else if (( $variable[$i] == 'Sexo') || ($variable[$i] == 'Pais')) {
 				$cadena = $cadena.$valor[$i];
@@ -79,10 +75,8 @@
 				$cadena = $cadena.', ';
 			}
 		}
-		
 		$conexion = conecta();
-		$consulta = "UPDATE usuarios SET ".$cadena." where IdUsuario = ".$id;
-		$resultado = ejecutaConsulta($conexion, $consulta);
+		$consulta = "UPDATE usuarios SET".$cadena." where IdUsuario = ".$id;
 		$conexion->close();
 		header("Location: menu_usuario.php");
 	}
@@ -380,7 +374,62 @@
 		$conexion->close();
 		return $existe;
 	}
-	
+	function MostrarFotoSeleccionada(){
+		$conexion = conecta();
+		$contador = 1;
+		$elegida = rand(1, 10);
+		$i=0;
+		$resultado = '';
+		$directorio = './Fotos-seleccionadas/Selecciones.txt';
+				
+		if(!file_exists($directorio)){
+			ContenidoNoExiste();
+		}
+		
+		else{
+			$archivo = fopen($directorio, 'r');
+			while($contador<$elegida){
+				$contador++;
+				while($i < 3){
+					$buffer = utf8_encode(fgets($archivo));
+					$i++;
+				} 
+				$i=0;
+			}
+			while($i < 3){
+				$buffer = utf8_encode(fgets($archivo));
+				switch ($i)	{
+					case 0:{
+						$resultado = ejecutaConsulta($conexion, $buffer);
+						$fila = $resultado->fetch_object();
+						echo '<h2>'.$fila->FTitulo.'</h2>
+							<img src="'.$fila->Fichero.'" alt='.$fila->FTitulo.'" width="400" height="300"/>
+							<aside>
+								<h3>Detalles</h3>
+								<p>Fecha: '.$fila->FFecha.'</p>
+								<p>País: '.$fila->NomPais.'</p>
+								<p>Álbum: '.$fila->ATitulo.'</p>
+								<p>Usuario: '.$fila->NomUsuario.'</p>
+							</aside>';
+						break;
+					}
+					case 1:{
+						echo '<p>Nombre del seleccionador: ' .$buffer.'</p>';
+						break;
+					}
+					case 2:{
+						echo '<p>Motivo de la selección: ' .$buffer.'</p>';
+						break;
+					}
+					
+				}
+				$i++;				
+			}
+			fclose($archivo);
+			$resultado->close();
+			$conexion->close();
+		}
+	}
 	function CrearAlbum($titulo_album_creado, $descripcion_album, $date, $pais, $usuario) {
 		$conexion = conecta();
 		$consulta = "INSERT INTO albumes (Titulo, Descripcion, Fecha, Pais, Usuario) VALUES ('$titulo_album_creado', '$descripcion_album', '$date', '$pais', '$usuario')";
@@ -630,31 +679,6 @@
 	
 	function noHayContenido() {
 		echo '<p>Todavía no tienes álbumes creados.</p>';
-	}
-	
-	function RenombrarFichero($nomdir, $nomFich) {
-		while (ComprobarFicherosIguales($nomdir, $nomFich)) {
-			$nomFich = "0".$nomFich;
-		}
-		return $nomFich;
-	}
-	
-	function ComprobarFicherosIguales($nomdir, $fichero2) {
-		$dir = opendir($nomdir);
-		while(($fichero1 = readdir($dir)) != FALSE) {
-			if (strcmp($fichero1, $fichero2) == 0) {
-				closedir($dir);
-				return true;
-			}
-		} 
-		closedir($dir);
-		return false;
-	}
-	
-	function EliminarFotoPerfil($foto) {
-		// Comprobamos que no sea la foto por defecto
-		if ($foto !== 'img/perfiles/foto.jpg')
-			unlink($foto);
 	}
 	
 	function darseDeBaja($id) {
