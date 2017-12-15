@@ -629,6 +629,27 @@
 		echo '<p>Todavía no tienes álbumes creados.</p>';
 	}
 	
+	function RenombrarFichero($nomFich) {
+		while (ComprobarFicherosIguales($nomFich)) {
+			$nomFich = "0".$nomFich;
+		}
+		return $nomFich;
+	}
+	
+	function ComprobarFicherosIguales($fichero2) {
+		$nomdir = "img/perfiles/";
+		$dir = opendir($nomdir);
+		
+		while(($fichero1 = readdir($dir)) != FALSE) {
+			if (strcmp($fichero1, $fichero2) == 0) {
+				closedir($dir);
+				return true;
+			}
+		} 
+		closedir($dir);
+		return false;
+	}
+	
 	function EliminarFotoPerfil($foto) {
 		// Comprobamos que no sea la foto por defecto
 		if ($foto !== 'img/perfiles/foto.jpg')

@@ -53,21 +53,28 @@ if (isset($_POST['registro'])) {
 		$destino = "img/perfiles/";
 		$foto_de_perfil = $destino.'foto.jpg';
 		
+		// Se renombra si hay otro fichero con el mismo nombre
+		$nomFich = $_FILES['fotoPerfil']['name'];
+		if (ComprobarFicherosIguales($nomFich)) {
+			$nomFich = RenombrarFichero($nomFich);
+		}
+		
 		if ($_FILES['fotoPerfil']['error'] == 0) {
-			
 			$tipo = $_FILES['fotoPerfil']['type'];
 			if ($tipo=="image/jpeg" || $tipo=="image/pjpeg" ||
 				$tipo=='image/gif' || $tipo=="image/png") {
 				
 				// Sacamos el destino con el nombre de la foto
 				$origen = $_FILES['fotoPerfil']['tmp_name'];
-				$carpetaDeDestino = $destino . $_FILES['fotoPerfil']['name'];
+				$carpetaDeDestino = $destino.$nomFich;
 				$foto_de_perfil=$carpetaDeDestino;
 				
 				// Movemos el fichero de la carpeta temporal a la de perfiles
 				move_uploaded_file($origen, $carpetaDeDestino);
 			}
 		}
+		
+		
 		// Borramos los datos del registro de la sesion
 		unset($_SESSION['reg']);
 		// Creamos el usuario e iniciamos sesión si todo ha ido bien

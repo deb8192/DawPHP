@@ -29,7 +29,7 @@ if (isset($_SESSION['mod'])) {
 	$ciudad = $_SESSION['mod']['ciudad'];
 	$pais = $_SESSION['mod']['pais'];
 	$sexo = $_SESSION['mod']['sexo'];
-	$foto = $_SESSION['mod']['foto'];
+	//$foto = $_SESSION['mod']['foto'];
 } else {
 	$nom = $copiaNom;
 	$mail = $copiaMail;
@@ -37,12 +37,12 @@ if (isset($_SESSION['mod'])) {
 	$ciudad = $copiaCiudad;
 	$pais = $copiaPais;
 	$sexo = $copiaSexo;
-	$foto = $copiaFoto;
+	//$foto = $copiaFoto;
 }
+$foto = $copiaFoto;
 
 if (isset($_POST['modificar'])) {
 	$_SESSION['error']['activado'] = false;
-	$destino = "img/perfiles/";
 	
 	$_SESSION['mod']['nom'] = $nom = $_POST['nombre'];
 	$_SESSION['mod']['pass'] = $pass = $_POST['password2'];
@@ -52,8 +52,7 @@ if (isset($_POST['modificar'])) {
 	$_SESSION['mod']['ciudad'] = $ciudad = $_POST['ciudad'];
 	$_SESSION['mod']['pais'] = $pais = $_POST['paises'];
 	$_SESSION['mod']['sexo'] = $sexo = $_POST['sexo'];
-	$_SESSION['mod']['foto'] = $foto = $copiaFoto;
-	$foto2 = $destino.$_FILES['fotoPerfil']['name'];
+	//$_SESSION['mod']['foto'] = $foto = $copiaFoto;
 	$passAnterior = $_POST['password'];
 	
 	// Comprobamos que la contrasenya anterior es correcta
@@ -79,14 +78,26 @@ if (isset($_POST['modificar'])) {
 			}
 		}
 		
-		if ($foto2 != '') {
-			if (strcmp ($copiaFoto , $foto2 ) !== 0) {
-				$_SESSION['mod']['foto'] = $foto2;
+		$destino = "img/perfiles/";
+		$foto2 = null;
+		// Comprobamos si hay fichero
+		if ($_FILES['fotoPerfil']['name'] != '') {
+			
+			// Comprobamos que el nombre es distinto al que tenemos
+			$nomFich = $_FILES['fotoPerfil']['name'];
+			if (strcmp ($copiaFoto , $destino.$nomFich ) !== 0) {
+				
+				// Se renombra si hay otro fichero con el mismo nombre
+				if (ComprobarFicherosIguales($nomFich)) {
+					$nomFich = RenombrarFichero($nomFich);
+				}
+				
 				if ($_FILES['fotoPerfil']['error'] == 0) {
 					$tipo = $_FILES['fotoPerfil']['type'];
 					if ($tipo=="image/jpeg" || $tipo=="image/pjpeg" ||
 						$tipo=='image/gif' || $tipo=="image/png") {
-							
+						
+						$foto2 = $destino.$nomFich;
 						$i++;
 						$variable[$i] = 'Foto';
 						$valor[$i] = $foto2;
@@ -96,7 +107,6 @@ if (isset($_POST['modificar'])) {
 					$_SESSION['error']['descripcion'] = "Error al subir la imagen.";
 					$error = true;
 				}
-				
 			}
 		}
 		
@@ -168,10 +178,8 @@ if (isset($_POST['modificar'])) {
 				$_SESSION['usuario']['ciudad'] = $_SESSION['mod']['ciudad'];
 				$_SESSION['usuario']['pais'] = CargarPais($_SESSION['mod']['pais']);
 				$_SESSION['usuario']['sexo'] = $_SESSION['mod']['sexo'];
-				$_SESSION['usuario']['foto'] = $_SESSION['mod']['foto'];
 				
-				
-				if ($foto2 != '') {
+				if ($foto2 !== NULL) {
 					//Borramos la foto antigua
 					EliminarFotoPerfil($copiaFoto);
 					
@@ -181,6 +189,7 @@ if (isset($_POST['modificar'])) {
 					// Movemos el fichero de la carpeta temporal a la de perfiles
 					// El destino se lo hemos añadido a $foto al cogerlo del POST
 					move_uploaded_file($origen, $foto2);
+					$_SESSION['usuario']['foto'] = $foto2;
 				}
 				
 				// Borramos los datos a modificar de la sesion
