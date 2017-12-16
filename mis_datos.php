@@ -29,7 +29,6 @@ if (isset($_SESSION['mod'])) {
 	$ciudad = $_SESSION['mod']['ciudad'];
 	$pais = $_SESSION['mod']['pais'];
 	$sexo = $_SESSION['mod']['sexo'];
-	//$foto = $_SESSION['mod']['foto'];
 } else {
 	$nom = $copiaNom;
 	$mail = $copiaMail;
@@ -37,7 +36,6 @@ if (isset($_SESSION['mod'])) {
 	$ciudad = $copiaCiudad;
 	$pais = $copiaPais;
 	$sexo = $copiaSexo;
-	//$foto = $copiaFoto;
 }
 $foto = $copiaFoto;
 
@@ -52,7 +50,6 @@ if (isset($_POST['modificar'])) {
 	$_SESSION['mod']['ciudad'] = $ciudad = $_POST['ciudad'];
 	$_SESSION['mod']['pais'] = $pais = $_POST['paises'];
 	$_SESSION['mod']['sexo'] = $sexo = $_POST['sexo'];
-	//$_SESSION['mod']['foto'] = $foto = $copiaFoto;
 	$passAnterior = $_POST['password'];
 	
 	// Comprobamos que la contrasenya anterior es correcta
@@ -85,8 +82,7 @@ if (isset($_POST['modificar'])) {
 			
 			// Comprobamos que el nombre es distinto al que tenemos
 			$nomFich = $_FILES['fotoPerfil']['name'];
-			//if (strcmp ($copiaFoto , $destino.$nomFich ) !== 0) {
-				
+			
 			// Se renombra si hay otro fichero con el mismo nombre
 			if (ComprobarFicherosIguales($destino, $nomFich)) {
 				$nomFich = RenombrarFichero($destino, $nomFich);
@@ -107,7 +103,6 @@ if (isset($_POST['modificar'])) {
 				$_SESSION['error']['descripcion'] = "Error al subir la imagen.";
 				$error = true;
 			}
-			//}
 		}
 		
 		if (strcmp ($copiaSexo , $sexo ) !== 0) {

@@ -82,7 +82,10 @@ if (isset($_POST['anyadirFoto'])){
 				<p><label for= "urlFoto">Foto: <span class="asterisco_rojo">*</span></label>
 				<input type="file" name="archivo" id="archivo" required="" tabindex="13"/></p>
 			
-				<p class="quitar_arriba"><select name="album" required="" tabindex="14" id="salbum">
+				<p class="quitar_arriba">
+				<label for= "album">Selecciona un álbum: <span class="asterisco_rojo">*</span></label>
+				<select name="album" required="" tabindex="14" id="salbum">
+				<option value="">Elegir álbum...</option>
 					<?php CargarListaAlbumesPorUsuario($_SESSION['usuario']['id']); ?>
 				</select></p> 
 			

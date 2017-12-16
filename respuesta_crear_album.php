@@ -22,15 +22,6 @@ require_once("includes/cabecera.php");
 			$fecha = FormatearFechaBarras($_POST['fecha_album']);
 			$pais = $_POST['pais'];
 			
-			/*$destino = "img/albumes/".$_SESSION['usuario']['id']."/";
-			$nomAlbum = trim(strtolower($titulo_album_creado)); // Minúsculas y sin espacios al principio y final
-			$nomAlbum = str_replace(' ', '-', $nomAlbum);		// Convertimos espacios en guiones
-			
-			while (file_exists($destino.$nomAlbum)) {	// Comprobamos si existe
-				$nomAlbum = $nomAlbum."0";
-			}
-			mkdir($destino.$nomAlbum);					// Creamos la carpeta del album
-			*/
 			CrearAlbum($titulo_album_creado, $descripcion_album, $_POST['fecha_album'], $pais, $_SESSION['usuario']['id']);
 			if(!empty($_POST['titulo_album_creado'])){
 				echo "<p>Título del álbum: $titulo_album_creado</p>";

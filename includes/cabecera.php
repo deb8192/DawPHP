@@ -37,8 +37,9 @@
 		$_SESSION['error']['activado'] = false;
 	}
 	
+	// Revisar este control del modal error
 	// Borramos los datos de sesión del registro de usuario
-	if ((isset($_SESSION['reg'])) || (strpos($_SERVER['PHP_SELF'], 'registro') === false )) {
+	if ((isset($_SESSION['reg'])) && (strpos($_SERVER['PHP_SELF'], 'registro') === false )) {
 		unset($_SESSION['reg']);
 		$_SESSION['error']['activado'] = false;
 	}

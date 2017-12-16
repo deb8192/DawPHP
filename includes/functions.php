@@ -47,6 +47,9 @@
 		$conexion->close();
 		
 		if ($id >= 0) {
+			// Le creamos su carpeta de albumes
+			mkdir("img/albumes/".$id);
+			
 			header("Location: menu_usuario.php");
 		} else {
 			$_SESSION['error']['activado'] = true;
@@ -60,10 +63,10 @@
 		// Obtenemos la cadena con los datos a modificar
 		$cadena = '';
 		for ($i=0; $i<count($variable); $i++) {
-			$cadena = $cadena.'"'.$variable[$i].'" = ';
+			$cadena = $cadena.$variable[$i].' = ';
 			
 			if ($variable[$i] == 'FNacimiento') {
-				$cadena = $cadena.FormatearFechaGuiones($valor[$i]);
+				$cadena = $cadena.'"'.FormatearFechaGuiones($valor[$i]).'"';
 				
 			} else if (( $variable[$i] == 'Sexo') || ($variable[$i] == 'Pais')) {
 				$cadena = $cadena.$valor[$i];
@@ -76,7 +79,8 @@
 			}
 		}
 		$conexion = conecta();
-		$consulta = "UPDATE usuarios SET".$cadena." where IdUsuario = ".$id;
+		$consulta = "UPDATE usuarios SET ".$cadena." where IdUsuario = ".$id;
+		$resultado = ejecutaConsulta($conexion, $consulta);
 		$conexion->close();
 		header("Location: menu_usuario.php");
 	}
@@ -400,7 +404,8 @@
 				$buffer = utf8_encode(fgets($archivo));
 				switch ($i)	{
 					case 0:{
-						$resultado = ejecutaConsulta($conexion, $buffer);
+						$consulta='select Fichero, f.Titulo as FTitulo, DATE_FORMAT(f.Fecha, "%d/%m/%Y") as FFecha, NomPais, a.Titulo as ATitulo, NomUsuario from fotos f inner join paises on Pais = IdPais inner join albumes a on Album = IdAlbum inner join usuarios on Usuario = IdUsuario where IdFoto = '.$buffer;
+						$resultado = ejecutaConsulta($conexion, $consulta);
 						$fila = $resultado->fetch_object();
 						echo '<h2>'.$fila->FTitulo.'</h2>
 							<img src="'.$fila->Fichero.'" alt='.$fila->FTitulo.'" width="400" height="300"/>
@@ -537,60 +542,6 @@
 		$resultado->close();
 		$conexion->close();
 		return $fila;
-		/*
-			echo '<p class="letra_roja">(*) Campos obligatorios</p>
-			<form id="form_modificar_datos" enctype="multipart/form-data" action="mis_datos.php" method="post">
-		
-			<p><label for="nombre">Nombre: <span class="asterisco_rojo">*</span></label>
-			<input type="text" name="nombre" id="nombre" value='.$fila->NomUsuario.' required="" tabindex="9"/></p>
-			
-			<p><label for="password2">Contraseña nueva: <span class="asterisco_rojo">*</span></label>
-			<input type="password" name="password2" id="password2" required="" tabindex="10"/></p>
-			
-			<p><label for="repassword">Repetir contraseña nueva: <span class="asterisco_rojo">*</span></label>
-			<input type="password" name="repassword" id="repassword" required="" tabindex="11"/></p>
-			
-			<p><label for="correo">Email: <span class="asterisco_rojo">*</span></label>
-			<input type="email" name="correo" id="correo" value='.$fila->Email.' required="" tabindex="12"/></p>
-			
-			<p>Sexo:';
-			if($fila->Sexo == 1){
-				echo '<label for="hombre">Hombre</label>
-				<input type="radio" name="sexo" value="Hombre" id="hombre" tabindex="13" checked>
-				<label for="mujer">Mujer</label>
-				<input type="radio" name="sexo" value="Mujer" id="mujer" tabindex="14">';
-			}
-			else{
-				echo '<label for="hombre">Hombre</label>
-				<input type="radio" name="sexo" value="Hombre" id="hombre" tabindex="13" 
-				<label for="mujer">Mujer</label>
-				<input type="radio" name="sexo" value="Mujer" id="mujer" tabindex="14" checked>';
-			}
-			echo '</p>
-			
-			<p><label for="fecha_nac">Fecha nacimiento:</label>
-			<input type="date" name="fecha_nac" id="fecha_nac" value='.$fila->FNacimiento.' tabindex="15"/></p>
-			
-			<p><label for="ciudad">Ciudad: <span class="asterisco_rojo">*</span></label>
-			<input type="text" name="ciudad" id="ciudad" value='.$fila->Ciudad.' required="" tabindex="16"/></p>
-			
-			<p><label for="pais">País:</label>
-				<select name="paises" tabindex="17" id="pais">
-					<option value="">Elegir país...</option>';
-					CargarPaisSeleccionado($fila->Pais);
-				echo '</select>
-			</p>
-			
-			<p><label for="foto">Foto:</label></p>
-			<p><img src="'.$fila->Foto.'"alt="Foto perfil" width="200" height="150"/></p>
-			<p><input type="file" name="fotoPerfil" id="foto"  tabindex="18"/></p>
-			
-			<p><label for="password">Introduce tu contraseña antigua: <span class="asterisco_rojo">*</span></label>
-			<input type="password" name="password" id="password" required="" tabindex="19"/></p>
-			
-			<input type="submit" name="modificar" value="Modificar datos" tabindex="20"/>
-		</form>';
-		}*/
 	}
 	
 	// Funciones para el formulario de busqueda
@@ -679,6 +630,34 @@
 	
 	function noHayContenido() {
 		echo '<p>Todavía no tienes álbumes creados.</p>';
+	}
+	
+	function RenombrarFichero($nomdir, $nomFich) {
+		$contador = 0;
+		$auxNom = $nomFich;
+		while (ComprobarFicherosIguales($nomdir, $auxNom)) {
+			$auxNom = $contador.$nomFich;
+			$contador++;
+		}
+		return $auxNom;
+	}
+	
+	function ComprobarFicherosIguales($nomdir, $fichero2) {
+		$dir = opendir($nomdir);
+		while(($fichero1 = readdir($dir)) != FALSE) {
+			if (strcmp($fichero1, $fichero2) == 0) {
+				closedir($dir);
+				return true;
+			}
+		} 
+		closedir($dir);
+		return false;
+	}
+	
+	function EliminarFotoPerfil($foto) {
+		// Comprobamos que no sea la foto por defecto
+		if ($foto !== 'img/perfiles/foto.jpg')
+			unlink($foto);
 	}
 	
 	function darseDeBaja($id) {
