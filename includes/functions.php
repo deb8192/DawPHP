@@ -388,9 +388,8 @@
 				
 		if(!file_exists($directorio)){
 			ContenidoNoExiste();
-		}
-		
-		else{
+			
+		} else {
 			$archivo = fopen($directorio, 'r');
 			while($contador<$elegida){
 				$contador++;
@@ -547,63 +546,59 @@
 	// Funciones para el formulario de busqueda
 	function BuscarFotos($titulo, $fecha, $pais) {
 		
-		if (($titulo != "") && ($fecha != "") && ($pais != "")) {
-			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
-			 where Titulo like "%'.$titulo.'%" and IdPais = '.$pais.' and Fecha = "'.$fecha.'"';
-			
-		} else if (($titulo != "") && ($fecha != "") && ($pais == "")) { // Titulo y fecha
-			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
-			 where Titulo like "%'.$titulo.'%" and Fecha = "'.$fecha.'"';
-			
-		} else if (($titulo != "") && ($pais != "") && ($fecha == "")) { // Titulo y pais
-			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
-			 where Titulo like "%'.$titulo.'%" and IdPais = '.$pais;
+		$i = -1;
+		$variable = [];
+		if ($titulo != "") {	// Buscar por título
+			$i++;
+			$variable[$i] = 'Titulo like "%'.$titulo.'%"';
+		}
+		if ($pais != "") {		// Buscar por país
+			$i++;
+			$variable[$i] = 'IdPais = '.$pais;
+		}
+		if ($fecha != "") {		// Buscar por fecha
+			$i++;
+			$variable[$i] = 'Fecha = "'.$fecha.'"';
+		}
 		
-		} else if (($titulo == "") && ($fecha != "") && ($pais != "")) { // Fecha y pais
-			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
-			 where IdPais = '.$pais.' and Fecha = "'.$fecha.'"';
-		
-		} else if (($titulo != "") && ($fecha == "") && ($pais == "")) { // Solo titulo
-			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
-			 where Titulo like "%'.$titulo.'%"';
-			 
-		} else if (($titulo == "") && ($fecha != "") && ($pais == "")) { // Solo fecha
-			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
-			 where Fecha = "'.$fecha.'"';
-			 
-		} else if (($titulo == "") && ($fecha == "") && ($pais != "")) { // Solo pais
-			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais
-			 where IdPais = '.$pais;
+		if ($i >= 0) {
+			// Obtenemos la cadena con los datos a consultar
+			$cadena = '';
+			for ($i=0; $i<count($variable); $i++) {
+				$cadena = $cadena.$variable[$i];
+				if ((count($variable) > 1) && ($i < count($variable)-1)) {
+					$cadena = $cadena.' and ';
+				}
+			}
+			$conexion = conecta();
+			$consulta = 'select IdFoto, Fichero, Titulo, DATE_FORMAT(Fecha, "%d/%m/%Y") as Fecha, NomPais from fotos inner join paises on IdPais = Pais where '.$cadena;
+			$resultado = ejecutaConsulta($conexion, $consulta);
+			
+			$tab = 13;
+			if ($resultado->num_rows > 0) {
+				while($fila = $resultado->fetch_object()) {
+					
+					echo '<ul class="lista_fotos">
+						<li>
+							<h3>'.$fila->Titulo.'</h3>
+							<a href="detalle_foto.php?id='.$fila->IdFoto.'" title="Ver '.$fila->Titulo.'" tabindex="'.$tab.'"><img src="'.$fila->Fichero.'" alt="'.$fila->Titulo.'" width="200" height="150"/></a>
+							<ul class="datos">
+								<li>'.$fila->Fecha.'</li>
+								<li>'.$fila->NomPais.'</li>
+							</ul>
+						</li>
+					</ul>';
+					$tab++;
+				}
+			} else {
+				echo '<p>No hay resultados.</p>';
+			}
+			$resultado->close();
+			$conexion->close();
 		} else {
 			// Si no hay datos, sacacmos el mensaje y salimos de la función
 			echo '<p class="color_rojo">Introduce algunos datos para la búsqueda.</p>';
-			return;
 		}
-		
-		$conexion = conecta();
-		$resultado = ejecutaConsulta($conexion, $consulta);
-		
-		$tab = 13;
-		if ($resultado->num_rows > 0) {
-			while($fila = $resultado->fetch_object()) {
-				
-				echo '<ul class="lista_fotos">
-					<li>
-						<h3>'.$fila->Titulo.'</h3>
-						<a href="detalle_foto.php?id='.$fila->IdFoto.'" title="Ver '.$fila->Titulo.'" tabindex="'.$tab.'"><img src="'.$fila->Fichero.'" alt="'.$fila->Titulo.'" width="200" height="150"/></a>
-						<ul class="datos">
-							<li>'.$fila->Fecha.'</li>
-							<li>'.$fila->NomPais.'</li>
-						</ul>
-					</li>
-				</ul>';
-				$tab++;
-			}
-		} else {
-			echo '<p>No hay resultados.</p>';
-		}
-		$resultado->close();
-		$conexion->close();
 	}
 	
 	function CargarPaisSeleccionado($seleccionado) {
