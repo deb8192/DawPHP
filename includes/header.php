@@ -132,7 +132,35 @@
 	<?php }
 	}
 	// Guardamos la url
-	$_SESSION['error']['url'] = substr($_SERVER['PHP_SELF'],4);
+	$_SESSION['error']['urlIniciarSesion'] = substr($_SERVER['PHP_SELF'],4);
+	
+	// Borra el error de Iniciar sesión
+	if (($_SESSION['error']['activado']) && isset($_SESSION['error']['url'])) {
+		$url = $_SESSION['error']['urlIniciarSesion'];
+		$urlError = $_SESSION['error']['url'];
+		
+		if (strcmp($url, $urlError) !== 0) {
+			$_SESSION['error']['activado'] = false;
+			$_SESSION['error']['urlIniciarSesion'] = NULL;
+			$_SESSION['error']['url'] = NULL;
+		}
+	}
+	
+	// Borra los errores del registro si no están en la página de registro
+	if (isset($_SESSION['error']['reg'])) {
+		if (($_SESSION['error']['reg']) && (strcmp($_SESSION['error']['urlIniciarSesion'], 'registro.php') !== 0 )) {
+			$_SESSION['error']['activado'] = false;
+			$_SESSION['error']['reg'] = false;
+		}
+	}
+	
+	// Borra los errores de modificar datos si no están en la página de modificar datos
+	if (isset($_SESSION['error']['mod'])) {
+		if (($_SESSION['error']['mod']) && (strcmp($_SESSION['error']['urlIniciarSesion'], 'mis_datos.php') !== 0 )) {
+			$_SESSION['error']['activado'] = false;
+			$_SESSION['error']['mod'] = false;
+		}
+	}
 	
 	// Modal de error
 	if ($_SESSION['error']['activado']) { 

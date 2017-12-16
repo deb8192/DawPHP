@@ -6,6 +6,7 @@
 
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
+$_SESSION['error']['mod'] = true; // Indicamos que los errores son de mis_datos
 
 // Cargamos los datos del usuario
 $usu = BuscarUsuario($_SESSION['usuario']['id']);

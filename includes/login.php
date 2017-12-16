@@ -11,7 +11,6 @@
 		if ($resultado->num_rows > 0) {
 			$fila = $resultado->fetch_object();
 			
-			//$_SESSION['usuario'] = true;
 			$_SESSION['usuario']['id'] = $fila->IdUsuario;
 			$_SESSION['usuario']['nombre'] = $fila->NomUsuario;
 			$_SESSION['usuario']['foto'] = $fila->Foto;
@@ -31,7 +30,8 @@
 	function ActivarErrorModal() {
 		$_SESSION['error']['activado'] = true;
 		$_SESSION['error']['descripcion'] = "El usuario o la contraseña no coincide.";
-		header("Location:../".$_SESSION['error']['url']);
+		$_SESSION['error']['url'] = $_SESSION['error']['urlIniciarSesion'];
+		header("Location:../".$_SESSION['error']['urlIniciarSesion']);
 	}
 	
 	if (isset($_POST['enviar'])) {

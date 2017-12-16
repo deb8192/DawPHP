@@ -6,6 +6,7 @@
 
  // Declaración de DOCTYPE, <html>, <head>, <title>, <meta> y <link>. 
 require_once("includes/cabecera.php");
+$_SESSION['error']['reg'] = true; // Indicamos que los errores son de registro
 
 function Comprobaciones($nombre, $pass, $repassword, $mail, $fecha) {
 	

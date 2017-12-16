@@ -34,14 +34,11 @@
 	// Borramos los datos de sesión de modificar el usuario
 	if ((isset($_SESSION['mod'])) && (strpos($_SERVER['PHP_SELF'], 'mis_datos') === false )) {
 		unset($_SESSION['mod']);
-		$_SESSION['error']['activado'] = false;
 	}
 	
-	// Revisar este control del modal error
 	// Borramos los datos de sesión del registro de usuario
 	if ((isset($_SESSION['reg'])) && (strpos($_SERVER['PHP_SELF'], 'registro') === false )) {
 		unset($_SESSION['reg']);
-		$_SESSION['error']['activado'] = false;
 	}
 ?>
 <!DOCTYPE html>

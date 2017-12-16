@@ -54,7 +54,7 @@
 		} else {
 			$_SESSION['error']['activado'] = true;
 			$_SESSION['error']['descripcion'] = "No se ha podido insertar el usuario.";
-			header("Location:../".$_SESSION['error']['url']);
+			header("Location:../".$_SESSION['error']['urlIniciarSesion']);
 		}
 	}
 	

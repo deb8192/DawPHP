@@ -51,7 +51,7 @@ if (isset($_POST['anyadirFoto'])){
 	} else {
 		$_SESSION['error']['activado'] = true;
 		$_SESSION['error']['descripcion'] = "Fallo al subir la foto.";
-		header("Location:".$_SESSION['error']['url']);
+		header("Location:".$_SESSION['error']['urlIniciarSesion']);
 	}
 }
  ?>
