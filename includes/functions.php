@@ -355,7 +355,7 @@
 			return false;
 		
 		$conexion = conecta();
-		$consulta = 'select Fichero, f.Titulo as FTitulo, DATE_FORMAT(f.Fecha, "%d/%m/%Y") as FFecha, NomPais, a.Titulo as ATitulo, NomUsuario from fotos f inner join paises on Pais = IdPais inner join albumes a on Album = IdAlbum inner join usuarios on Usuario = IdUsuario where IdFoto = '.$id;
+		$consulta = 'select Fichero, f.Titulo as FTitulo, DATE_FORMAT(f.Fecha, "%d/%m/%Y") as FFecha, NomPais, a.Titulo as ATitulo, NomUsuario, f.Descripcion as Descripcion from fotos f inner join paises on Pais = IdPais inner join albumes a on Album = IdAlbum inner join usuarios on Usuario = IdUsuario where IdFoto = '.$id;
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
 		$existe = false;
@@ -367,6 +367,7 @@
 			<img src="'.$fila->Fichero.'" alt='.$fila->FTitulo.'" width="400" height="300"/>
 			<aside>
 				<h3>Detalles</h3>
+				<p>Descripción: '.$fila->Descripcion.'</p>
 				<p>Fecha: '.$fila->FFecha.'</p>
 				<p>País: '.$fila->NomPais.'</p>
 				<p>Álbum: '.$fila->ATitulo.'</p>
