@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Feed de imágenes de "PI - Pictures and images"</title>
+    <link>localhost</link>
+    <description>Galería de fotos online.</description>
+    <language>es</language>
+    <item>
+      <title>Foto ahora</title>
+      <link>http://localhost/P6/detalle_foto.php?id=27</link>
+      <description>Una foto chula.</description>
+    </item>
+    <item>
+      <title>Katherine 2</title>
+      <link>http://localhost/P6/detalle_foto.php?id=26</link>
+      <description>K2</description>
+    </item>
+    <item>
+      <title>Katherine 1</title>
+      <link>http://localhost/P6/detalle_foto.php?id=25</link>
+      <description>K1</description>
+    </item>
+    <item>
+      <title>Cumpleaños Marta 3</title>
+      <link>http://localhost/P6/detalle_foto.php?id=18</link>
+      <description>Cumpleaños Marta 3</description>
+    </item>
+    <item>
+      <title>Cumpleaños Marta 2</title>
+      <link>http://localhost/P6/detalle_foto.php?id=17</link>
+      <description>Cumpleaños Marta 2</description>
+    </item>
+  </channel>
+</rss>

@@ -88,6 +88,16 @@ header a{
 .lupa:hover {
 	background-position: -32px 0;
 }
+.rss { background-image: url(../img/rss-icono.png); }
+.atom  { background-image: url(../img/atom-icono.png); }
+.rss, .atom {
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-size: 25px;
+	padding-right: 25px;
+	padding-bottom: 25px;
+	margin-left: 10px;
+}
 footer{
 		height:60px;
 		width:100%;

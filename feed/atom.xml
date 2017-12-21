@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Feed de imágenes de "PI - Pictures and images"</title>
+  <link href="localhost"/>
+  <id>Galería de fotos online.</id>
+  <entry>
+    <link href="http://localhost/P6/detalle_foto.php?id=27"/>
+    <title>Foto ahora</title>
+    <summary>Una foto chula.</summary>
+  </entry>
+  <entry>
+    <link href="http://localhost/P6/detalle_foto.php?id=26"/>
+    <title>Katherine 2</title>
+    <summary>K2</summary>
+  </entry>
+  <entry>
+    <link href="http://localhost/P6/detalle_foto.php?id=25"/>
+    <title>Katherine 1</title>
+    <summary>K1</summary>
+  </entry>
+  <entry>
+    <link href="http://localhost/P6/detalle_foto.php?id=18"/>
+    <title>Cumpleaños Marta 3</title>
+    <summary>Cumpleaños Marta 3</summary>
+  </entry>
+  <entry>
+    <link href="http://localhost/P6/detalle_foto.php?id=17"/>
+    <title>Cumpleaños Marta 2</title>
+    <summary>Cumpleaños Marta 2</summary>
+  </entry>
+</feed>
