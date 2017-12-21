@@ -23,13 +23,13 @@
 		
 		// Datos del canal
 		$title = 'Feed de imágenes de "PI - Pictures and images"';
-		$link = $_SERVER['SERVER_NAME'];
+		$link = 'http://'.$_SERVER['SERVER_NAME'].'/P6';
 		$description = 'Galería de fotos online.';
 		$language = 'es';
 		$categoria = 'Media';
 		
 		$conexion = conecta();
-		$consulta = 'select IdFoto, Titulo, Descripcion, DATE_FORMAT(Fecha, "%d/%m/%Y") As Fecha, NomPais from fotos inner join paises on Pais = IdPais order by FRegistro desc limit 0, 5';
+		$consulta = 'select IdFoto, f.Titulo as Titulo, f.Descripcion as Descripcion, NomPais, NomUsuario, DATE_FORMAT(f.FRegistro, "%a, %d %b %Y %T") As Fecha from usuarios inner join albumes inner join fotos f inner join paises p on f.Pais = IdPais where Usuario = IdUsuario and IdAlbum = Album order by f.FRegistro desc limit 0, 5';
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
 		if ($resultado->num_rows > 0) {
@@ -51,9 +51,14 @@
 				$nodo2 = CrearHijoDescripcion($xml, $nodo, $nodo2, 'language', $language);
 				$nodo2 = CrearHijoDescripcion($xml, $nodo, $nodo2, 'category', $categoria);
 				
-				// Imagen
 				$nodo2 = CrearHijo($xml, $nodo, $nodo2, 'image');
-				//CrearAtributo($xml, $nodo2, 'link', '2.0');
+				$nodo3 = CrearHijoDescripcion($xml, $nodo2, $nodo3, 'link', $link);
+				$nodo3 = CrearHijoDescripcion($xml, $nodo2, $nodo3, 'title', $title);
+				$nodo3 = CrearHijoDescripcion($xml, $nodo2, $nodo3, 'url', '../img/pi.png');
+				$nodo3 = CrearHijoDescripcion($xml, $nodo2, $nodo3, 'description', $description);
+				$nodo3 = CrearHijoDescripcion($xml, $nodo2, $nodo3, 'height', '32');
+				$nodo3 = CrearHijoDescripcion($xml, $nodo2, $nodo3, 'width', '96');
+				
 				
 			} else {
 				// Creamos la raiz atom y su atributo xmlns
@@ -84,6 +89,12 @@
 					
 					$tipoDesc = 'description';	// Para la descipción
 					
+					$subnodo = CrearHijoDescripcion($xml, $nodo2, $subnodo, 'author', $fila->NomUsuario);
+					
+					$subnodo = CrearHijoDescripcion($xml, $nodo2, $subnodo, 'pubDate', $fila->Fecha);
+					
+					//<pubDate>Fri, 05 Oct 2007 09:00:00 CST</pubDate>
+					
 				} else {
 					$nodo2 = CrearHijo($xml, $raiz, $nodo2, 'entry');	// Elemento
 					
@@ -99,7 +110,7 @@
 				
 				// Título y descripción de la imagen
 				$subnodo = CrearHijoDescripcion($xml, $nodo2, $subnodo, 'title', $fila->Titulo);
-				$subnodo = CrearHijoDescripcion($xml, $nodo2, $subnodo, $tipoDesc, $fila->Descripcion);
+				$subnodo = CrearHijoDescripcion($xml, $nodo2, $subnodo, $tipoDesc, $fila->Descripcion.' País: '.$fila->NomPais);
 				
 			}
 		}

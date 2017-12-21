@@ -2,33 +2,52 @@
 <rss version="2.0">
   <channel>
     <title>Feed de imágenes de "PI - Pictures and images"</title>
-    <link>localhost</link>
+    <link>http://localhost/P6</link>
     <description>Galería de fotos online.</description>
     <language>es</language>
+    <category>Media</category>
+    <image>
+      <link>http://localhost/P6</link>
+      <title>Feed de imágenes de "PI - Pictures and images"</title>
+      <url>../img/pi.png</url>
+      <description>Galería de fotos online.</description>
+      <height>32</height>
+      <width>96</width>
+    </image>
     <item>
-      <title>Foto ahora</title>
       <link>http://localhost/P6/detalle_foto.php?id=27</link>
-      <description>Una foto chula.</description>
+      <author>Marines</author>
+      <pubDate>Fri, 15 Dec 2017 11:58:54</pubDate>
+      <title>Foto ahora</title>
+      <description>Una foto chula. País: Argentina</description>
     </item>
     <item>
-      <title>Katherine 2</title>
       <link>http://localhost/P6/detalle_foto.php?id=26</link>
-      <description>K2</description>
+      <author>Marines</author>
+      <pubDate>Fri, 15 Dec 2017 11:55:31</pubDate>
+      <title>Katherine 2</title>
+      <description>K2 País: Argentina</description>
     </item>
     <item>
-      <title>Katherine 1</title>
       <link>http://localhost/P6/detalle_foto.php?id=25</link>
-      <description>K1</description>
+      <author>Marines</author>
+      <pubDate>Fri, 15 Dec 2017 11:42:15</pubDate>
+      <title>Katherine 1</title>
+      <description>K1 País: Colombia</description>
     </item>
     <item>
-      <title>Cumpleaños Marta 3</title>
       <link>http://localhost/P6/detalle_foto.php?id=18</link>
-      <description>Cumpleaños Marta 3</description>
+      <author>Debora</author>
+      <pubDate>Mon, 30 Oct 2017 07:31:32</pubDate>
+      <title>Cumpleaños Marta 3</title>
+      <description>Cumpleaños Marta 3 País: Colombia</description>
     </item>
     <item>
-      <title>Cumpleaños Marta 2</title>
       <link>http://localhost/P6/detalle_foto.php?id=17</link>
-      <description>Cumpleaños Marta 2</description>
+      <author>Debora</author>
+      <pubDate>Mon, 30 Oct 2017 07:30:31</pubDate>
+      <title>Cumpleaños Marta 2</title>
+      <description>Cumpleaños Marta 2 País: Colombia</description>
     </item>
   </channel>
 </rss>
