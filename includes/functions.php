@@ -1,7 +1,6 @@
 <?php
 	require_once('admin/db.inc');
 	
-	// TO DO: Meterlas por todos los php
 	function FormatearFechaBarras($fecha) {
 		$date = new DateTime($fecha);
 		$fechaNueva = $date->format('d/m/Y');
@@ -331,7 +330,7 @@
 		$tab = 10;
 		if ($resultado->num_rows > 0) {
 			while($fila = $resultado->fetch_object()) {
-				
+
 				echo '<ul class="lista_fotos">
 					<li>
 						<h3>'.$fila->Titulo.'</h3>
