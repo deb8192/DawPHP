@@ -9,45 +9,45 @@
     <image>
       <link>http://localhost/P6</link>
       <title>Feed de imágenes de "PI - Pictures and images"</title>
-      <url>../img/pi.png</url>
+      <url>http://localhost/P6/img/pi.png</url>
       <description>Galería de fotos online.</description>
       <height>32</height>
       <width>96</width>
     </image>
     <item>
       <link>http://localhost/P6/detalle_foto.php?id=27</link>
-      <author>Marines</author>
-      <pubDate>Fri, 15 Dec 2017 11:58:54</pubDate>
       <title>Foto ahora</title>
       <description>Una foto chula. País: Argentina</description>
+      <pubDate>Fri, 15 Dec 2017 11:58:54 +0100</pubDate>
+      <guid>http://localhost/P6/detalle_foto.php?id=27</guid>
     </item>
     <item>
       <link>http://localhost/P6/detalle_foto.php?id=26</link>
-      <author>Marines</author>
-      <pubDate>Fri, 15 Dec 2017 11:55:31</pubDate>
       <title>Katherine 2</title>
       <description>K2 País: Argentina</description>
+      <pubDate>Fri, 15 Dec 2017 11:55:31 +0100</pubDate>
+      <guid>http://localhost/P6/detalle_foto.php?id=26</guid>
     </item>
     <item>
       <link>http://localhost/P6/detalle_foto.php?id=25</link>
-      <author>Marines</author>
-      <pubDate>Fri, 15 Dec 2017 11:42:15</pubDate>
       <title>Katherine 1</title>
       <description>K1 País: Colombia</description>
+      <pubDate>Fri, 15 Dec 2017 11:42:15 +0100</pubDate>
+      <guid>http://localhost/P6/detalle_foto.php?id=25</guid>
     </item>
     <item>
       <link>http://localhost/P6/detalle_foto.php?id=18</link>
-      <author>Debora</author>
-      <pubDate>Mon, 30 Oct 2017 07:31:32</pubDate>
       <title>Cumpleaños Marta 3</title>
       <description>Cumpleaños Marta 3 País: Colombia</description>
+      <pubDate>Mon, 30 Oct 2017 07:31:32 +0100</pubDate>
+      <guid>http://localhost/P6/detalle_foto.php?id=18</guid>
     </item>
     <item>
       <link>http://localhost/P6/detalle_foto.php?id=17</link>
-      <author>Debora</author>
-      <pubDate>Mon, 30 Oct 2017 07:30:31</pubDate>
       <title>Cumpleaños Marta 2</title>
       <description>Cumpleaños Marta 2 País: Colombia</description>
+      <pubDate>Mon, 30 Oct 2017 07:30:31 +0100</pubDate>
+      <guid>http://localhost/P6/detalle_foto.php?id=17</guid>
     </item>
   </channel>
 </rss>

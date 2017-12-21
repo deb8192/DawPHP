@@ -27,9 +27,17 @@
 		$description = 'Galería de fotos online.';
 		$language = 'es';
 		$categoria = 'Media';
+		$imagen = $link.'/img/pi.png';
+		
+		// Formato de la fecha para la select
+		if ((strcmp ($tipo, 'rss') == 0)) {
+			$formato = '"%a, %d %b %Y %T +0100"';	// Fri, 15 Dec 2017 11:58:54 +0100
+		} else {
+			$formato = '"%Y-%m-%dT%T+01:00"';		// 2017-12-15T11:58:54+01:00
+		}
 		
 		$conexion = conecta();
-		$consulta = 'select IdFoto, f.Titulo as Titulo, f.Descripcion as Descripcion, NomPais, NomUsuario, DATE_FORMAT(f.FRegistro, "%a, %d %b %Y %T") As Fecha from usuarios inner join albumes inner join fotos f inner join paises p on f.Pais = IdPais where Usuario = IdUsuario and IdAlbum = Album order by f.FRegistro desc limit 0, 5';
+		$consulta = 'select IdFoto, f.Titulo as Titulo, f.Descripcion as Descripcion, NomPais, NomUsuario, DATE_FORMAT(f.FRegistro, '.$formato.') As Fecha from usuarios inner join albumes inner join fotos f inner join paises p on f.Pais = IdPais where Usuario = IdUsuario and IdAlbum = Album order by f.FRegistro desc limit 0, 5';
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
 		if ($resultado->num_rows > 0) {
@@ -51,10 +59,11 @@
 				$nodo2 = CrearHijoDescripcion($xml, $nodo, $nodo2, 'language', $language);
 				$nodo2 = CrearHijoDescripcion($xml, $nodo, $nodo2, 'category', $categoria);
 				
+				// Logo de la web
 				$nodo2 = CrearHijo($xml, $nodo, $nodo2, 'image');
 				$nodo3 = CrearHijoDescripcion($xml, $nodo2, $nodo3, 'link', $link);
 				$nodo3 = CrearHijoDescripcion($xml, $nodo2, $nodo3, 'title', $title);
-				$nodo3 = CrearHijoDescripcion($xml, $nodo2, $nodo3, 'url', '../img/pi.png');
+				$nodo3 = CrearHijoDescripcion($xml, $nodo2, $nodo3, 'url', $imagen);
 				$nodo3 = CrearHijoDescripcion($xml, $nodo2, $nodo3, 'description', $description);
 				$nodo3 = CrearHijoDescripcion($xml, $nodo2, $nodo3, 'height', '32');
 				$nodo3 = CrearHijoDescripcion($xml, $nodo2, $nodo3, 'width', '96');
@@ -66,52 +75,48 @@
 				CrearAtributo($xml, $raiz, 'xmlns', 'http://www.w3.org/2005/Atom');
 				
 				$nodo2 = CrearHijoDescripcion($xml, $raiz, $nodo2, 'title', $title);
-				$nodo2 = CrearHijo($xml, $raiz, $nodo2, 'link');
-				CrearAtributo($xml, $nodo2, 'href', $link);
+				$nodo2 = CrearHijoDescripcion($xml, $raiz, $nodo2, 'id', $link);
+				$nodo2 = CrearHijoDescripcion($xml, $raiz, $nodo2, 'updated', date(DATE_ATOM));
+				$nodo2 = CrearHijoDescripcion($xml, $raiz, $nodo2, 'subtitle', $description);
 				
-				$nodo2 = CrearHijoDescripcion($xml, $raiz, $nodo2, 'id', $description);
-				
-				//<updated>2003-12-13T18:30:02Z</updated>
-				/*<author>
-					<name>John Doe</name>
-				  </author>*/
+				// Logo de la web
+				$nodo2 = CrearHijoDescripcion($xml, $raiz, $nodo2, 'logo', $imagen);
 			}
 			
 			while($fila = $resultado->fetch_object()) {
-				$dir = 'detalle_foto.php?id='.$fila->IdFoto;
+				$dir = '/detalle_foto.php?id='.$fila->IdFoto;
 				
 				// Elementos
 				if ((strcmp ($tipo, 'rss') == 0)) {
 					$nodo2 = CrearHijo($xml, $nodo, $nodo2, 'item');	// Elemento
 					
-					// URL de la imagen
-					$subnodo = CrearHijoDescripcion($xml, $nodo2, $subnodo, 'link', 'http://localhost/P6/'.$dir);
-					
+					$id = 'guid';				// Para el id único
 					$tipoDesc = 'description';	// Para la descipción
+					$tipoPubli = 'pubDate'; 	// Para la fecha de publicación
 					
-					$subnodo = CrearHijoDescripcion($xml, $nodo2, $subnodo, 'author', $fila->NomUsuario);
-					
-					$subnodo = CrearHijoDescripcion($xml, $nodo2, $subnodo, 'pubDate', $fila->Fecha);
-					
-					//<pubDate>Fri, 05 Oct 2007 09:00:00 CST</pubDate>
-					
+					// URL de la imagen
+					$subnodo = CrearHijoDescripcion($xml, $nodo2, $subnodo, 'link', $link.$dir);
+				
 				} else {
 					$nodo2 = CrearHijo($xml, $raiz, $nodo2, 'entry');	// Elemento
 					
+					$id = 'id';				// Para el id único
+					$tipoDesc = 'summary';	// Para la descipción
+					$tipoPubli = 'updated'; // Para la fecha de publicación
+					
+					$subnodo = CrearHijo($xml, $nodo2, $subnodo, 'author');
+					$subnodo2 = CrearHijoDescripcion($xml, $subnodo, $subnodo2, 'name', $fila->NomUsuario);
+					
 					// URL de la imagen
 					$subnodo = CrearHijo($xml, $nodo2, $subnodo, 'link');
-					CrearAtributo($xml, $subnodo, 'href', 'http://localhost/P6/'.$dir);
-					
-					$tipoDesc = 'summary';	// Para la descipción
-					
-					/*<id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
-    <updated>2003-12-13T18:30:02Z</updated>*/
+					CrearAtributo($xml, $subnodo, 'href', $link.$dir);
 				}
 				
 				// Título y descripción de la imagen
 				$subnodo = CrearHijoDescripcion($xml, $nodo2, $subnodo, 'title', $fila->Titulo);
 				$subnodo = CrearHijoDescripcion($xml, $nodo2, $subnodo, $tipoDesc, $fila->Descripcion.' País: '.$fila->NomPais);
-				
+				$subnodo = CrearHijoDescripcion($xml, $nodo2, $subnodo, $tipoPubli, $fila->Fecha);
+				$subnodo = CrearHijoDescripcion($xml, $nodo2, $subnodo, $id, $link.$dir);
 			}
 		}
 		$resultado->close();
