@@ -291,21 +291,6 @@
 		return "";
 	}
 	
-	function CargarTituloAlbum($id) {
-		
-		$conexion = conecta();
-		$consulta = 'select Titulo from albumes where IdAlbum = '.$id;
-		$resultado = ejecutaConsulta($conexion, $consulta);
-		
-		if ($resultado->num_rows > 0) {
-			$fila = $resultado->fetch_object();
-			return $fila->Titulo;
-		}
-		$resultado->close();
-		$conexion->close();
-		return "";
-	}
-	
 	function CargarListaAlbumesPorUsuario($idUsuario) {
 		
 		$conexion = conecta();
@@ -470,60 +455,23 @@
 				$resultado2 = ejecutaConsulta($conexion, $consulta);
 				
 				echo '<li class="lista_de_albumes">';
-				echo '<a href="ver_album.php?id='.$fila->IdAlbum.'" tabindex="'.$tab.'">';
-				$tab++;
+				
 				if ($resultado2->num_rows > 0){
 					$fila2 = $resultado2->fetch_object();
+					echo '<a href="ver_album.php?id='.$fila->IdAlbum.'&pagina=1" tabindex="'.$tab.'">';
 					echo '<img src="'.$fila2->Fichero.'" alt="'.$fila->Titulo.'" width="200" height="150"/>';
 				} else {
+					echo '<a href="ver_album.php?id='.$fila->IdAlbum.'&pagina=1" tabindex="'.$tab.'">';
 					echo 'Sin foto';
 				}
-				echo '</a><p> Título: '.$fila->Titulo.' </br> Descripión: '.$fila->Descripcion.' </br> <a href="ver_album.php?id='.$fila->IdAlbum.'" tabindex="'.$tab.'">Ver álbum</a></p></li>';
+				$tab++;
+				echo '</a><p> Título: '.$fila->Titulo.' </br> Descripión: '.$fila->Descripcion.' </br> <a href="ver_album.php?id='.$fila->IdAlbum.'&pagina=1" tabindex="'.$tab.'">Ver álbum</a></p></li>';
 				$tab++;
 			}
 			$resultado2->close();
 			$existe = true;
 		} else {
 			noHayContenido();
-		}
-		$resultado->close();
-		$conexion->close();
-		return $existe;
-	}
-	
-	function CargarAlbum($id_Album) {
-		
-		// Si el id no es numerico, salimos de la funcion
-		if (!is_numeric($id_Album))
-			return false;
-		
-		$existe = false;
-		$tit_Album = CargarTituloAlbum($id_Album);
-		
-		if ($tit_Album != "") {
-			$existe = true;
-			echo '<h2>'.$tit_Album.'</h2>';
-		} else {
-			// Si no existe el album, salimos de la funcion
-			return $existe;
-		}
-		
-		$conexion = conecta();
-		$consulta = 'select a.Titulo as ATitulo, IdFoto, Fichero, f.Titulo as FTitulo from fotos f inner join albumes a on IdAlbum = Album where Album = '.$id_Album;
-		$resultado = ejecutaConsulta($conexion, $consulta);
-		$tab = 9;
-		if ($resultado->num_rows > 0) {
-			
-			echo '<ul class="lista_fotos">';
-			while($fila = $resultado->fetch_object()) {
-					echo '<li>
-						<h3>'.$fila->FTitulo.'</h3>
-						<a href="detalle_foto.php?id='.$fila->IdFoto.'" title="Ver '.$fila->FTitulo.'" tabindex="'.$tab.'"><img src="'.$fila->Fichero.'" alt="'.$fila->FTitulo.'" width="200" height="150"/></a>
-					</li>';
-			}
-			echo '</ul>';
-		} else {
-			albumSinContenido();
 		}
 		$resultado->close();
 		$conexion->close();

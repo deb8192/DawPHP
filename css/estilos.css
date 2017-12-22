@@ -98,6 +98,17 @@ header a{
 	padding-bottom: 25px;
 	margin-left: 10px;
 }
+.paginacion {
+	clear: both;
+	margin-bottom: 50px;
+}
+.p_left {
+	float: left;
+}
+.p_right {
+	float: right;
+	margin-right: 100px;
+}
 footer{
 		height:60px;
 		width:100%;
