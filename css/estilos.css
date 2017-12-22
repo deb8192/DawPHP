@@ -71,7 +71,7 @@ header a{
     float: left;
 }
 
-.logo:hover, .registro:hover, .salir:hover {
+.logo:hover, .registro:hover, .salir:hover, .paginacion a:hover {
 	color: orange;
 }
 
@@ -101,6 +101,7 @@ header a{
 .paginacion {
 	clear: both;
 	margin-bottom: 50px;
+	text-align: center;
 }
 .p_left {
 	float: left;
