@@ -103,6 +103,9 @@ header a{
 	margin-bottom: 50px;
 	text-align: center;
 }
+.paginacion a {
+	color: #222262;
+}
 .p_left {
 	float: left;
 }

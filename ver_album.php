@@ -97,23 +97,14 @@ require_once("includes/cabecera.php");
 					echo "<a href='#' class='p_left'>< Anterior</a>";
 				}
 				
-				echo "<a href='ver_album.php?id=".$id_Album."&pagina=1' '>Primera</a> - ";
-				echo "<a href='ver_album.php?id=".$id_Album."&pagina=".$total_paginas."' >Última</a>";
+				echo "<a href='ver_album.php?id=".$id_Album."&pagina=1' '>Primera</a> - 
+					<a href='ver_album.php?id=".$id_Album."&pagina=".$total_paginas."' >Última</a>";
 				
 				if (($pagina + 1)<=$total_paginas) {
 					echo "<a href='ver_album.php?id=".$id_Album."&pagina=".($pagina+1)."' class='p_right'>Siguiente ></a>";
 				} else {
 					echo "<a href='#' class='p_right'>Siguiente ></a>";
 				}
-				
-				// Numeros de las paginas
-				/*for ($i = 1; $i <= $total_paginas; $i++) {
-				if ($pagina == $i) {
-					echo "<a href='#'>". $pagina ."</a>"; 
-				} else {
-					echo "<a href='ver_album.php?id=".$id_Album."&pagina=$i'>$i</a> "; 
-				}	
-			}*/
 				
 			echo '</div>';
 			
