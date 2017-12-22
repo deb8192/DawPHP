@@ -215,7 +215,7 @@ footer{
 	padding-bottom: 60px;
 }
 
- #modificar_datos_usuario > h2,#anyadirFoto > h2, #principal > h2, #registro > h2, .form_busqueda > h2, #solicitar > h2,
+ #modificar_datos_usuario > h2,#anyadirFoto > h2, #principal > h3, #principal > h2, #registro > h2, .form_busqueda > h2, #solicitar > h2,
 #datos_usuario > h2, #respuesta_album > h2, #respuesta_album > h3, #crear_album > h2,
 #detalle_imagen > h2, #respuesta_crear_album > h2 {
 	margin-top: 20px;

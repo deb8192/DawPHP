@@ -2,37 +2,37 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Feed de imágenes de "PI - Pictures and images"</title>
   <id>http://localhost/P6</id>
-  <updated>2017-12-21T23:40:57+01:00</updated>
+  <updated>2017-12-22T04:22:13+01:00</updated>
   <subtitle>Galería de fotos online.</subtitle>
   <logo>http://localhost/P6/img/pi.png</logo>
   <entry>
     <author>
-      <name>Marines</name>
+      <name>Debora</name>
     </author>
     <link href="http://localhost/P6/detalle_foto.php?id=27"/>
-    <title>Foto ahora</title>
-    <summary>Una foto chula. País: Argentina</summary>
-    <updated>2017-12-15T11:58:54+01:00</updated>
+    <title>foto foto</title>
+    <summary>una foto mas País: Colombia</summary>
+    <updated>2017-12-22T03:11:38+01:00</updated>
     <id>http://localhost/P6/detalle_foto.php?id=27</id>
   </entry>
   <entry>
     <author>
-      <name>Marines</name>
+      <name>Debora</name>
     </author>
     <link href="http://localhost/P6/detalle_foto.php?id=26"/>
-    <title>Katherine 2</title>
-    <summary>K2 País: Argentina</summary>
-    <updated>2017-12-15T11:55:31+01:00</updated>
+    <title>otra foto</title>
+    <summary>foto País: Colombia</summary>
+    <updated>2017-12-22T02:24:00+01:00</updated>
     <id>http://localhost/P6/detalle_foto.php?id=26</id>
   </entry>
   <entry>
     <author>
-      <name>Marines</name>
+      <name>Debora</name>
     </author>
     <link href="http://localhost/P6/detalle_foto.php?id=25"/>
-    <title>Katherine 1</title>
-    <summary>K1 País: Colombia</summary>
-    <updated>2017-12-15T11:42:15+01:00</updated>
+    <title>Mi gateta</title>
+    <summary>La gata que adopté País: España</summary>
+    <updated>2017-12-21T16:22:57+01:00</updated>
     <id>http://localhost/P6/detalle_foto.php?id=25</id>
   </entry>
   <entry>

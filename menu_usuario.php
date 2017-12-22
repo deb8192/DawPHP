@@ -28,7 +28,12 @@ require_once("includes/cabecera.php");
 			echo "<p>Esta es tu primera vez aquí.</p>";
 		?>
 	</section>
-	
+	<section id="datos_usuario">
+		<h2>Mis álbumes</h2>
+		<ul class="lista-albumes">
+			<?php CargarAlbumes($_SESSION['usuario']['id']); ?>
+		</ul>
+	</section>
 	<!-- FOOTER -->
 	<?php require_once("includes/footer.php"); ?>
 </body>

@@ -363,6 +363,51 @@
 		$conexion->close();
 		return $existe;
 	}
+	function MostrarGraficoUltimosSiteDias(){
+		$grafica = imagecreatetruecolor(400, 400);
+		$contador = 0;
+		$conexion = conecta();
+		$blue = imagecolorallocate($grafica, 0x00, 0x33, 0xFF);
+		$white = imagecolorallocatealpha($grafica, 0xFF, 0xFF, 0xFF, 1);
+		$black = imagecolorallocate($grafica, 0x00, 0x00, 0x00);
+		imagefill($grafica, 0, 0, $white); 
+		$y = 25;
+		$x=15;
+		$fotos = 0;
+		
+		echo '<h3> Fotografías subidas la última semana: </h3>';
+		
+		imageline($grafica, $x-2, $y-20, $x-2, 395, $black);
+		
+		while($contador <= 7) {
+			if($contador == 1)
+				$texto = utf8_decode("fotos de hace $contador día: ");
+			else
+				$texto = utf8_decode("fotos de hace $contador días: ");
+			$contador++;
+			$consulta = 'select Fichero, FRegistro from fotos where FRegistro BETWEEN DATE_SUB(NOW(),INTERVAL ' .$contador--.  ' DAY) AND DATE_SUB(NOW(),INTERVAL ' .$contador. ' DAY)';
+			$resultado = ejecutaConsulta($conexion, $consulta);
+			$fotos = $resultado->num_rows;
+			
+			imagefilledrectangle($grafica, $x, $y, 10*$fotos+$x, $y+20, $blue);
+			imagestring($grafica, 3, $x, $y-20, $texto, $black);
+			imagestring($grafica, 3, 10*$fotos+$x+10, $y+3, $fotos, $black);
+			
+			$contador++;
+			$y+=50;
+		}
+		ob_start(); 
+		imagepng($grafica); 
+		// ob_get_contents() devuelve el contenido del buffer de salida 
+		$img_src = "data:image/png;base64," . base64_encode(ob_get_contents()); 
+		// Limpia y deshabilita el buffer de salida 
+		ob_end_clean(); 
+ 
+		// Libera los recursos utilizados 
+		imagedestroy($grafica); 
+ 			echo '<img src="'.$img_src.'" alt= "grafica " width="400" height="400"/>';
+	}
+	
 	function MostrarFotoSeleccionada(){
 		$conexion = conecta();
 		$contador = 1;
@@ -455,11 +500,33 @@
 				$resultado2 = ejecutaConsulta($conexion, $consulta);
 				
 				echo '<li class="lista_de_albumes">';
-				
+										
 				if ($resultado2->num_rows > 0){
 					$fila2 = $resultado2->fetch_object();
+					$extension = explode('.', $fila2->Fichero);
+					switch ($extension[count($extension)-1]){
+						case "jpg":
+							$foto = @imagecreatefromjpeg ($fila2->Fichero);
+							break;
+						case "png":
+							$foto = @imagecreatefrompng ($fila2->Fichero);
+							break;
+						case "gif":
+							$foto = @imagecreatefromgif ($fila2->Fichero);
+							break;
+					}
+					if (!$foto)
+					{
+						$foto= @imagecreatefromstring(file_get_contents($fila2->Fichero));
+					}
+					$foto_escalada = imagescale($foto, 200, 150, IMG_BILINEAR_FIXED);
+					ob_start(); 
+					imagejpeg($foto_escalada);
+					$img_src = "data:image/png;base64," . base64_encode(ob_get_contents()); 
+					// Limpia y deshabilita el buffer de salida 
+					ob_end_clean();  
 					echo '<a href="ver_album.php?id='.$fila->IdAlbum.'&pagina=1" tabindex="'.$tab.'">';
-					echo '<img src="'.$fila2->Fichero.'" alt="'.$fila->Titulo.'" width="200" height="150"/>';
+					echo '<img src="'.$img_src.'" alt="'.$fila->Titulo.'"/>';
 				} else {
 					echo '<a href="ver_album.php?id='.$fila->IdAlbum.'&pagina=1" tabindex="'.$tab.'">';
 					echo 'Sin foto';

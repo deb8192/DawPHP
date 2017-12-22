@@ -91,7 +91,7 @@ require_once("includes/cabecera.php");
 			echo '</ul>';
 			echo '<div class="paginacion">';
 			
-				if ($pagina == 1) {
+				if ($pagina > 1) {
 					echo "<a href='ver_album.php?id=".$id_Album."&pagina=".($pagina-1)."' class='p_left'>< Anterior</a>";
 				} else {
 					echo "<a href='#' class='p_left'>< Anterior</a>";

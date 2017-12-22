@@ -18,6 +18,11 @@ include_once("includes/cabecera.php");
 	
 	<section id="principal">
 		<h2>Inicio</h2>
+		<?php MostrarGraficoUltimosSiteDias(); ?>
+	</section>
+	
+	<section id="principal">
+		<h2>Últimas fotos</h2>
 		<?php CargarUltimasFotos(); ?>
 	</section>
 	<section id="principal">
