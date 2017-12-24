@@ -2,57 +2,57 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Feed de imágenes de "PI - Pictures and images"</title>
   <id>http://localhost/P6</id>
-  <updated>2017-12-22T04:22:13+01:00</updated>
+  <updated>2017-12-22T12:01:07+01:00</updated>
   <subtitle>Galería de fotos online.</subtitle>
   <logo>http://localhost/P6/img/pi.png</logo>
   <entry>
     <author>
-      <name>Debora</name>
+      <name>Marines</name>
+    </author>
+    <link href="http://localhost/P6/detalle_foto.php?id=31"/>
+    <title>4</title>
+    <summary>444444444 País: Colombia</summary>
+    <updated>2017-12-22T01:06:13+01:00</updated>
+    <id>http://localhost/P6/detalle_foto.php?id=31</id>
+  </entry>
+  <entry>
+    <author>
+      <name>Marines</name>
+    </author>
+    <link href="http://localhost/P6/detalle_foto.php?id=30"/>
+    <title>3</title>
+    <summary>3 País: España</summary>
+    <updated>2017-12-22T01:05:33+01:00</updated>
+    <id>http://localhost/P6/detalle_foto.php?id=30</id>
+  </entry>
+  <entry>
+    <author>
+      <name>Marines</name>
+    </author>
+    <link href="http://localhost/P6/detalle_foto.php?id=29"/>
+    <title>2</title>
+    <summary>2 País: Argentina</summary>
+    <updated>2017-12-22T01:05:16+01:00</updated>
+    <id>http://localhost/P6/detalle_foto.php?id=29</id>
+  </entry>
+  <entry>
+    <author>
+      <name>Marines</name>
+    </author>
+    <link href="http://localhost/P6/detalle_foto.php?id=28"/>
+    <title>1</title>
+    <summary>1 País: Irlanda</summary>
+    <updated>2017-12-21T01:04:51+01:00</updated>
+    <id>http://localhost/P6/detalle_foto.php?id=28</id>
+  </entry>
+  <entry>
+    <author>
+      <name>Marines</name>
     </author>
     <link href="http://localhost/P6/detalle_foto.php?id=27"/>
-    <title>foto foto</title>
-    <summary>una foto mas País: Colombia</summary>
-    <updated>2017-12-22T03:11:38+01:00</updated>
+    <title>Foto ahora</title>
+    <summary>Una foto chula. País: Argentina</summary>
+    <updated>2017-12-15T11:58:54+01:00</updated>
     <id>http://localhost/P6/detalle_foto.php?id=27</id>
-  </entry>
-  <entry>
-    <author>
-      <name>Debora</name>
-    </author>
-    <link href="http://localhost/P6/detalle_foto.php?id=26"/>
-    <title>otra foto</title>
-    <summary>foto País: Colombia</summary>
-    <updated>2017-12-22T02:24:00+01:00</updated>
-    <id>http://localhost/P6/detalle_foto.php?id=26</id>
-  </entry>
-  <entry>
-    <author>
-      <name>Debora</name>
-    </author>
-    <link href="http://localhost/P6/detalle_foto.php?id=25"/>
-    <title>Mi gateta</title>
-    <summary>La gata que adopté País: España</summary>
-    <updated>2017-12-21T16:22:57+01:00</updated>
-    <id>http://localhost/P6/detalle_foto.php?id=25</id>
-  </entry>
-  <entry>
-    <author>
-      <name>Debora</name>
-    </author>
-    <link href="http://localhost/P6/detalle_foto.php?id=18"/>
-    <title>Cumpleaños Marta 3</title>
-    <summary>Cumpleaños Marta 3 País: Colombia</summary>
-    <updated>2017-10-30T07:31:32+01:00</updated>
-    <id>http://localhost/P6/detalle_foto.php?id=18</id>
-  </entry>
-  <entry>
-    <author>
-      <name>Debora</name>
-    </author>
-    <link href="http://localhost/P6/detalle_foto.php?id=17"/>
-    <title>Cumpleaños Marta 2</title>
-    <summary>Cumpleaños Marta 2 País: Colombia</summary>
-    <updated>2017-10-30T07:30:31+01:00</updated>
-    <id>http://localhost/P6/detalle_foto.php?id=17</id>
   </entry>
 </feed>

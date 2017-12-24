@@ -15,39 +15,39 @@
       <width>96</width>
     </image>
     <item>
+      <link>http://localhost/P6/detalle_foto.php?id=31</link>
+      <title>4</title>
+      <description>444444444 País: Colombia</description>
+      <pubDate>Fri, 22 Dec 2017 01:06:13 +0100</pubDate>
+      <guid>http://localhost/P6/detalle_foto.php?id=31</guid>
+    </item>
+    <item>
+      <link>http://localhost/P6/detalle_foto.php?id=30</link>
+      <title>3</title>
+      <description>3 País: España</description>
+      <pubDate>Fri, 22 Dec 2017 01:05:33 +0100</pubDate>
+      <guid>http://localhost/P6/detalle_foto.php?id=30</guid>
+    </item>
+    <item>
+      <link>http://localhost/P6/detalle_foto.php?id=29</link>
+      <title>2</title>
+      <description>2 País: Argentina</description>
+      <pubDate>Fri, 22 Dec 2017 01:05:16 +0100</pubDate>
+      <guid>http://localhost/P6/detalle_foto.php?id=29</guid>
+    </item>
+    <item>
+      <link>http://localhost/P6/detalle_foto.php?id=28</link>
+      <title>1</title>
+      <description>1 País: Irlanda</description>
+      <pubDate>Thu, 21 Dec 2017 01:04:51 +0100</pubDate>
+      <guid>http://localhost/P6/detalle_foto.php?id=28</guid>
+    </item>
+    <item>
       <link>http://localhost/P6/detalle_foto.php?id=27</link>
-      <title>foto foto</title>
-      <description>una foto mas País: Colombia</description>
-      <pubDate>Fri, 22 Dec 2017 03:11:38 +0100</pubDate>
+      <title>Foto ahora</title>
+      <description>Una foto chula. País: Argentina</description>
+      <pubDate>Fri, 15 Dec 2017 11:58:54 +0100</pubDate>
       <guid>http://localhost/P6/detalle_foto.php?id=27</guid>
-    </item>
-    <item>
-      <link>http://localhost/P6/detalle_foto.php?id=26</link>
-      <title>otra foto</title>
-      <description>foto País: Colombia</description>
-      <pubDate>Fri, 22 Dec 2017 02:24:00 +0100</pubDate>
-      <guid>http://localhost/P6/detalle_foto.php?id=26</guid>
-    </item>
-    <item>
-      <link>http://localhost/P6/detalle_foto.php?id=25</link>
-      <title>Mi gateta</title>
-      <description>La gata que adopté País: España</description>
-      <pubDate>Thu, 21 Dec 2017 16:22:57 +0100</pubDate>
-      <guid>http://localhost/P6/detalle_foto.php?id=25</guid>
-    </item>
-    <item>
-      <link>http://localhost/P6/detalle_foto.php?id=18</link>
-      <title>Cumpleaños Marta 3</title>
-      <description>Cumpleaños Marta 3 País: Colombia</description>
-      <pubDate>Mon, 30 Oct 2017 07:31:32 +0100</pubDate>
-      <guid>http://localhost/P6/detalle_foto.php?id=18</guid>
-    </item>
-    <item>
-      <link>http://localhost/P6/detalle_foto.php?id=17</link>
-      <title>Cumpleaños Marta 2</title>
-      <description>Cumpleaños Marta 2 País: Colombia</description>
-      <pubDate>Mon, 30 Oct 2017 07:30:31 +0100</pubDate>
-      <guid>http://localhost/P6/detalle_foto.php?id=17</guid>
     </item>
   </channel>
 </rss>

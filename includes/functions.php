@@ -377,19 +377,23 @@
 		
 		echo '<h3> Fotografías subidas la última semana: </h3>';
 		
-		imageline($grafica, $x-2, $y-20, $x-2, 395, $black);
+		imageline($grafica, $x-2, $y-20, $x-2, 396, $black);
 		
 		while($contador <= 7) {
-			if($contador == 1)
+			if($contador == 0)
+				$texto = utf8_decode("fotos de hoy: ");
+			else if($contador == 1)
 				$texto = utf8_decode("fotos de hace $contador día: ");
 			else
 				$texto = utf8_decode("fotos de hace $contador días: ");
 			$contador++;
+			// TO DO: hacerlo con group by?
 			$consulta = 'select Fichero, FRegistro from fotos where FRegistro BETWEEN DATE_SUB(NOW(),INTERVAL ' .$contador--.  ' DAY) AND DATE_SUB(NOW(),INTERVAL ' .$contador. ' DAY)';
 			$resultado = ejecutaConsulta($conexion, $consulta);
 			$fotos = $resultado->num_rows;
 			
 			imagefilledrectangle($grafica, $x, $y, 10*$fotos+$x, $y+20, $blue);
+			imageline($grafica, $x-2, $y+22, 395, $y+22, $black);
 			imagestring($grafica, 3, $x, $y-20, $texto, $black);
 			imagestring($grafica, 3, 10*$fotos+$x+10, $y+3, $fotos, $black);
 			
@@ -398,14 +402,11 @@
 		}
 		ob_start(); 
 		imagepng($grafica); 
-		// ob_get_contents() devuelve el contenido del buffer de salida 
 		$img_src = "data:image/png;base64," . base64_encode(ob_get_contents()); 
-		// Limpia y deshabilita el buffer de salida 
 		ob_end_clean(); 
  
-		// Libera los recursos utilizados 
 		imagedestroy($grafica); 
- 			echo '<img src="'.$img_src.'" alt= "grafica " width="400" height="400"/>';
+ 			echo '<img src="'.$img_src.'" alt= "grafica " width="400" height="400" class="sin_borde"/>';
 	}
 	
 	function MostrarFotoSeleccionada(){
@@ -523,8 +524,8 @@
 					ob_start(); 
 					imagejpeg($foto_escalada);
 					$img_src = "data:image/png;base64," . base64_encode(ob_get_contents()); 
-					// Limpia y deshabilita el buffer de salida 
 					ob_end_clean();  
+					imagedestroy($foto); 
 					echo '<a href="ver_album.php?id='.$fila->IdAlbum.'&pagina=1" tabindex="'.$tab.'">';
 					echo '<img src="'.$img_src.'" alt="'.$fila->Titulo.'"/>';
 				} else {

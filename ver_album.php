@@ -11,6 +11,7 @@ require_once("includes/cabecera.php");
 	function CargarTituloNumPag($id) {
 		
 		$conexion = conecta();
+		// TO DO: hacerlo con group by
 		$consulta = 'select a.Titulo as ATitulo from fotos f inner join albumes a on IdAlbum = Album where Album = '.$id;
 		$resultado = ejecutaConsulta($conexion, $consulta);
 		
@@ -33,7 +34,7 @@ require_once("includes/cabecera.php");
 // Contiene paginacion
 	function CargarAlbum($id_Album, $pagina) {
 		
-		$registros = 3;	// Fotos a mostrar por pagina
+		$registros = 5;	// Fotos a mostrar por pagina
 		
 		// Si el id no es numerico, salimos de la funcion
 		if (!is_numeric($id_Album))
@@ -91,6 +92,7 @@ require_once("includes/cabecera.php");
 			echo '</ul>';
 			echo '<div class="paginacion">';
 			
+				// TO DO: mejorar esto
 				if ($pagina > 1) {
 					echo "<a href='ver_album.php?id=".$id_Album."&pagina=".($pagina-1)."' class='p_left'>< Anterior</a>";
 				} else {

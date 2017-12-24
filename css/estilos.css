@@ -113,6 +113,10 @@ header a{
 	float: right;
 	margin-right: 100px;
 }
+.sin_borde {
+	border: none;
+	margin-top: 20px;
+}
 footer{
 		height:60px;
 		width:100%;
